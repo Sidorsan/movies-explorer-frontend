@@ -1,3 +1,4 @@
 @import url(../src/vendor/normalize.css);
 @import url(../src/vendor/Fonts/fonts.css);
 @import url(../src/components/Page/page.css);
+@import url(../src/components/Header/Header.css);
