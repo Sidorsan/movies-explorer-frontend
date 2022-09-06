@@ -8,27 +8,34 @@ function Header(props) {
     <header className="header">
       <img src={logo} alt="логотип Место" className="header__logo" />
       <Switch>
-        <Route path="/signup">
+        {/* <Route path="/signup">
           <Link className="header__link" to={"/signin"}>
             Войти
           </Link>
-        </Route>
+        </Route> */}
 
-        <Route path="/signin">
+        {/* <Route path="/signin">
           <Link className="header__link" to={"/signup"}>
             Регистрация
           </Link>
-        </Route>
+        </Route> */}
         <Route path="/">
-          <p className="header__link header__link_email">
+          {/* <p className="header__link header__link_email">
             {localStorage.getItem("userEmail")}
-          </p>
+          </p> */}
           <Link
-            className="header__link"
-            to={"/signin"}
-            onClick={props.onLogout}
+            className="header__link header__link_registration "
+            to={"/signup"}
+            // onClick={props.onLogout}
           >
-            Выйти
+            Регистрация
+          </Link>
+          <Link
+            className="header__link header__link_enter"
+            to={"/signin"}
+            // onClick={props.onLogout}
+          >
+            <button>Войти</button>
           </Link>
         </Route>
       </Switch>
