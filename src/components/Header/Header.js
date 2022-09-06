@@ -31,11 +31,10 @@ function Header(props) {
             Регистрация
           </Link>
           <Link
-            className="header__link header__link_enter"
             to={"/signin"}
             // onClick={props.onLogout}
           >
-            <button>Войти</button>
+            <button className="header__link header__link_enter">Войти</button>
           </Link>
         </Route>
       </Switch>

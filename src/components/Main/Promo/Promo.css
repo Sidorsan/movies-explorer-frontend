@@ -1,0 +1,25 @@
+.promo {
+  min-height: 570px;
+  background-color: rgba(7, 48, 66, 1);
+  display: flex;
+  justify-content: center;
+
+}
+
+.promo__logo {
+  margin-top: 0px;
+  Width: 248px;
+  Height: 248px;
+  margin-top: 142px;
+}
+
+.promo__title {
+  position: absolute;
+  margin-top: 207px;
+  font-weight: 400;
+  font-size: 31px;
+  line-height: 39px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}

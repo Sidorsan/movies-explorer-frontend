@@ -183,30 +183,30 @@ function App() {
       {/* <Header loggedIn={loggedIn} onLogout={handleLogaout} /> */}
       <Header />
 
-      {/* <Switch>
-        <ProtectedRoute
+      <Switch>
+        {/* <ProtectedRoute */}
         <Route
           exact
           path="/"
           component={Main}
-          onEditAvatar={() => {
-            setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-          }}
-          onEditProfile={() => {
-            setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-          }}
-          onAddPlace={() => {
-            setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-          }}
-          onCardClick={setSelectedCard}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          cards={cards}
-          isLoading={isLoading}
-          loggedIn={loggedIn}
+          // onEditAvatar={() => {
+          //   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+          // }}
+          // onEditProfile={() => {
+          //   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+          // }}
+          // onAddPlace={() => {
+          //   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+          // }}
+          // onCardClick={setSelectedCard}
+          // onCardLike={handleCardLike}
+          // onCardDelete={handleCardDelete}
+          // cards={cards}
+          // isLoading={isLoading}
+          // loggedIn={loggedIn}
         />
 
-        <Route path="/signup">
+        {/* <Route path="/signup">
           <Register onRegister={handleRegister} />
           <Register />
         </Route>
@@ -225,8 +225,8 @@ function App() {
         </Route>
         <Route path="/profile ">
           <Profile />
-        </Route>
-      </Switch> */}
+        </Route> */}
+      </Switch>
 
       {/* <Footer /> */}
 
