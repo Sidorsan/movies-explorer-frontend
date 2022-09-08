@@ -1,0 +1,29 @@
+.navTab {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 53px;
+}
+
+.aboutProject__title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 70px 18px 0px 18px;
+  height: 45px;
+  border-bottom: 1px solid #DADADA;
+}
+.aboutProject__subtitle {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 60px 18px 0px 18px;
+  height: 46px;
+  border-bottom: 1px solid #DADADA;
+}
+

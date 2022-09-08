@@ -1,25 +1,14 @@
-.promo {
-  min-height: 570px;
-  background-color: rgba(7, 48, 66, 1);
+.navTab {
+  list-style: none;
+  padding: 0px;
   display: flex;
-  justify-content: center;
-
+  justify-content: space-between;
+  margin: 25px 53px;
 }
 
-.promo__logo {
-  margin-top: 0px;
-  Width: 248px;
-  Height: 248px;
-  margin-top: 142px;
-}
-
-.promo__title {
-  position: absolute;
-  margin-top: 207px;
-  font-weight: 400;
-  font-size: 31px;
-  line-height: 39px;
-  text-align: center;
-  letter-spacing: -0.04em;
+.navTab__links {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
   color: #FFFFFF;
 }

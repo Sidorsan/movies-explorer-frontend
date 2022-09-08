@@ -1,14 +1,26 @@
 import React from "react";
-import logo from "../../../images/pic__COLOR_landing-logo.svg";
 
 function NavTab(props) {
   return (
-    <div className="promo">
-      <img src={logo} alt="логотип лендинг" className="promo__logo" />
-      <h1 className="promo__title">
-        Учебный проект студента факультета Веб-разработки.
-      </h1>
-    </div>
+    <nav>
+      <ul className="navTab">
+        <li>
+          <a href="#aboutProject" className="navTab__links">
+            О проекте
+          </a>
+        </li>
+        <li>
+          <a href="#techs" className="navTab__links">
+            Технологии
+          </a>
+        </li>
+        <li>
+          <a href="#aboutMe" className="navTab__links">
+            Студент
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
