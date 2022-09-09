@@ -1,9 +1,6 @@
-.navTab {
-  list-style: none;
-  padding: 0px;
-  display: flex;
-  justify-content: space-between;
-  margin: 25px 53px;
+.aboutProject {
+  margin: 70px 18px 70px 18px;
+  color: #FFFFFF;
 }
 
 .aboutProject__title {
@@ -11,19 +8,85 @@
   font-size: 18px;
   line-height: 22px;
   letter-spacing: -0.04em;
-  color: #FFFFFF;
-  margin: 70px 18px 0px 18px;
+
+  margin: 0;
   height: 45px;
   border-bottom: 1px solid #DADADA;
 }
+
+.aboutProject__table {
+  padding: 0;
+  margin: 60px 0 0;
+  list-style: none;
+}
+
+.aboutProject__table_cell {
+  margin: 56px 0 0;
+}
+
 .aboutProject__subtitle {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: -0.04em;
-  color: #FFFFFF;
-  margin: 60px 18px 0px 18px;
-  height: 46px;
-  border-bottom: 1px solid #DADADA;
+  margin: 0;
 }
 
+.aboutProject__description {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 16px 0 0;
+}
+
+.aboutProject__table_cell:first-of-type {
+  margin-top: 0;
+}
+
+.aboutProject__brief {
+  display: flex;
+  flex-direction: row;
+  margin: 56px 0 0;
+}
+
+.aboutProject__brief_column {
+  width: 100%;
+  height: 35px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  position: relative;
+}
+
+.aboutProject__brief_column_colorGreen {
+  background-color: #3DDC84;
+}
+
+.aboutProject__brief_column_little {
+  max-width: 100px;
+}
+
+.aboutProject__brief_column_colorGrey {
+  background-color: #303030;
+}
+
+.aboutProject__brief_column_title {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.aboutProject__brief_column_title_colorBlack {
+  color: black;
+}
+
+.aboutProject__brief_title {
+  margin-top: 0;
+}
+
+.aboutProject__brief_column_title_colorGray {
+  color: #A0A0A0
+}
