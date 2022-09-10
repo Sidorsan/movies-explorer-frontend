@@ -228,7 +228,7 @@ function App() {
         </Route> */}
       </Switch>
 
-      {/* <Footer /> */}
+      <Footer />
 
       {/* <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

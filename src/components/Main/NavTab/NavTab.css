@@ -12,3 +12,6 @@
   line-height: 16px;
   color: #FFFFFF;
 }
+.navTab__links:hover {
+  opacity: 0.5;
+}
