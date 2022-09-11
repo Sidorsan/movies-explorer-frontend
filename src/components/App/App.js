@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import {
+  useLocation,
+  withRouter, Route,
+  Switch,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
@@ -8,6 +14,7 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
+
 // import ImagePopup from "./ImagePopup";
 // import RegistrationConfirmPopup from "./RegistrationConfirmPopup";
 // import api from "../../utils/Api";
@@ -177,11 +184,16 @@ function App() {
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
+let location = useLocation();
   return (
     // <CurrentUserContext.Provider value={currentUser}>
     <>
       {/* <Header loggedIn={loggedIn} onLogout={handleLogaout} /> */}
-      <Header />
+
+      {/* <Header /> */}
+      {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
+        <Header />
+      ) : null}
 
       <Switch>
         {/* <ProtectedRoute */}
@@ -206,17 +218,19 @@ function App() {
           // loggedIn={loggedIn}
         />
 
-        {/* <Route path="/signup">
-          <Register onRegister={handleRegister} />
-          <Register />
+        <Route path="/signup">
+          <Register
+          // onRegister={handleRegister}
+          />
         </Route>
         <Route path="/signin">
-          <Login onLogin={handleLogin} />
-          <Login />
+          <Login
+          // onLogin={handleLogin}
+          />
         </Route>
-        <Route path="/signin">
-          {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-        </Route>
+        {/* <Route path="/signin"> */}
+        {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
+        {/* </Route> */}
         <Route path="/movies">
           <Movies />
         </Route>
@@ -225,7 +239,7 @@ function App() {
         </Route>
         <Route path="/profile ">
           <Profile />
-        </Route> */}
+        </Route>
       </Switch>
 
       <Footer />
@@ -273,3 +287,4 @@ function App() {
 }
 
 export default App;
+// export default withRouter(App);

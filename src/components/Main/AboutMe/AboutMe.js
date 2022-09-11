@@ -1,5 +1,6 @@
 import React from "react";
 import photoStudent from "../../../images/photoStudent.jpg";
+const {gitHabLink} = require("../../Constant/Constant")
 
 function AboutMe(props) {
   return (
@@ -23,7 +24,7 @@ function AboutMe(props) {
           Практикуме.
         </p>
         <a
-          href="https://github.com/Sidorsan"
+          href={gitHabLink}
           className="aboutMe__info_githabLink"
         >
           Github

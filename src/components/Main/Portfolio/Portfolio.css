@@ -3,6 +3,10 @@
   color: #FFFFFF;
 }
 
+.portfolio__link_blocks {
+  padding: 0;
+}
+
 .portfolio__title {
   font-weight: 400;
   font-size: 14px;
@@ -13,7 +17,7 @@
 
 .portfolio__link_block {
   display: flex;
-justify-content: space-between;
+  justify-content: space-between;
   height: 47px;
   border-bottom: 1px solid #E6E6E6;
   margin: 20px 0 0;
@@ -24,14 +28,15 @@ justify-content: space-between;
   font-size: 18px;
   line-height: 28px;
   letter-spacing: -0.04em;
-margin: 0;
+  margin: 0;
 }
-.portfolio__link_arrow{
+
+.portfolio__link_arrow {
   margin-left: auto;
   width: 18px;
   height: 28px;
 }
 
-.portfolio__link_arrow:hover{
+.portfolio__link_arrow:hover {
   opacity: 0.5;
 }
