@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../images/logoDiploma.svg";
 
 const Register = ({ onRegister }) => {
   const [data, setData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -18,26 +20,36 @@ const Register = ({ onRegister }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     {
-      const { password, email } = data;
-      onRegister({ password, email });
+      const { password, email, name } = data;
+      onRegister({ password, email, name });
     }
   };
   return (
     <div className="register">
-      <p className="register__welcome">Регистрация</p>
+      <img src={logo} alt="Логотип" className="register__logo" />
+      <p className="register__welcome">Добро пожаловать!</p>
+
       <form onSubmit={handleSubmit} className="form form__register">
+        <label className="form__input_label">Имя</label>
         <input
-          className="form__input form__input_sign"
-          placeholder="Email"
+          className="form__input"
+          id="name"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+        />
+        <label className="form__input_label">E-mail</label>
+        <input
+          className="form__input"
           id="email"
           name="email"
           type="email"
           value={data.email}
           onChange={handleChange}
         />
+        <label className="form__input_label">Пароль</label>
         <input
-          className="form__input form__input_sign"
-          placeholder="Пароль"
+          className="form__input"
           id="password"
           name="password"
           type="password"
@@ -47,7 +59,7 @@ const Register = ({ onRegister }) => {
         <button
           type="submit"
           onSubmit={handleSubmit}
-          className="register__link"
+          className="form__submitButton"
         >
           Зарегистрироваться
         </button>
@@ -56,12 +68,10 @@ const Register = ({ onRegister }) => {
         <p>
           Уже зарегистрированы?{" "}
           <span>
-            {" "}
-            {/* <Link to="sign-in" className="register__login-link"> */}
-            <Link to="signin" className="register__login-link">
+            <Link to="signin" className="register__signin_link">
               Войти
             </Link>
-          </span>{" "}
+          </span>
         </p>
       </div>
     </div>

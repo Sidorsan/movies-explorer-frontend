@@ -242,8 +242,10 @@ let location = useLocation();
         </Route>
       </Switch>
 
-      <Footer />
-
+      {/* <Footer /> */}
+      {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
+        <Footer />
+      ) : null}
       {/* <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}

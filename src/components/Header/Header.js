@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Header(props) {
   return (
     <header className="header">
-      <img src={logo} alt="логотип Место" className="header__logo" />
+      <img src={logo} alt="Логотип" className="header__logo" />
       <Switch>
         {/* <Route path="/signup">
           <Link className="header__link" to={"/signin"}>

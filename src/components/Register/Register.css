@@ -1,0 +1,84 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFFFFF;
+  margin: 56px 0 30px;
+}
+
+.register__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.register__welcome {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+
+  margin: 50px 0 0;
+}
+
+.form {
+  margin: 80px 50px 0;
+}
+
+.form__input_label {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+  margin-top: 24px;
+}
+
+.form__input_label:first-of-type {
+  margin-top: 0;
+}
+
+.form__input {
+  width: 260px;
+  margin-top: 5px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #424242;
+  color: #FFFFFF;
+  background-color: black;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.form__submitButton {
+  margin-top: 240px;
+  width: 260px;
+  height: 45px;
+  background: #4285F4;
+  border-radius: 3px;
+  border: none;
+}
+
+.form__submitButton:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.register__signin {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #8B8B8B;
+  margin-top: 14px;
+}
+
+.register__signin_link {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #4285F4;
+  text-decoration: none;
+}
+
+.register__signin_link:hover {
+  opacity: 0.5;
+}
