@@ -1,0 +1,17 @@
+.navTab {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 53px;
+}
+
+.navTab__links {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+.navTab__links:hover {
+  opacity: 0.5;
+}
