@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
+const validator = require("validator");
 
 const Register = ({ onRegister }) => {
   const [data, setData] = useState({
@@ -29,7 +30,7 @@ const Register = ({ onRegister }) => {
       <img src={logo} alt="Логотип" className="register__logo" />
       <p className="register__welcome">Добро пожаловать!</p>
 
-      <form onSubmit={handleSubmit} className="form form__register">
+      <form onSubmit={handleSubmit} className="form">
         <label className="form__input_label">Имя</label>
         <input
           className="form__input"
@@ -55,6 +56,7 @@ const Register = ({ onRegister }) => {
           type="password"
           value={data.password}
           onChange={handleChange}
+
         />
         <button
           type="submit"
