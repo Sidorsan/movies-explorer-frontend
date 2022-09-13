@@ -228,18 +228,18 @@ let location = useLocation();
           // onLogin={handleLogin}
           />
         </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
         {/* <Route path="/signin"> */}
         {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
         {/* </Route> */}
-        <Route path="/movies">
+        {/* <Route path="/movies">
           <Movies />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies />
-        </Route>
-        <Route path="/profile ">
-          <Profile />
-        </Route>
+        </Route> */}
       </Switch>
 
       {/* <Footer /> */}

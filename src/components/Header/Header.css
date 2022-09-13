@@ -76,3 +76,9 @@
   border-radius: 3px;
   border: none;
 }
+
+.header__menu{
+  width: 40px;
+  height: 43px;
+  margin-right: 14px;
+}
