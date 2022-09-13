@@ -4,15 +4,15 @@ import logo from "../../images/logoDiploma.svg";
 import menu from "../../images//menu.svg";
 import { Link, useLocation } from "react-router-dom";
 
-
-
-
-
 function Header(props) {
-let location = useLocation();
+  let location = useLocation();
 
   return (
-    <header className="header">
+    <header
+      className={`header ${
+        location.pathname === "/" ? "header_backgroundColorAdd" : ""
+      }`}
+    >
       <img src={logo} alt="Логотип" className="header__logo" />
       <Switch>
         <Route path="/profile">

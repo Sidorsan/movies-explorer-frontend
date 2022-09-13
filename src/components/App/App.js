@@ -243,7 +243,9 @@ let location = useLocation();
       </Switch>
 
       {/* <Footer /> */}
-      {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
+      {location.pathname !== "/signin" &&
+      location.pathname !== "/signup" &&
+      location.pathname !== "/profile" ? (
         <Footer />
       ) : null}
       {/* <EditAvatarPopup

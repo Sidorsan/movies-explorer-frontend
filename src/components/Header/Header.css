@@ -1,7 +1,7 @@
 .header {
   /* border-bottom: 1px solid rgba(84, 84, 84, 0.7); */
   min-height: 74px;
-  background-color: rgba(7, 48, 66, 1);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,4 +81,8 @@
   width: 40px;
   height: 43px;
   margin-right: 14px;
+}
+
+.header_backgroundColorAdd {
+background-color: rgba(7, 48, 66, 1);
 }
