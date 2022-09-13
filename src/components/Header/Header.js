@@ -13,7 +13,9 @@ function Header(props) {
         location.pathname === "/" ? "header_backgroundColorAdd" : ""
       }`}
     >
-      <img src={logo} alt="Логотип" className="header__logo" />
+      <a href="/">
+        <img src={logo} alt="Логотип" className="header__logo" />
+      </a>
       <Switch>
         <Route path="/profile">
           <Link className="header__link" to={"/navigation"}>

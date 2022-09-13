@@ -40,7 +40,10 @@ const Register = () => {
 
   return (
     <div className="register">
-      <img src={logo} alt="Логотип" className="register__logo" />
+      <a href='/'>
+        <img src={logo} alt="Логотип" className="register__logo" />
+      </a>
+
       <p className="register__welcome">Добро пожаловать!</p>
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         <label className="form__input_label">Имя</label>
