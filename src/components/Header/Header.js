@@ -29,7 +29,7 @@ function Header(props) {
                     <span class="line line3"></span>
                   </div>
                   <div class="logo">
-                    <h1>Navbar</h1>
+                    <h1>svce</h1>
                   </div>
                   <div class="menu-items">
                     <li>
