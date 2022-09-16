@@ -13,13 +13,51 @@ function Header(props) {
         location.pathname === "/" ? "header_backgroundColorAdd" : ""
       }`}
     >
-      <a href="/">
-        <img src={logo} alt="Логотип" className="header__logo" />
-      </a>
       <Switch>
         <Route path="/profile">
+          <div className="header__nav">
+            <div class="header__nav-container">
+              <a href="/">
+                <img src={logo} alt="Логотип" className="header__logo" />
+              </a>
+              <input class="checkbox" type="checkbox" name="" id="" />
+              <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+              </div>
+              <ul className="header__menuItems">
+                <li>
+                  <a className="header__menuItems_link" href="#">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a className="header__menuItems_link" href="#">
+                    about
+                  </a>
+                </li>
+                <li>
+                  <a className="header__menuItems_link" href="#">
+                    blogs
+                  </a>
+                </li>
+                <li>
+                  <a className="header__menuItems_link" href="#">
+                    portfolio
+                  </a>
+                </li>
+                <li>
+                  <a className="header__menuItems_link" href="#">
+                    contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           {/* <Link className="header__link" to={"/navigation"}> */}
-            <nav>
+          {/* <nav>
               <div class="navbar">
                 <div class="container nav-container">
                   <input class="checkbox" type="checkbox" name="" id="" />
@@ -28,9 +66,7 @@ function Header(props) {
                     <span class="line line2"></span>
                     <span class="line line3"></span>
                   </div>
-                  <div class="logo">
-                    <h1>svce</h1>
-                  </div>
+
                   <div class="menu-items">
                     <li>
                       <a href="#">Home</a>
@@ -50,8 +86,8 @@ function Header(props) {
                   </div>
                 </div>
               </div>
-            </nav>
-            {/* <img src={menu} alt="Меню" className="header__menu" /> */}
+            </nav> */}
+          {/* <img src={menu} alt="Меню" className="header__menu" /> */}
           {/* </Link> */}
         </Route>
 
