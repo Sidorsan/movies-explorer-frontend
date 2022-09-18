@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
-import menu from "../../images//menu.svg";
+import Navigation from "../Navigation/Navigation";
 import { Link, useLocation } from "react-router-dom";
 
 function Header(props) {
@@ -15,83 +15,16 @@ function Header(props) {
     >
       <Switch>
         <Route path="/profile">
-          <div className="header__nav">
-            <div class="header__nav-container">
-              <a href="/">
-                <img src={logo} alt="Логотип" className="header__logo" />
-              </a>
-              <input class="checkbox" type="checkbox" name="" id="" />
-              <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-              </div>
-              <ul className="header__menuItems">
-                <li>
-                  <a className="header__menuItems_link" href="#">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a className="header__menuItems_link" href="#">
-                    about
-                  </a>
-                </li>
-                <li>
-                  <a className="header__menuItems_link" href="#">
-                    blogs
-                  </a>
-                </li>
-                <li>
-                  <a className="header__menuItems_link" href="#">
-                    portfolio
-                  </a>
-                </li>
-                <li>
-                  <a className="header__menuItems_link" href="#">
-                    contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* <Link className="header__link" to={"/navigation"}> */}
-          {/* <nav>
-              <div class="navbar">
-                <div class="container nav-container">
-                  <input class="checkbox" type="checkbox" name="" id="" />
-                  <div class="hamburger-lines">
-                    <span class="line line1"></span>
-                    <span class="line line2"></span>
-                    <span class="line line3"></span>
-                  </div>
-
-                  <div class="menu-items">
-                    <li>
-                      <a href="#">Home</a>
-                    </li>
-                    <li>
-                      <a href="#">about</a>
-                    </li>
-                    <li>
-                      <a href="#">blogs</a>
-                    </li>
-                    <li>
-                      <a href="#">portfolio</a>
-                    </li>
-                    <li>
-                      <a href="#">contact</a>
-                    </li>
-                  </div>
-                </div>
-              </div>
-            </nav> */}
-          {/* <img src={menu} alt="Меню" className="header__menu" /> */}
-          {/* </Link> */}
+          <Navigation />
         </Route>
 
+        <Route path="/movies">
+          <Navigation />
+        </Route>
         <Route path="/">
+          <a href="/">
+            <img src={logo} alt="Логотип" className="header__logo" />
+          </a>
           <Link
             className="header__link header__link_registration "
             to={"/signup"}

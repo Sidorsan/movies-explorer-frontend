@@ -40,71 +40,89 @@ const Register = () => {
 
   return (
     <div className="register">
-      <a href='/'>
+      <a href="/">
         <img src={logo} alt="Логотип" className="register__logo" />
       </a>
 
       <p className="register__welcome">Добро пожаловать!</p>
       <form onSubmit={handleSubmit(onSubmit)} className="form">
-        <label className="form__input_label">Имя</label>
-        <input
-          className="form__input"
-          placeholder="Введите имя"
-          id="firstName"
-          name="firstName"
-          // value={data.firstName}
-          onChange={handleChange}
-          {...register("firstName", {
-            required: true,
-            minLength: 2,
-            maxLength: 20,
-          })}
-        />
-        {errors?.firstName?.type === "required" && (
-          <p className="errorState">Это поле необходимо заполнить</p>
-        )}
-        {errors?.firstName?.type === "maxLength" && (
-          <p className="errorState">Имя не должно быть длиннее 20 символов</p>
-        )}
-        {errors?.firstName?.type === "minLength" && (
-          <p className="errorState">Имя не должно быть меньше 2 символов</p>
-        )}
-        <label className="form__input_label">E-mail</label>
-        <input
-          placeholder="Введите E-mail"
-          className="form__input"
-          id="email"
-          name="email"
-          type="email"
-          // value={data.email}
-          onChange={handleChange}
-          {...register("email", {
-            required: true,
-          })}
-        />
-        {errors?.email?.type === "required" && (
-          <p className="errorState">Это поле необходимо заполнить</p>
-        )}
-        <label className="form__input_label">Пароль</label>
-        <input
-          placeholder="Введите пароль"
-          className="form__input"
-          id="password"
-          name="password"
-          type="password"
-          // value={data.password}
-          onChange={handleChange}
-          {...register("password", {
-            required: true,
-            minLength: 8,
-          })}
-        />
-        {errors?.password?.type === "required" && (
-          <p className="errorState">Это поле необходимо заполнить</p>
-        )}
-        {errors?.password?.type === "minLength" && (
-          <p className="errorState">Пароль не может быть меньше 8 символов</p>
-        )}
+        <section className="form__section">
+          <label className="form__input_label">Имя</label>
+          <input
+            className="form__input"
+            placeholder="Введите имя"
+            id="firstName"
+            name="firstName"
+            // value={data.firstName}
+            onChange={handleChange}
+            {...register("firstName", {
+              required: true,
+              minLength: 2,
+              maxLength: 20,
+            })}
+          />
+          <span>
+            {errors?.firstName?.type === "required" && (
+              <p className="errorState">Это поле необходимо заполнить</p>
+            )}
+            {errors?.firstName?.type === "maxLength" && (
+              <p className="errorState">
+                Имя не должно быть длиннее 20 символов
+              </p>
+            )}
+            {errors?.firstName?.type === "minLength" && (
+              <p className="errorState">Имя не должно быть меньше 2 символов</p>
+            )}
+          </span>
+        </section>
+        <section className="form__section">
+          {" "}
+          <label className="form__input_label">E-mail</label>
+          <input
+            placeholder="Введите E-mail"
+            className="form__input"
+            id="email"
+            name="email"
+            type="email"
+            // value={data.email}
+            onChange={handleChange}
+            {...register("email", {
+              required: true,
+            })}
+          />
+          <span>
+            {errors?.email?.type === "required" && (
+              <p className="errorState">Это поле необходимо заполнить</p>
+            )}
+          </span>
+        </section>
+        <section className="form__section">
+          <label className="form__input_label">Пароль</label>
+          <input
+            placeholder="Введите пароль"
+            className="form__input"
+            id="password"
+            name="password"
+            type="password"
+            // value={data.password}
+            onChange={handleChange}
+            {...register("password", {
+              required: true,
+              minLength: 8,
+            })}
+          />
+          <span>
+            {errors?.password?.type === "required" && (
+              <p className="errorState">Это поле необходимо заполнить</p>
+            )}
+            {errors?.password?.type === "minLength" && (
+              <p className="errorState">
+                Пароль не может быть меньше 8 символов
+              </p>
+            )}
+          </span>
+        </section>
+
         <button
           type="submit"
           onSubmit={handleSubmit}

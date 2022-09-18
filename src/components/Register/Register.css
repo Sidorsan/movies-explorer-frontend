@@ -1,4 +1,4 @@
-.register {
+.form__register {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,8 +21,18 @@
 
 .form {
   margin: 80px 0 0;
+
+
+}
+
+.form__section {
+  position: relative;
   display: flex;
-  flex-direction: column;
+    flex-direction: column;
+    margin-top: 24px;
+}
+.form__section:first-of-type{
+  margin-top: 0;
 }
 
 .form__input_label {
@@ -39,6 +49,7 @@
 
 .form__input {
   width: 260px;
+  height: 27px;
   margin-top: 5px;
   padding: 0;
   border: none;
@@ -86,27 +97,24 @@
 }
 
 
-.form__input-error {
-  font-size: 12px;
-  line-height: 1.21;
+
+.errorState {
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
   color: #FF0000;
-  opacity: 0;
   position: absolute;
-  top: 45px;
+  top: 51px;
   left: 0;
   transition: opacity 0.3s;
   z-index: 1;
   pointer-events: none;
 }
 
-.form__input-error_active {
-  opacity: 1;
-}
-
-.errorState {
+/* .errorState {
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #EE3465
-}
-
+} */

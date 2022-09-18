@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
 import { useForm } from "react-hook-form";
+import Form from "../Form/Form";
 
 const Login = ({ onLogin }) => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -35,67 +36,58 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="register">
-      <a href="/">
-        <img src={logo} alt="Логотип" className="register__logo" />
-      </a>
-      <p className="register__welcome">Рады видеть!</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
-        <label className="form__input_label">E-mail</label>
-        <input
-          className="form__input"
-          placeholder="Email"
-          id="useremailname"
-          name="email"
-          type="email"
-          // value={data.email}
-          onChange={handleChange}
-          {...register("email", {
-            required: true,
-          })}
-        />
-        {errors?.email?.type === "required" && (
-          <p className="errorState">Это поле необходимо заполнить</p>
-        )}
-        <label className="form__input_label">Пароль</label>
-        <input
-          className="form__input"
-          placeholder="Пароль"
-          id="password"
-          name="password"
-          type="password"
-          // value={data.password}
-          onChange={handleChange}
-          {...register("password", {
-            required: true,
-            minLength: 8,
-          })}
-        />
-        {errors?.password?.type === "required" && (
-          <p className="errorState">Это поле необходимо заполнить</p>
-        )}
-        {errors?.password?.type === "minLength" && (
-          <p className="errorState">Пароль не может быть меньше 8 символов</p>
-        )}
-        <button
-          type="submit"
-          onSubmit={handleSubmit}
-          className="form__submitButton"
-        >
-          Войти
-        </button>
-      </form>
-      <div className="register__signin">
-        <p>
-          Ещё не зарегистрированы?{" "}
+    <Form
+      name="register"
+      title="Рады видеть!"
+      buttonSubmitTitle="Войти"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="register">
+        <section className="form__section">
+          {" "}
+          <label className="form__input_label">E-mail</label>
+          <input
+            placeholder="Введите E-mail"
+            className="form__input"
+            id="email"
+            name="email"
+            type="email"
+            // value={data.email}
+            onChange={handleChange}
+            {...register("email", {
+              required: true,
+            })}
+          />
           <span>
-            <Link to="signup" className="register__signin_link">
-              Регистрация
-            </Link>
+            {errors?.email?.type === "required" && (
+              <p className="errorState">Это поле необходимо заполнить</p>
+            )}
           </span>
-        </p>
+        </section>
+        <section className="form__section">
+          <label className="form__input_label">Пароль</label>
+          <input
+            className="form__input"
+            placeholder="Пароль"
+            id="password"
+            name="password"
+            type="password"
+            // value={data.password}
+            onChange={handleChange}
+            {...register("password", {
+              required: true,
+              minLength: 8,
+            })}
+          />
+          {errors?.password?.type === "required" && (
+            <p className="errorState">Это поле необходимо заполнить</p>
+          )}
+          {errors?.password?.type === "minLength" && (
+            <p className="errorState">Пароль не может быть меньше 8 символов</p>
+          )}
+        </section>
       </div>
-    </div>
+    </Form>
   );
 };
 export default Login;

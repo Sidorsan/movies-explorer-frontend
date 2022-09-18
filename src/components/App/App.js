@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   useLocation,
-  withRouter, Route,
+  withRouter,
+  Route,
   Switch,
   Redirect,
   useHistory,
@@ -184,7 +185,7 @@ function App() {
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
-let location = useLocation();
+  let location = useLocation();
   return (
     // <CurrentUserContext.Provider value={currentUser}>
     <>
@@ -234,10 +235,10 @@ let location = useLocation();
         {/* <Route path="/signin"> */}
         {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
         {/* </Route> */}
-        {/* <Route path="/movies">
+        <Route path="/movies">
           <Movies />
         </Route>
-        <Route path="/saved-movies">
+        {/* <Route path="/saved-movies">
           <SavedMovies />
         </Route> */}
       </Switch>

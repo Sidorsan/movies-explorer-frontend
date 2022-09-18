@@ -1,0 +1,151 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-right: 14px;
+}
+
+.nav-container__logo {
+  margin-left: 14px;
+  width: 38px;
+  height: 38px;
+}
+
+.checkbox {
+  position: absolute;
+  height: 20.5px;
+  width: 22px;
+  top: 27.5px;
+  right: 23px;
+  z-index: 3;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hamburger-lines {
+  height: 20.5px;
+  width: 22px;
+  position: absolute;
+  top: 27.5px;
+  right: 23px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.line {
+  height: 2.5px;
+  width: 22px;
+  background: #FFFFFF;
+}
+
+.line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+.line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav-container input[type="checkbox"]:checked~.header__menuItems {
+
+  transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked~.header__menuItems {
+
+  transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked~.hamburger-lines .line1 {
+  transform: rotate(45deg) translateX(2px);
+}
+
+.nav-container input[type="checkbox"]:checked~.hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+
+.nav-container input[type="checkbox"]:checked~.hamburger-lines .line3 {
+  transform: rotate(-45deg) translateX(2px);
+  ;
+}
+
+
+.header__menuItems {
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  transform: translateX(-150%);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  transition: transform 0.5s ease-in-out;
+  text-align: center;
+  align-self: flex-start;
+  align-items: center;
+  z-index: 1;
+  background-color: black;
+  color: #FFFFFF;
+  list-style: none;
+}
+
+.header__menuItems_links {
+  height: 29px;
+  margin-top: 24px;
+}
+
+.header__menuItems_link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+.header__menuItems_links:first-of-type {
+  margin-top: 144px;
+}
+
+.header__menuItems_links:hover {
+  opacity: 0.5;
+  border-bottom: 2px solid#FFFFFF;
+}
+
+.header__menuItems-accaunt {
+  margin: 444px 0 48px;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__menuItems_linkAccaunt {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.header__menuItems_linkAccaunt:hover {
+  opacity: 0.5;
+}
+
+.accaunt__logo {
+  width: 26px;
+  height: 30px;
+  background: #313131;
+  border-radius: 4px;
+}

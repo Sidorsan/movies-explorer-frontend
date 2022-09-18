@@ -55,16 +55,16 @@ const Profile = ({ onLogin }) => {
               maxLength: 20,
             })}
           />
-          {errors?.firstName?.type === "required" && (
-            <p className="errorState">Это поле необходимо заполнить</p>
-          )}
-          {errors?.firstName?.type === "maxLength" && (
-            <p className="errorState">Имя не должно быть длиннее 20 символов</p>
-          )}
-          {errors?.firstName?.type === "minLength" && (
-            <p className="errorState">Имя не должно быть меньше 2 символов</p>
-          )}
         </div>
+        {errors?.firstName?.type === "required" && (
+          <p className="errorState">Это поле необходимо заполнить</p>
+        )}
+        {errors?.firstName?.type === "maxLength" && (
+          <p className="errorState">Имя не должно быть длиннее 20 символов</p>
+        )}
+        {errors?.firstName?.type === "minLength" && (
+          <p className="errorState">Имя не должно быть меньше 2 символов</p>
+        )}
         <div className="profile__form_line">
           <label className="profile__form_label">E-mail</label>
           <input
@@ -79,11 +79,10 @@ const Profile = ({ onLogin }) => {
               required: true,
             })}
           />
-          {errors?.email?.type === "required" && (
-            <p className="errorState">Это поле необходимо заполнить</p>
-          )}
         </div>
-
+        {errors?.email?.type === "required" && (
+          <p className="errorState">Это поле необходимо заполнить</p>
+        )}
         <button
           type="submit"
           onSubmit={handleSubmit}
