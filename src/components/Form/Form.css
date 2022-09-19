@@ -50,6 +50,7 @@
   background: #4285F4;
   border-radius: 3px;
   border: none;
+  padding: 0;
 }
 
 .form__submitButton:hover {
@@ -63,7 +64,7 @@
   line-height: 15px;
   text-align: center;
   color: #8B8B8B;
-  margin: 14px 0 0;
+  margin: 14px 0 30px;
 }
 
 .form__link {

@@ -42,8 +42,7 @@ const Login = ({ onLogin }) => {
       </a>
       <h2 className="login__title">Рады видеть!</h2>
       <Form
-        name="register"
-        title="Рады видеть!"
+        name="login"
         buttonSubmitTitle="Войти"
         onSubmit={handleSubmit(onSubmit)}
         questionAboutRegistration="Ещё не зарегистрированы?"

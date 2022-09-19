@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
 import { useForm } from "react-hook-form";
-
+import Form from "../Form/Form";
 // const Register = ({ onRegister }) => {
 const Register = () => {
   const [data, setData] = useState({
@@ -44,8 +44,15 @@ const Register = () => {
         <img src={logo} alt="Логотип" className="register__logo" />
       </a>
 
-      <p className="register__welcome">Добро пожаловать!</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <h2 className="register__title">Добро пожаловать!</h2>
+      <Form
+        name="register"
+        buttonSubmitTitle="Зарегистрироваться"
+        onSubmit={handleSubmit(onSubmit)}
+        questionAboutRegistration="Уже зарегистрированы?"
+        link="signin"
+        linkTitle="Войти"
+      >
         <section className="form__section">
           <label className="form__input_label">Имя</label>
           <input
@@ -63,18 +70,23 @@ const Register = () => {
           />
           <span>
             {errors?.firstName?.type === "required" && (
-              <p className="errorState">Это поле необходимо заполнить</p>
+              <p className="form__input_errorState">
+                Это поле необходимо заполнить
+              </p>
             )}
             {errors?.firstName?.type === "maxLength" && (
-              <p className="errorState">
+              <p className="form__input_errorState">
                 Имя не должно быть длиннее 20 символов
               </p>
             )}
             {errors?.firstName?.type === "minLength" && (
-              <p className="errorState">Имя не должно быть меньше 2 символов</p>
+              <p className="form__input_errorState">
+                Имя не должно быть меньше 2 символов
+              </p>
             )}
           </span>
         </section>
+
         <section className="form__section">
           {" "}
           <label className="form__input_label">E-mail</label>
@@ -92,7 +104,9 @@ const Register = () => {
           />
           <span>
             {errors?.email?.type === "required" && (
-              <p className="errorState">Это поле необходимо заполнить</p>
+              <p className="form__input_errorState">
+                Это поле необходимо заполнить
+              </p>
             )}
           </span>
         </section>
@@ -113,34 +127,18 @@ const Register = () => {
           />
           <span>
             {errors?.password?.type === "required" && (
-              <p className="errorState">Это поле необходимо заполнить</p>
+              <p className="form__input_errorState">
+                Это поле необходимо заполнить
+              </p>
             )}
             {errors?.password?.type === "minLength" && (
-              <p className="errorState">
+              <p className="form__input_errorState">
                 Пароль не может быть меньше 8 символов
               </p>
             )}
           </span>
         </section>
-
-        <button
-          type="submit"
-          onSubmit={handleSubmit}
-          className="form__submitButton"
-        >
-          Зарегистрироваться
-        </button>
-      </form>
-      <div className="register__signin">
-        <p>
-          Уже зарегистрированы?{" "}
-          <span>
-            <Link to="signin" className="register__signin_link">
-              Войти
-            </Link>
-          </span>
-        </p>
-      </div>
+      </Form>
     </div>
   );
 };
