@@ -36,13 +36,20 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <Form
-      name="register"
-      title="Рады видеть!"
-      buttonSubmitTitle="Войти"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="register">
+    <div className="login">
+      <a href="/">
+        <img src={logo} alt="Логотип" className="login__logo" />
+      </a>
+      <h2 className="login__title">Рады видеть!</h2>
+      <Form
+        name="register"
+        title="Рады видеть!"
+        buttonSubmitTitle="Войти"
+        onSubmit={handleSubmit(onSubmit)}
+        questionAboutRegistration="Ещё не зарегистрированы?"
+        link="signup"
+        linkTitle="Регистрация"
+      >
         <section className="form__section">
           {" "}
           <label className="form__input_label">E-mail</label>
@@ -60,7 +67,9 @@ const Login = ({ onLogin }) => {
           />
           <span>
             {errors?.email?.type === "required" && (
-              <p className="errorState">Это поле необходимо заполнить</p>
+              <p className="form__input_errorState">
+                Это поле необходимо заполнить
+              </p>
             )}
           </span>
         </section>
@@ -68,7 +77,7 @@ const Login = ({ onLogin }) => {
           <label className="form__input_label">Пароль</label>
           <input
             className="form__input"
-            placeholder="Пароль"
+            placeholder="Введите пароль"
             id="password"
             name="password"
             type="password"
@@ -80,14 +89,18 @@ const Login = ({ onLogin }) => {
             })}
           />
           {errors?.password?.type === "required" && (
-            <p className="errorState">Это поле необходимо заполнить</p>
+            <p className="form__input_errorState">
+              Это поле необходимо заполнить
+            </p>
           )}
           {errors?.password?.type === "minLength" && (
-            <p className="errorState">Пароль не может быть меньше 8 символов</p>
+            <p className="form__input_errorState">
+              Пароль не может быть меньше 8 символов
+            </p>
           )}
         </section>
-      </div>
-    </Form>
+      </Form>
+    </div>
   );
 };
 export default Login;

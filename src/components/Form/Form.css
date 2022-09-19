@@ -1,0 +1,93 @@
+.form {
+  margin: 80px 0 0;
+  display: flex;
+  flex-direction: column;
+
+  min-height: 527px;
+}
+
+.form__section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.form__section:first-of-type {
+  margin-top: 0;
+}
+
+.form__input_label {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+  margin-top: 24px;
+}
+
+.form__input_label:first-of-type {
+  margin-top: 0;
+}
+
+.form__input {
+  width: 260px;
+  height: 27px;
+  margin-top: 5px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #424242;
+  color: #FFFFFF;
+  background-color: black;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.form__submitButton {
+  margin: auto 0 0px;
+  width: 260px;
+  height: 45px;
+  background: #4285F4;
+  border-radius: 3px;
+  border: none;
+}
+
+.form__submitButton:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.form__questionAboutRegistration {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #8B8B8B;
+  margin: 14px 0 0;
+}
+
+.form__link {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #4285F4;
+  text-decoration: none;
+}
+
+.form__link:hover {
+  opacity: 0.5;
+}
+
+.form__input_errorState {
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF0000;
+  position: absolute;
+  top: 51px;
+  left: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+  pointer-events: none;
+}
