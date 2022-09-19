@@ -11,16 +11,5 @@
 
 
 
-.movies__find{
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: none;
-  border-radius: 45px;
-  cursor: pointer;
-  margin-right: 19px;
-  }
-  .movies__find:hover {
-    opacity: 0.5;
-  }
+
 

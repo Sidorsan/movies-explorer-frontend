@@ -6,6 +6,16 @@
   min-height: 527px;
 }
 
+.form_profile {
+  width: 100%;
+}
+
+
+
+.form_searchForm{
+min-height: 72px;
+}
+
 .form__section {
   position: relative;
   display: flex;
@@ -13,9 +23,6 @@
   margin-top: 24px;
 }
 
-.form_profile {
-  width: 100%;
-}
 
 .form__section_profile {
   display: flex;
@@ -101,6 +108,16 @@
   height: auto;
 }
 
+.form__submitButton_searchForm {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 45px;
+  cursor: pointer;
+  margin-right: 19px;
+}
+
 
 .form__questionAboutRegistration {
   font-weight: 400;
@@ -109,6 +126,10 @@
   text-align: center;
   color: #8B8B8B;
   margin: 14px 0 30px;
+}
+
+.form__questionAboutRegistration_profile {
+  margin: 16px 0 40px;
 }
 
 .form__link {

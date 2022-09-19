@@ -25,7 +25,7 @@ function Form({
         {buttonSubmitTitle}
       </button>
 
-      <p className="form__questionAboutRegistration">
+      <p className={`form__questionAboutRegistration form__questionAboutRegistration_${name}`}>
         {questionAboutRegistration}{" "}
         <span>
           <Link to={link} className={`form__link form__link_${name}`}>
