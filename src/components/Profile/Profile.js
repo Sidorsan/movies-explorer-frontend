@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import Form from "../Form/Form";
 const Profile = ({ onLogin }) => {
   //  const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -38,8 +38,75 @@ const Profile = ({ onLogin }) => {
 
   return (
     <div className="profile">
-      <p className="profile__welcome">Привет, Александр!</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="profile__form">
+      <h2 className="profile__title">Привет, Александр!</h2>
+
+      <Form
+        name="profile"
+        buttonSubmitTitle="Редактировать"
+        onSubmit={handleSubmit(onSubmit)}
+        questionAboutRegistration=""
+        link="#"
+        linkTitle="Выйти из аккаунта"
+      >
+        <section className="form__section form__section_profile">
+          {" "}
+          <label className="form__input_label form__input_label_profile ">
+            Имя
+          </label>
+          <input
+            placeholder="Введите имя"
+            className="form__input form__input_profile"
+            id="firstName"
+            name="firstName"
+            type="firstName"
+            onChange={handleChange}
+            {...register("firstName", {
+              required: true,
+            })}
+          />
+          <span>
+            {errors?.firstName?.type === "required" && (
+              <p className="form__input_errorState form__input_errorState_profile">
+                Это поле необходимо заполнить
+              </p>
+            )}
+            {errors?.firstName?.type === "maxLength" && (
+              <p className="form__input_errorState form__input_errorState_profile">
+                Имя не должно быть длиннее 20 символов
+              </p>
+            )}
+            {errors?.firstName?.type === "minLength" && (
+              <p className="form__input_errorState form__input_errorState_profile">
+                Имя не должно быть меньше 2 символов
+              </p>
+            )}
+          </span>
+        </section>
+        <section className="form__section form__section_profile">
+          <label className="form__input_label form__input_label_profile">
+            E-mail
+          </label>
+          <input
+            className="form__input form__input_profile"
+            placeholder="Введите E-mail"
+            id="email"
+            name="email"
+            type="email"
+            onChange={handleChange}
+            {...register("email", {
+              required: true,
+              minLength: 8,
+            })}
+          />
+          {errors?.email?.type === "required" && (
+            <p className="form__input_errorState form__input_errorState_profile">
+              Это поле необходимо заполнить
+            </p>
+          )}
+        </section>
+      </Form>
+
+      {/* <form onSubmit={handleSubmit(onSubmit)} className="profile__form">
         <div className="profile__form_line">
           <label className="profile__form_label">Имя</label>
           <input
@@ -93,7 +160,7 @@ const Profile = ({ onLogin }) => {
         <button className="profile__form_exitAccountButton">
           Выйти из аккаунта
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };

@@ -3,15 +3,15 @@ import accaunt from "../../images/accaunt.svg";
 
 function Navigation(props) {
   return (
-    <div class="nav-container">
+    <div className="nav-container">
       <a href="/">
         <img src={logo} alt="Логотип" className="nav-container__logo" />
       </a>
-      <input class="checkbox" type="checkbox" name="" id="" />
-      <div class="hamburger-lines">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-        <span class="line line3"></span>
+      <input className="checkbox" type="checkbox" name="" id="" />
+      <div className="hamburger-lines">
+        <span className="line line1"></span>
+        <span className="line line2"></span>
+        <span className="line line3"></span>
       </div>
 
       <ul className="header__menuItems">

@@ -19,22 +19,20 @@ function Form({
       <button
         type="submit"
         // onSubmit={handleSubmit}
-        className="form__submitButton"
+        className={`form__submitButton form__submitButton_${name}`}
         value={buttonSubmitTitle}
       >
         {buttonSubmitTitle}
       </button>
 
-
-        <p className="form__questionAboutRegistration">
-          {questionAboutRegistration}{" "}
-          <span>
-            <Link to={link} className="form__link">
-              {linkTitle}
-            </Link>
-          </span>
-        </p>
-
+      <p className="form__questionAboutRegistration">
+        {questionAboutRegistration}{" "}
+        <span>
+          <Link to={link} className={`form__link form__link_${name}`}>
+            {linkTitle}
+          </Link>
+        </span>
+      </p>
     </form>
   );
 }

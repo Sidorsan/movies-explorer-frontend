@@ -6,7 +6,7 @@
   margin: 70px 30px 40px;
 }
 
-.profile__welcome {
+.profile__title {
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
@@ -44,57 +44,18 @@
 .profile__userData_line:last-of-type {
   border: none; */
 /* } */
-.profile__form {
+/* .profile__form {
   width: 100%;
   margin: 80px 0 0;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.profile__form_line {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  height: 30px;
-  border-bottom: 1px solid#424242;
-}
 
-.profile__form_input {
-  background-color: black;
-  border: none;
-  width: 120px;
-  font-size: 11px;
-  line-height: 13px;
-  text-align: right;
-  color: #FFFFFF;
-}
 
-.profile__form_label {
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
-  align-self: center;
-}
 
-.profile__form_submitButton {
-  margin: 379px 0 0;
-  color: #FFFFFF;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-}
 
-.profile__form_exitAccountButton {
-  margin: 16px 0 0;
-  color: #EE3465;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-}
+
+
+
+
