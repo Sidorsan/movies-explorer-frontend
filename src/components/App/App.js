@@ -15,11 +15,12 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
+import MoviesCard from "../Movies/MoviesCard/MoviesCard";
 
 // import ImagePopup from "./ImagePopup";
 // import RegistrationConfirmPopup from "./RegistrationConfirmPopup";
 // import api from "../../utils/Api";
-// import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
 // import EditAvatarPopup from "./EditAvatarPopup";
 // import AddPlacePopup from "./AddPlacePopup";
@@ -40,11 +41,13 @@ function App() {
   //   alt: "",
   //   title: "",
   // });
-  // const [selectedCard, setSelectedCard] = useState(null);
-  // const [currentUser, setCurrentUser] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
   // const [cards, setCards] = useState();
-  // const [isLoading, setIsloading] = useState(false);
-  // const [loggedIn, setLoggedIn] = useState(false);
+  const cardData = [{}]
+  const [cards, setCards] = useState(cardData);
+  const [isLoading, setIsloading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // const history = useHistory();
 
@@ -186,95 +189,107 @@ function App() {
   //   localStorage.removeItem("userEmail");
   // };
   let location = useLocation();
+  console.log(cards);
   return (
-    // <CurrentUserContext.Provider value={currentUser}>
-    <>
-      {/* <Header loggedIn={loggedIn} onLogout={handleLogaout} /> */}
+    <CurrentUserContext.Provider value={currentUser}>
+      <>
+        {/* <Header loggedIn={loggedIn} onLogout={handleLogaout} /> */}
 
-      {/* <Header /> */}
-      {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
-        <Header />
-      ) : null}
+        {/* <Header /> */}
+        {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
+          <Header />
+        ) : null}
 
-      <Switch>
-        {/* <ProtectedRoute */}
-        <Route
-          exact
-          path="/"
-          component={Main}
-          // onEditAvatar={() => {
-          //   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-          // }}
-          // onEditProfile={() => {
-          //   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-          // }}
-          // onAddPlace={() => {
-          //   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-          // }}
-          // onCardClick={setSelectedCard}
-          // onCardLike={handleCardLike}
-          // onCardDelete={handleCardDelete}
-          // cards={cards}
-          // isLoading={isLoading}
-          // loggedIn={loggedIn}
-        />
-
-        <Route path="/signup">
-          <Register
-          // onRegister={handleRegister}
+        <Switch>
+          {/* <ProtectedRoute */}
+          <Route
+            exact
+            path="/"
+            component={Main}
+            // onEditAvatar={() => {
+            //   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+            // }}
+            // onEditProfile={() => {
+            //   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+            // }}
+            // onAddPlace={() => {
+            //   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+            // }}
+            // onCardClick={setSelectedCard}
+            // onCardLike={handleCardLike}
+            // onCardDelete={handleCardDelete}
+            // cards={cards}
+            // isLoading={isLoading}
+            // loggedIn={loggedIn}
           />
-        </Route>
-        <Route path="/signin">
-          <Login
-          // onLogin={handleLogin}
-          />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        {/* <Route path="/signin"> */}
-        {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
-        {/* </Route> */}
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        {/* <Route path="/saved-movies">
+          <Route path="/signuu">
+            <MoviesCard
+            // onRegister={handleRegister}
+            />
+          </Route>
+          <Route path="/signup">
+            <Register
+            // onRegister={handleRegister}
+            />
+          </Route>
+          <Route path="/signin">
+            <Login
+            // onLogin={handleLogin}
+            />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          {/* <Route path="/signin"> */}
+          {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
+          {/* </Route> */}
+          <Route
+            path="/movies"
+            component={Movies}
+            onCardClick={setSelectedCard}
+            onCardLike={"handleCardLike"}
+            onCardDelete={"handleCardDelete"}
+            cards={cards}
+            isLoading={isLoading}
+            loggedIn={loggedIn}
+          ></Route>
+          {/* <Route path="/saved-movies">
           <SavedMovies />
         </Route> */}
-      </Switch>
+        </Switch>
 
-      {/* <Footer /> */}
-      {location.pathname !== "/signin" &&
-      location.pathname !== "/signup" &&
-      location.pathname !== "/profile" ? (
-        <Footer />
-      ) : null}
-      {/* <EditAvatarPopup
+        {/* <Footer /> */}
+        {location.pathname !== "/signin" &&
+        location.pathname !== "/signup" &&
+        location.pathname !== "/profile" ? (
+          <Footer />
+        ) : null}
+        {/* <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         /> */}
 
-      {/* <EditProfilePopup
+        {/* <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         /> */}
-      {/* <AddPlacePopup
+        {/* <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         /> */}
 
-      {/* <ImagePopup card={selectedCard} onClose={closeAllPopups} /> */}
+        {/* <ImagePopup card={selectedCard} onClose={closeAllPopups} /> */}
 
-      {/* <RegistrationConfirmPopup
+        {/* <RegistrationConfirmPopup
           data={dataRegistrationConfirmPopup}
           isOpen={isRegistrationConfirmPopupOpen}
           onClose={closeAllPopups}
         /> */}
 
-      {/* <div className="popup popup_deleteCard">
+        {/* <div className="popup popup_deleteCard">
           <form className="popup__container">
             <button className="popup__close" type="button"></button>
             <h2 className="popup__title">Вы уверены?</h2>
@@ -286,8 +301,8 @@ function App() {
             </button>
           </form>
         </div> */}
-    </>
-    // </CurrentUserContext.Provider>
+      </>
+    </CurrentUserContext.Provider>
   );
 }
 
