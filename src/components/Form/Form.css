@@ -108,16 +108,6 @@ min-height: 72px;
   height: auto;
 }
 
-.form__submitButton_searchForm {
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: none;
-  border-radius: 45px;
-  cursor: pointer;
-  margin-right: 19px;
-}
-
 
 .form__questionAboutRegistration {
   font-weight: 400;

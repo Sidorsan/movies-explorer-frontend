@@ -5,8 +5,7 @@ import find from "../../../images/find.svg";
 import Form from "../../Form/Form";
 const Movies = () => {
   const [data, setData] = useState({
-    email: "",
-    firstName: "",
+    film: ""
   });
 
   const handleChange = (e) => {
@@ -29,84 +28,32 @@ const Movies = () => {
   };
   return (
     <div className="searchForm">
-      <Form
-        name="searchForm"
-        buttonSubmitTitle={<img src={find} alt="Лупа" />}
-        onSubmit={handleSubmit(onSubmit)}
-        questionAboutRegistration=""
-        link="#"
-        linkTitle="Выйти из аккаунта"
-      >
-        <section className="form__section form__section_profile">
-          {" "}
-          <label className="form__input_label form__input_label_profile ">
-            Имя
-          </label>
-          <input
-            placeholder="Введите имя"
-            className="form__input form__input_profile"
-            id="firstName"
-            name="firstName"
-            type="firstName"
-            onChange={handleChange}
-            {...register("firstName", {
-              required: true,
-            })}
-          />
-          <span>
-            {errors?.firstName?.type === "required" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Это поле необходимо заполнить
-              </p>
-            )}
-            {errors?.firstName?.type === "maxLength" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Имя не должно быть длиннее 20 символов
-              </p>
-            )}
-            {errors?.firstName?.type === "minLength" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Имя не должно быть меньше 2 символов
-              </p>
-            )}
-          </span>
-        </section>
+      <form onSubmit={handleSubmit(onSubmit)} className="searchForm__form">
+        <input
+          className="searchForm__input"
+          placeholder="Фильм"
+          id="film"
+          name="film"
+          onChange={handleChange}
+          {...register("film", {
+            required: true,
+          })}
+        />
+        <span>
+          {errors?.film?.type === "required" && (
+            <p className="searchForm__errorState">Введите название фильма</p>
+          )}
+        </span>
 
-      </Form>
-      <section className="movies__search">
-        <form onSubmit={handleSubmit(onSubmit)} className="movies__form">
-          <input
-            className="movies__form_input"
-            placeholder="Фильм"
-            id="film"
-            name="film"
-            onChange={handleChange}
-            {...register("film", {
-              required: true,
-              minLength: 2,
-              maxLength: 20,
-            })}
-          />
-          <span>
-            {errors?.film?.type === "required" && (
-              <p className="errorState">Это поле необходимо заполнить</p>
-            )}
-            {errors?.film?.type === "maxLength" && (
-              <p className="errorState">
-                Название не должно быть длиннее 20 символов
-              </p>
-            )}
-            {errors?.film?.type === "minLength" && (
-              <p className="errorState">
-                Название не должно быть меньше 2 символов
-              </p>
-            )}
-          </span>
-        </form>
-        <button type="submit" onSubmit={handleSubmit} className="movies__find">
+        <button
+          type="submit"
+          // onSubmit={handleSubmit}
+          className="searchForm__submitButton"
+        >
           <img src={find} alt="Лупа" />
         </button>
-      </section>
+      </form>
+
     </div>
   );
 };

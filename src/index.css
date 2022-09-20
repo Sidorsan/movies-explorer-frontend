@@ -18,3 +18,5 @@
 @import url(../src/components/Movies/Movies.css);
 @import url(../src/components/Movies/SearchForm/SearchForm.css);
 @import url(../src/components/Form/Form.css);
+@import url(../src/components/Movies/SearchForm/FilterCheckbox/FilterCheckbox.css);
+@import url(../src/components/Movies/Preloader/Preloader.css);
