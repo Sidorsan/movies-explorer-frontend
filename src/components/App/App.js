@@ -16,7 +16,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../Movies/MoviesCard/MoviesCard";
-
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import ImagePopup from "./ImagePopup";
 // import RegistrationConfirmPopup from "./RegistrationConfirmPopup";
 import api from "../../utils/Api";
@@ -43,7 +43,6 @@ function App() {
   });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  // const [cards, setCards] = useState();
   const [cards, setCards] = useState();
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -63,9 +62,9 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push("/");
+      history.push("/movies");
     } else {
-      history.push("/signin");
+      history.push("/");
     }
   }, [loggedIn]);
 
@@ -159,12 +158,11 @@ function App() {
       api
         .getAllNeededData()
         .then(([userData, cardData]) => {
-
           setCurrentUser(userData);
           setCards(cardData);
           setIsloading(false);
         })
-        .catch(console.log("Ошибка"));
+        .catch(handleError);
     }
   }, [loggedIn]);
 
@@ -182,14 +180,15 @@ function App() {
       })
       .catch(handleError);
   };
-
+  console.log(cards);
+  console.log(loggedIn);
   // const handleLogaout = () => {
   //   setLoggedIn(false);
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
   let location = useLocation();
-  console.log(cards);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
@@ -202,40 +201,19 @@ function App() {
 
         <Switch>
           {/* <ProtectedRoute */}
-          <Route
-            exact
-            path="/"
-            component={Main}
-            // onEditAvatar={() => {
-            //   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-            // }}
-            // onEditProfile={() => {
-            //   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-            // }}
-            // onAddPlace={() => {
-            //   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-            // }}
-            // onCardClick={setSelectedCard}
-            // onCardLike={handleCardLike}
-            // onCardDelete={handleCardDelete}
-            // cards={cards}
-            // isLoading={isLoading}
-            // loggedIn={loggedIn}
-          />
+          <Route exact path="/">
+            <Main />
+          </Route>
           <Route path="/signuu">
             <MoviesCard
             // onRegister={handleRegister}
             />
           </Route>
           <Route path="/signup">
-            <Register
-            onRegister={handleRegister}
-            />
+            <Register onRegister={handleRegister} />
           </Route>
           <Route path="/signin">
-            <Login
-            onLogin={handleLogin}
-            />
+            <Login onLogin={handleLogin} />
           </Route>
           <Route path="/profile">
             <Profile />
@@ -243,16 +221,14 @@ function App() {
           {/* <Route path="/signin"> */}
           {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
           {/* </Route> */}
-          <Route
+          <ProtectedRoute
             path="/movies"
             component={Movies}
-            onCardClick={setSelectedCard}
-            onCardLike={"handleCardLike"}
-            onCardDelete={"handleCardDelete"}
             cards={cards}
             isLoading={isLoading}
             loggedIn={loggedIn}
-          ></Route>
+          />
+
           {/* <Route path="/saved-movies">
           <SavedMovies />
         </Route> */}

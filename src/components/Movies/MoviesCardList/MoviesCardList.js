@@ -8,8 +8,8 @@ function MoviesCardList({
   onCardDelete,
   cards,
   isLoading,
+  loggedIn
 }) {
-
   return (
     <main>
       <section className="element">
@@ -17,11 +17,10 @@ function MoviesCardList({
           {isLoading ? (
             <Preloader />
           ) : (
-              cards.map((card) => (
-
+            cards.map((card) => (
               <MoviesCard
-                // key={card._id}
-                // card={card}
+                key={card._id}
+                card={card}
                 // onCardClick={onCardClick}
                 // onCardLike={onCardLike}
                 // onCardDelete={onCardDelete}
