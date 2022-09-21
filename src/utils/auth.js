@@ -1,18 +1,22 @@
-export const BASE_URL = "https://api.sidorsan.nomoredomains.sbs";
+export const BASE_URL = "https://api.sidorsan.diploma.nomoredomains.sbs";
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
     : Promise.reject(console.log(`Ошибка: ${response.status}`));
 };
 
-export const register = ({ password, email }) => {
+export const register = ({ password, email, firstName }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ password: password, email: email }),
+    body: JSON.stringify({
+      password: password,
+      email: email,
+      name: firstName,
+    }),
   }).then(checkResponse);
 };
 

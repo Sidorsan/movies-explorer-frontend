@@ -4,7 +4,7 @@ import logo from "../../images/logoDiploma.svg";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 // const Register = ({ onRegister }) => {
-const Register = () => {
+const Register = ({ onRegister }) => {
   const [data, setData] = useState({
     firstName: "",
     email: "",
@@ -36,6 +36,7 @@ const Register = () => {
 
   const onSubmit = (data) => {
     const { password, email, firstName } = data;
+    onRegister({ password, email, firstName });
   };
 
   return (

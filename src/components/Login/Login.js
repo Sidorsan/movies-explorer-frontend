@@ -32,6 +32,7 @@ const Login = ({ onLogin }) => {
 
   const onSubmit = (data) => {
     const { password, email } = data;
+    onLogin({ email, password });
     console.log(data);
   };
 

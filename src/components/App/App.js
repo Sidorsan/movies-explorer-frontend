@@ -19,7 +19,7 @@ import MoviesCard from "../Movies/MoviesCard/MoviesCard";
 
 // import ImagePopup from "./ImagePopup";
 // import RegistrationConfirmPopup from "./RegistrationConfirmPopup";
-// import api from "../../utils/Api";
+import api from "../../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
 // import EditAvatarPopup from "./EditAvatarPopup";
@@ -27,57 +27,56 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 // import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-// import * as auth from "../../utils/auth";
-// import union_confirm from "../images/union_confirm.svg";
-// import union_fail from "../images/union_fail.svg";
+import * as auth from "../../utils/auth";
+import union_confirm from "../../images/union_confirm.svg";
+import union_fail from "../../images/union_fail.svg";
 function App() {
   // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   // const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  // const [isRegistrationConfirmPopupOpen, setRegistrationConfirmPopupOpen] =
-  //   useState(false);
-  // const [dataRegistrationConfirmPopup, setRegistrationConfirmPopup] = useState({
-  //   img: "",
-  //   alt: "",
-  //   title: "",
-  // });
+  const [isRegistrationConfirmPopupOpen, setRegistrationConfirmPopupOpen] =
+    useState(false);
+  const [dataRegistrationConfirmPopup, setRegistrationConfirmPopup] = useState({
+    img: "",
+    alt: "",
+    title: "",
+  });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   // const [cards, setCards] = useState();
-  const cardData = [{}]
-  const [cards, setCards] = useState(cardData);
+  const [cards, setCards] = useState();
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // const history = useHistory();
+  const history = useHistory();
 
-  // const handleTokenCheck = () => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-  //   }
-  // };
+  const handleTokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+    }
+  };
 
-  // useEffect(() => {
-  //   handleTokenCheck();
-  // }, []);
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     history.push("/");
-  //   } else {
-  //     history.push("/signin");
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/");
+    } else {
+      history.push("/signin");
+    }
+  }, [loggedIn]);
 
-  // const handleError = () => {
-  //   setRegistrationConfirmPopup({
-  //     img: union_fail,
-  //     alt: "Крестик в круге",
-  //     title: "Что-то пошло не так! Попробуйте ещё раз.",
-  //   });
-  //   setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
-  // };
+  const handleError = () => {
+    setRegistrationConfirmPopup({
+      img: union_fail,
+      alt: "Крестик в круге",
+      title: "Что-то пошло не так! Попробуйте ещё раз.",
+    });
+    setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
+  };
 
   // function handleCardDelete(id) {
   //   api
@@ -130,58 +129,59 @@ function App() {
   //     .catch(handleError);
   // }
 
-  // function closeAllPopups() {
-  //   setIsEditAvatarPopupOpen(false);
-  //   setIsEditProfilePopupOpen(false);
-  //   setIsAddPlacePopupOpen(false);
-  //   setRegistrationConfirmPopupOpen(false);
-  //   setSelectedCard(null);
-  // }
+  function closeAllPopups() {
+    // setIsEditAvatarPopupOpen(false);
+    // setIsEditProfilePopupOpen(false);
+    // setIsAddPlacePopupOpen(false);
+    setRegistrationConfirmPopupOpen(false);
+    // setSelectedCard(null);
+  }
 
-  // const handleLogin = ({ email, password }) => {
-  //   auth
-  //     .authorize({ email, password })
-  //     .then((data) => {
-  //       if (!data) {
-  //         return handleError;
-  //       }
-  //       if (data) {
-  //         localStorage.setItem("jwt", data.token);
-  //         localStorage.setItem("userEmail", email);
-  //         setLoggedIn(true);
-  //       }
-  //     })
-  //     .catch(handleError);
-  // };
+  const handleLogin = ({ email, password }) => {
+    auth
+      .authorize({ email, password })
+      .then((data) => {
+        if (!data) {
+          return handleError;
+        }
+        if (data) {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("userEmail", email);
+          setLoggedIn(true);
+        }
+      })
+      .catch(handleError);
+  };
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     setIsloading(true);
-  //     api
-  //       .getAllNeededData()
-  //       .then(([userData, cardData]) => {
-  //         setCurrentUser(userData);
-  //         setCards(cardData);
-  //         setIsloading(false);
-  //       })
-  //       .catch(handleError);
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    if (loggedIn) {
+      setIsloading(true);
+      api
+        .getAllNeededData()
+        .then(([userData, cardData]) => {
 
-  // const handleRegister = ({ password, email }) => {
-  //   auth
-  //     .register({ password, email })
-  //     .then(() => {
-  //       setRegistrationConfirmPopup({
-  //         img: union_confirm,
-  //         alt: "Галочка в круге",
-  //         title: "Вы успешно зарегистрировались!",
-  //       });
-  //       setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
-  //       history.push("/signin");
-  //     })
-  //     .catch(handleError);
-  // };
+          setCurrentUser(userData);
+          setCards(cardData);
+          setIsloading(false);
+        })
+        .catch(console.log("Ошибка"));
+    }
+  }, [loggedIn]);
+
+  const handleRegister = ({ password, email, firstName }) => {
+    auth
+      .register({ password, email, firstName })
+      .then(() => {
+        setRegistrationConfirmPopup({
+          img: union_confirm,
+          alt: "Галочка в круге",
+          title: "Вы успешно зарегистрировались!",
+        });
+        setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
+        history.push("/signin");
+      })
+      .catch(handleError);
+  };
 
   // const handleLogaout = () => {
   //   setLoggedIn(false);
@@ -229,12 +229,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <Register
-            // onRegister={handleRegister}
+            onRegister={handleRegister}
             />
           </Route>
           <Route path="/signin">
             <Login
-            // onLogin={handleLogin}
+            onLogin={handleLogin}
             />
           </Route>
           <Route path="/profile">
