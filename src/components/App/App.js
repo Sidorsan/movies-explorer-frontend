@@ -31,6 +31,7 @@ import * as auth from "../../utils/auth";
 import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
 function App() {
+   let location = useLocation();
   // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   // const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -60,13 +61,13 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push("/movies");
-    } else {
-      history.push("/");
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push("/movies");
+  //   } else {
+  //     history.push("/");
+  //   }
+  // }, [loggedIn]);
 
   const handleError = () => {
     setRegistrationConfirmPopup({
@@ -153,18 +154,21 @@ function App() {
   };
 
   useEffect(() => {
-    if (loggedIn) {
-      setIsloading(true);
-      api
-        .getAllNeededData()
-        .then(([userData, cardData]) => {
-          setCurrentUser(userData);
-          setCards(cardData);
-          setIsloading(false);
-        })
-        .catch(handleError);
-    }
-  }, [loggedIn]);
+    // if (loggedIn) {раскомментировать когда будет авторизация
+    //   setIsloading(true);раскомментировать когда будет авторизация
+
+    api
+      .getAllNeededData()
+      .then(([userData, cardData]) => {
+        setCurrentUser(userData);
+        setCards(cardData);
+        // setIsloading(false); раскомментировать когда будет авторизация
+        setIsloading(true);
+      })
+      .catch(handleError);
+    // }
+    // }, [loggedIn]);раскомментировать когда будет авторизация
+  }, []);
 
   const handleRegister = ({ password, email, firstName }) => {
     auth
@@ -180,14 +184,13 @@ function App() {
       })
       .catch(handleError);
   };
-  console.log(cards);
-  console.log(loggedIn);
+
   // const handleLogaout = () => {
   //   setLoggedIn(false);
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
-  let location = useLocation();
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -204,30 +207,39 @@ function App() {
           <Route exact path="/">
             <Main />
           </Route>
-          <Route path="/signuu">
-            <MoviesCard
-            // onRegister={handleRegister}
-            />
-          </Route>
+
           <Route path="/signup">
             <Register onRegister={handleRegister} />
           </Route>
-          <Route path="/signin">
+          {/* <Route path="/signin">
             <Login onLogin={handleLogin} />
+          </Route> */}
+          <Route path="/signin">
+            {/* {loggedIn ? (
+              <Redirect to="/movies" />
+            ) : ( */}
+            <Login onLogin={handleLogin} />
+            {/* )} */}
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
-          {/* <Route path="/signin"> */}
-          {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />} */}
-          {/* </Route> */}
-          <ProtectedRoute
+
+          <Route path="/movies">
+            <Movies
+              cards={cards}
+              isLoading={isLoading}
+              onCardSave={""}
+            />
+          </Route>
+
+          {/* <ProtectedRoute
             path="/movies"
             component={Movies}
             cards={cards}
             isLoading={isLoading}
             loggedIn={loggedIn}
-          />
+          /> */}
 
           {/* <Route path="/saved-movies">
           <SavedMovies />
@@ -282,5 +294,5 @@ function App() {
   );
 }
 
-export default App;
-// export default withRouter(App);
+// export default App;
+export default withRouter(App);

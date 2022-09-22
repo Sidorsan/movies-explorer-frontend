@@ -4,28 +4,30 @@ import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({
   onCardClick,
-  onCardLike,
+  onCardSave,
   onCardDelete,
   cards,
   isLoading,
-  loggedIn
+  loggedIn,
 }) {
+  console.log(cards);
   return (
     <main>
       <section className="element">
         <ul className="element__container">
+          {/* поменять местами Preloader и cards.map */}
           {isLoading ? (
-            <Preloader />
-          ) : (
             cards.map((card) => (
               <MoviesCard
                 key={card._id}
                 card={card}
                 // onCardClick={onCardClick}
-                // onCardLike={onCardLike}
+                onCardSave={onCardSave}
                 // onCardDelete={onCardDelete}
               />
             ))
+          ) : (
+            <Preloader />
           )}
         </ul>
       </section>
