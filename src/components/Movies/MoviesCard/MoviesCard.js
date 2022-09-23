@@ -38,6 +38,7 @@ function MoviesCard(props) {
           type="button"
         ></button>
       </div>
+      <div className="moviesCard__duration">{props.card.duration}</div>
     </li>
   );
 }

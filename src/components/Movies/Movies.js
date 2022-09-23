@@ -6,9 +6,15 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 const Movies = ({ cards, isLoading, loggedIn }) => {
   return (
     <>
-      <SearchForm />
-      <FilterCheckbox />
-      <MoviesCardList cards={cards} isLoading={isLoading} loggedIn={loggedIn} />
+      <main>
+        <SearchForm />
+        <FilterCheckbox />
+        <MoviesCardList
+          cards={cards}
+          isLoading={isLoading}
+          loggedIn={loggedIn}
+        />
+      </main>
     </>
   );
 };

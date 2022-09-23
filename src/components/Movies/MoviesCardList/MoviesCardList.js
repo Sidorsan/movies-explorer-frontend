@@ -12,26 +12,25 @@ function MoviesCardList({
 }) {
   console.log(cards);
   return (
-    <main>
-      <section className="element">
-        <ul className="element__container">
-          {/* поменять местами Preloader и cards.map */}
-          {isLoading ? (
-            cards.map((card) => (
-              <MoviesCard
-                key={card._id}
-                card={card}
-                // onCardClick={onCardClick}
-                onCardSave={onCardSave}
-                // onCardDelete={onCardDelete}
-              />
-            ))
-          ) : (
-            <Preloader />
-          )}
-        </ul>
-      </section>
-    </main>
+    <section className="element">
+      <ul className="element__container">
+        {/* поменять местами Preloader и cards.map */}
+        {isLoading ? (
+          cards.map((card) => (
+            <MoviesCard
+              key={card._id}
+              card={card}
+              // onCardClick={onCardClick}
+              onCardSave={onCardSave}
+              // onCardDelete={onCardDelete}
+            />
+          ))
+        ) : (
+          <Preloader />
+        )}
+      </ul>
+      <button className="element__buttonAdd">Ещё</button>
+    </section>
   );
 }
 
