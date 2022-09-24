@@ -12,6 +12,25 @@
   line-height: 16px;
   color: #FFFFFF;
 }
+
 .navTab__links:hover {
   opacity: 0.5;
+}
+
+
+@media screen and (min-width: 768px) {
+  .navTab {
+    margin: 24px 246px;
+  }
+
+  .navTab__links {
+    font-size: 13px;
+  }
+
+}
+
+@media screen and (min-width: 1280px) {
+  .navTab {
+    margin: 24px 502px;
+  }
 }

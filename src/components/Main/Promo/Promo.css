@@ -15,11 +15,46 @@
 
 .promo__title {
   position: absolute;
-  margin-top: 207px;
+  margin: 207px 10px 0;
   font-weight: 400;
   font-size: 31px;
   line-height: 39px;
   text-align: center;
   letter-spacing: -0.04em;
   color: #FFFFFF;
+}
+
+@media screen and (min-width: 768px) {
+  .promo {
+    min-height: 784px;
+  }
+
+  .promo__logo {
+    Width: 320px;
+    Height: 320px;
+    margin-top: 224px;
+  }
+
+  .promo__title {
+    margin: 326px 19px 0;
+    font-size: 50px;
+    line-height: 58px;
+  }
+
+}
+
+@media screen and (min-width: 1280px) {
+  .promo {
+    min-height: 524px;
+  }
+
+  .promo__logo {
+    margin-top: 82px;
+  }
+
+  .promo__title {
+    margin: 184px 275px 0;
+    font-size: 50px;
+    line-height: 58px;
+  }
 }

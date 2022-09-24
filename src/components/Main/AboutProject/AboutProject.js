@@ -25,7 +25,7 @@ function AboutProject(props) {
         </li>
       </ul>
       <div className="aboutProject__brief">
-        <div className="aboutProject__brief_column aboutProject__brief_column_colorGreen aboutProject__brief_column_little  ">
+        <div className="aboutProject__brief_column aboutProject__brief_column_colorGreen aboutProject__brief_column_size  ">
           <p className="aboutProject__brief_column_title aboutProject__brief_column_title_colorBlack ">
             1 неделя
           </p>
@@ -35,7 +35,7 @@ function AboutProject(props) {
         </div>
       </div>
       <div className="aboutProject__brief aboutProject__brief_title">
-        <div className="aboutProject__brief_column aboutProject__brief_column_little">
+        <div className="aboutProject__brief_column aboutProject__brief_column_size">
           <p className="aboutProject__brief_column_title aboutProject__brief_column_title_colorGray">
             Back-end
           </p>
