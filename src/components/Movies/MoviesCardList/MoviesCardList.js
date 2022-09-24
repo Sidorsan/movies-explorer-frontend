@@ -1,16 +1,14 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList({
   onCardClick,
-  onCardSave,
   onCardDelete,
   cards,
   isLoading,
   loggedIn,
 }) {
-  console.log(cards);
   return (
     <section className="element">
       <ul className="element__container">
@@ -21,7 +19,7 @@ function MoviesCardList({
               key={card._id}
               card={card}
               // onCardClick={onCardClick}
-              onCardSave={onCardSave}
+              onCardClick={onCardClick}
               // onCardDelete={onCardDelete}
             />
           ))
@@ -29,7 +27,6 @@ function MoviesCardList({
           <Preloader />
         )}
       </ul>
-      <button className="element__buttonAdd">Ещё</button>
     </section>
   );
 }

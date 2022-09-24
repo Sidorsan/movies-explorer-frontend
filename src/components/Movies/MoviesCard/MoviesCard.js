@@ -1,27 +1,26 @@
 import React from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import pikcher from "../../../images/Pikcher.png";
+import { useLocation } from "react-router-dom";
 
 function MoviesCard(props) {
-
-
-
-  // const handleCardClick = () => {
-  //   props.onCardClick(props.card);
-  // };
-  const handleSaveClick = () => {
-    props.onCardSave(props.card);
+  let location = useLocation();
+  const handleCardButtonClick = () => {
+    props.onCardClick(props.card);
   };
+
   // const handleDeleteClick = () => {
   //   props.onCardDelete(props.card._id);
   // };
 
   const currentUser = React.useContext(CurrentUserContext);
-   // const isOwn = props.card.owner === currentUser._id;
+  // const isOwn = props.card.owner === currentUser._id;
   const isSaved = props.card.owner === currentUser._id;
 
-  const MoviesSaveButtonClassName = `moviesCard__saveButton ${
-    isSaved ? "moviesCard__saveButton_active" : " "
+  const MoviesButtonClassName = `moviesCard__Button ${
+    isSaved ? "moviesCard__Button_active" : " "
+  } ${
+    location.pathname === "/saved-movies" ? "moviesCard__Button_delite" : " "
   }`;
   return (
     <li className="moviesCard">
@@ -33,8 +32,8 @@ function MoviesCard(props) {
       <div className="moviesCard__Content">
         <h2 className="moviesCard__title">{props.card.description}</h2>
         <button
-          className={MoviesSaveButtonClassName}
-          onClick={handleSaveClick}
+          className={MoviesButtonClassName}
+          onClick={handleCardButtonClick}
           type="button"
         ></button>
       </div>

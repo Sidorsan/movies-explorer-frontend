@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const Profile = ({ onLogin }) => {
   //  const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -35,10 +36,10 @@ const Profile = ({ onLogin }) => {
     const { firstName, email } = data;
     console.log(data);
   };
-
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, Александр!</h2>
+      <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
 
       <Form
         name="profile"

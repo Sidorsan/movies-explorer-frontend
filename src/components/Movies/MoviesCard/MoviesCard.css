@@ -33,7 +33,7 @@
 
 }
 
-.moviesCard__saveButton {
+.moviesCard__Button {
   background: url(../../../images/buttonSave.svg);
   background-repeat: no-repeat;
   background-size: contain;
@@ -43,10 +43,19 @@
   padding: 0;
   cursor: pointer;
 }
-
-.moviesCard__saveButton:hover {
-  opacity: 0.5;
+.moviesCard__Button_delite {
+  background: url(../../../images/buttonDelite.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  border-style: none;
+  padding: 0;
   cursor: pointer;
+}
+
+.moviesCard__Button:hover {
+  opacity: 0.5;
 }
 
 .moviesCard__duration {

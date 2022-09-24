@@ -21,17 +21,17 @@ function Navigation(props) {
           </a>
         </li>
         <li className="header__menuItems_links">
-          <a className="header__menuItems_link" href="#">
+          <a className="header__menuItems_link" href="/movies">
             Фильмы
           </a>
         </li>
         <li className="header__menuItems_links">
-          <a className="header__menuItems_link" href="#">
+          <a className="header__menuItems_link" href="/saved-movies">
             Сохранённые фильмы
           </a>
         </li>
         <div className="header__menuItems-accaunt">
-          <a className="header__menuItems_linkAccaunt" href="#">
+          <a className="header__menuItems_linkAccaunt" href="/profile">
             Аккаунт
           </a>
           <img src={accaunt} alt="Аккаунт" className="accaunt__logo" />

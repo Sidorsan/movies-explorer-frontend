@@ -15,10 +15,9 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
-import MoviesCard from "../Movies/MoviesCard/MoviesCard";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import ImagePopup from "./ImagePopup";
-// import RegistrationConfirmPopup from "./RegistrationConfirmPopup";
+import RegistrationConfirmPopup from "../RegistrationConfirmPopup/RegistrationConfirmPopup";
 import api from "../../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
@@ -31,16 +30,16 @@ import * as auth from "../../utils/auth";
 import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
 function App() {
-   let location = useLocation();
+  let location = useLocation();
   // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   // const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isRegistrationConfirmPopupOpen, setRegistrationConfirmPopupOpen] =
     useState(false);
   const [dataRegistrationConfirmPopup, setRegistrationConfirmPopup] = useState({
-    img: "",
-    alt: "",
     title: "",
+    subtitle: "",
+    buttonTitle: "",
   });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
@@ -71,9 +70,9 @@ function App() {
 
   const handleError = () => {
     setRegistrationConfirmPopup({
-      img: union_fail,
-      alt: "Крестик в круге",
-      title: "Что-то пошло не так! Попробуйте ещё раз.",
+      title: "404",
+      subtitle: "Страница не найдена",
+      buttonTitle: "Назад",
     });
     setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
   };
@@ -130,11 +129,7 @@ function App() {
   // }
 
   function closeAllPopups() {
-    // setIsEditAvatarPopupOpen(false);
-    // setIsEditProfilePopupOpen(false);
-    // setIsAddPlacePopupOpen(false);
     setRegistrationConfirmPopupOpen(false);
-    // setSelectedCard(null);
   }
 
   const handleLogin = ({ email, password }) => {
@@ -174,12 +169,6 @@ function App() {
     auth
       .register({ password, email, firstName })
       .then(() => {
-        setRegistrationConfirmPopup({
-          img: union_confirm,
-          alt: "Галочка в круге",
-          title: "Вы успешно зарегистрировались!",
-        });
-        setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
         history.push("/signin");
       })
       .catch(handleError);
@@ -190,7 +179,6 @@ function App() {
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -229,7 +217,8 @@ function App() {
             <Movies
               cards={cards}
               isLoading={isLoading}
-              onCardSave={""}
+              onCardclick={""}
+              loggedIn={loggedIn}
             />
           </Route>
 
@@ -241,9 +230,9 @@ function App() {
             loggedIn={loggedIn}
           /> */}
 
-          {/* <Route path="/saved-movies">
-          <SavedMovies />
-        </Route> */}
+          <Route path="/saved-movies">
+            <SavedMovies cards={cards} isLoading={isLoading} onCardclick={""} />
+          </Route>
         </Switch>
 
         {/* <Footer /> */}
@@ -252,43 +241,11 @@ function App() {
         location.pathname !== "/profile" ? (
           <Footer />
         ) : null}
-        {/* <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        /> */}
-
-        {/* <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        /> */}
-        {/* <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        /> */}
-
-        {/* <ImagePopup card={selectedCard} onClose={closeAllPopups} /> */}
-
-        {/* <RegistrationConfirmPopup
+        <RegistrationConfirmPopup
           data={dataRegistrationConfirmPopup}
           isOpen={isRegistrationConfirmPopupOpen}
           onClose={closeAllPopups}
-        /> */}
-
-        {/* <div className="popup popup_deleteCard">
-          <form className="popup__container">
-            <button className="popup__close" type="button"></button>
-            <h2 className="popup__title">Вы уверены?</h2>
-            <button
-              className="popup__submit-button popup__submit-button-deleteCard"
-              type="submit"
-            >
-              Да
-            </button>
-          </form>
-        </div> */}
+        />
       </>
     </CurrentUserContext.Provider>
   );

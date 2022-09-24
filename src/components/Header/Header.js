@@ -14,13 +14,10 @@ function Header(props) {
       }`}
     >
       <Switch>
-        <Route path="/profile">
+        <Route exact path={["/profile", "/movies", "/saved-movies"]}>
           <Navigation />
         </Route>
 
-        <Route path="/movies">
-          <Navigation />
-        </Route>
         <Route path="/">
           <a href="/">
             <img src={logo} alt="Логотип" className="header__logo" />

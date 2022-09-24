@@ -6,6 +6,10 @@
 }
 
 .element__container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 100%;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -13,16 +17,3 @@
   border-top: 1px solid #424242;
 }
 
-.element__buttonAdd {
-  margin: 70px 0 80px;
-  width: 240px;
-  height: 36px;
-  border: none;
-  padding: 0;
-  background: #2F2F2F;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FFFFFF;
-}
