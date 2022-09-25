@@ -1,4 +1,4 @@
-.nav-container {
+.navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,7 +6,7 @@
   margin-right: 14px;
 }
 
-.nav-container__logo {
+.navigation__logo {
   margin-left: 14px;
   width: 38px;
   height: 38px;
@@ -55,25 +55,25 @@
   transition: transform 0.4s ease-in-out;
 }
 
-.nav-container input[type="checkbox"]:checked~.header__menuItems {
+.navigation input[type="checkbox"]:checked~.header__menuItems {
 
   transform: translateX(0);
 }
 
-.nav-container input[type="checkbox"]:checked~.header__menuItems {
+.navigation input[type="checkbox"]:checked~.header__menuItems {
 
   transform: translateX(0);
 }
 
-.nav-container input[type="checkbox"]:checked~.hamburger-lines .line1 {
+.navigation input[type="checkbox"]:checked~.hamburger-lines .line1 {
   transform: rotate(45deg) translateX(2px);
 }
 
-.nav-container input[type="checkbox"]:checked~.hamburger-lines .line2 {
+.navigation input[type="checkbox"]:checked~.hamburger-lines .line2 {
   transform: scaleY(0);
 }
 
-.nav-container input[type="checkbox"]:checked~.hamburger-lines .line3 {
+.navigation input[type="checkbox"]:checked~.hamburger-lines .line3 {
   transform: rotate(-45deg) translateX(2px);
   ;
 }
@@ -83,6 +83,7 @@
   position: absolute;
   padding: 0;
   width: 100%;
+  height: 100%;
   transform: translateX(-150%);
   display: flex;
   flex-direction: column;
@@ -148,4 +149,14 @@
   height: 30px;
   background: #313131;
   border-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+
+
+
+}
+
+@media screen and (min-width: 1280px) {
+
 }

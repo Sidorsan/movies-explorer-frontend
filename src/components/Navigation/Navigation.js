@@ -3,9 +3,9 @@ import accaunt from "../../images/accaunt.svg";
 
 function Navigation(props) {
   return (
-    <div className="nav-container">
+    <div className="navigation">
       <a href="/">
-        <img src={logo} alt="Логотип" className="nav-container__logo" />
+        <img src={logo} alt="Логотип" className="navigation__logo" />
       </a>
       <input className="checkbox" type="checkbox" name="" id="" />
       <div className="hamburger-lines">

@@ -1,6 +1,7 @@
 .aboutProject {
-  margin: 70px 18px;
+  padding: 70px 18px;
   color: #FFFFFF;
+  background-color: #202020;
 }
 
 .aboutProject__title {
@@ -94,7 +95,7 @@
 
 @media screen and (min-width: 768px) {
   .aboutProject {
-    margin: 90px 50px;
+    padding: 90px 50px;
   }
 
   .aboutProject__title {
@@ -137,7 +138,7 @@
 
 @media screen and (min-width: 1280px) {
   .aboutProject {
-    margin: 110px 70px;
+    padding: 110px 70px;
   }
 
    .aboutProject__table_cell {

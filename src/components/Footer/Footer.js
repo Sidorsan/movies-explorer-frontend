@@ -8,13 +8,15 @@ function Footer(props) {
       <h2 className="footer__title">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h2>
-      <a href={yandexPracticumLink} className="footer__link">
-        Яндекс.Практикум
-      </a>
-      <a href={gitHabLink} className="footer__link">
-        Github
-      </a>
-      <p className='footer__date'>© {date.getFullYear()}</p>
+      <div className="footer__lowerPart">
+        <a href={yandexPracticumLink} className="footer__lowerPart_link">
+          Яндекс.Практикум
+        </a>
+        <a href={gitHabLink} className="footer__lowerPart_link">
+          Github
+        </a>
+        <p className="footer__lowerPart_date">© {date.getFullYear()}</p>
+      </div>
     </footer>
   );
 }

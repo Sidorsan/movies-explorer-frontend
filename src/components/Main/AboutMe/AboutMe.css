@@ -1,6 +1,7 @@
 .aboutMe {
-  margin: 70px 14px 0px 14px;
+  padding: 70px 14px;
   color: #FFFFFF;
+  background-color: #202020;
 }
 
 .aboutMe__title {
@@ -19,7 +20,7 @@
   margin-top: 60px;
 }
 
-.aboutMe__info_title {
+.aboutMe__info_text_title {
   font-weight: 400;
   font-size: 30px;
   line-height: 36px;
@@ -27,21 +28,21 @@
   margin: 40px 0 0;
 }
 
-.aboutMe__info_subtitle {
+.aboutMe__info_text_subtitle {
   font-weight: 500;
   font-size: 11px;
   line-height: 16px;
   margin: 20px 0 0;
 }
 
-.aboutMe__info_description {
+.aboutMe__info_text_description {
   font-weight: 400;
   font-size: 11px;
   line-height: 16px;
   margin: 20px 0 0;
 }
 
-.aboutMe__info_githabLink {
+.aboutMe__info_text_githabLink {
   display: inline-block;
   font-weight: 500;
   font-size: 14px;
@@ -51,6 +52,94 @@
   color: #FFFFFF;
 }
 
-.aboutMe__info_githabLink:hover {
+.aboutMe__info_text_githabLink:hover {
   opacity: 0.5;
+}
+
+@media screen and (min-width: 768px) {
+  .aboutMe {
+    padding: 90px 50px 91px;
+  }
+
+  .aboutMe__title {
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .aboutMe__info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 66px;
+  }
+
+  .aboutMe__info_text {
+    display: flex;
+    flex-direction: column;
+    order: 0;
+
+  }
+
+  .aboutMe__photo {
+    order: 1;
+    width: 255px;
+    height: 307px;
+    margin: 0;
+  }
+
+  .aboutMe__info_text_title {
+    font-size: 40px;
+    line-height: 40px;
+    margin: 0;
+  }
+
+  .aboutMe__info_text_subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 16px 0 0;
+  }
+
+
+
+  .aboutMe__info_text_description {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 20px 0 0;
+    max-width: 364px;
+  }
+
+  .aboutMe__info_text_githabLink {
+    margin: auto 0 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .aboutMe {
+    padding: 110px 70px 101px;
+  }
+
+  .aboutMe__photo {
+    order: 1;
+    width: 270px;
+    height: 327px;
+    margin: 0;
+  }
+
+  .aboutMe__info_text_title {
+    font-size: 50px;
+    line-height: 58px;
+    margin: 0;
+  }
+
+  .aboutMe__info_text_subtitle {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 18px 0 0;
+  }
+
+  .aboutMe__info_text_description {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 26px 0 0;
+    max-width: 600px;
+  }
 }

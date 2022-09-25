@@ -3,7 +3,9 @@
   padding: 0px;
   display: flex;
   justify-content: space-between;
-  margin: 25px 53px;
+  padding: 25px 53px;
+  margin: 0;
+  background-color: #272727;
 }
 
 .navTab__links {
@@ -20,7 +22,7 @@
 
 @media screen and (min-width: 768px) {
   .navTab {
-    margin: 24px 246px;
+    padding: 24px 246px;
   }
 
   .navTab__links {
@@ -31,6 +33,6 @@
 
 @media screen and (min-width: 1280px) {
   .navTab {
-    margin: 24px 502px;
+    padding: 24px 502px;
   }
 }
