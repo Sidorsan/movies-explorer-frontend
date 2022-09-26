@@ -21,7 +21,7 @@
 
 .moviesCard__image {
   width: 100%;
-  object-fit: contain;
+  object-fit:cover;
 }
 
 .moviesCard__Content {
@@ -43,6 +43,7 @@
   padding: 0;
   cursor: pointer;
 }
+
 .moviesCard__Button_delite {
   background: url(../../../images/buttonDelite.svg);
   background-repeat: no-repeat;
@@ -65,4 +66,22 @@
   color: #8B8B8B;
   margin: 10px 0 14px 12px;
 
+}
+
+@media screen and (min-width: 768px) {
+  .moviesCard {
+    margin: 0;
+  }
+
+  .moviesCard__image {
+    height: 190px;
+  }
+
+
+}
+
+@media screen and (min-width: 1280px) {
+.moviesCard__image {
+    height: 151px;
+  }
 }

@@ -1,6 +1,6 @@
 .searchForm {
   min-width: 300px;
-  height: 72px;
+    height: 72px;
   margin: 80px 10px 0;
   align-items: center;
   background: #222222;
@@ -57,7 +57,7 @@
 
 @media screen and (min-width: 768px) {
   .searchForm {
-    min-width: 500px;
+    width: 80%;
     margin: 0;
     box-shadow: none;
   }

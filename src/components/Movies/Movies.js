@@ -19,7 +19,7 @@ const Movies = ({ cards, isLoading, onCardclick, loggedIn }) => {
             onCardclick={onCardclick}
             loggedIn={loggedIn}
           />
-          <button className="element__buttonAdd">Ещё</button>
+          <button className="movies__buttonAdd">Ещё</button>
         </div>
       </main>
     </>

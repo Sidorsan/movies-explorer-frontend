@@ -89,7 +89,7 @@
   align-self: flex-start;
   align-items: center;
   z-index: 1;
-  background-color: black;
+  background: #202020;
   color: #FFFFFF;
   list-style: none;
 
@@ -207,6 +207,7 @@
     justify-content: space-between;
     align-items: center;
     align-self: center;
+
   }
 
   .navigation__panel_menu {

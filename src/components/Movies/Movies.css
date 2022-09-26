@@ -7,7 +7,7 @@
 
 
 
-.element__buttonAdd {
+.movies__buttonAdd {
   margin: 70px 0 80px;
   width: 240px;
   height: 36px;
@@ -19,17 +19,27 @@
   font-size: 12px;
   line-height: 15px;
   color: #FFFFFF;
+  cursor: pointer;
+}
+
+.movies__buttonAdd:hover {
+ opacity: 0.5;
 }
 
 @media screen and (min-width: 768px) {
   .movies__searchAndFilter {
-display: flex;
-
-    min-width: 708Px;
-    margin: 80px 30px 0;
-    background-color: #222222;
+    display: flex;
+    width: 90%;
+    padding: 80px 30px 0;
+    background-color: #202020;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     border-radius: 9px;
+  }
+
+  .movies__buttonAdd {
+    margin: 50px 0 80px;
+    width: 320px;
+    height: 36px;
   }
 
 

@@ -8,13 +8,12 @@ function Navigation(props) {
         <img src={logo} alt="Логотип" className="navigation__logo" />
       </a>
 
-        <input className="navigation__checkbox" type="checkbox" name="" id="" />
-        <div className="navigation__hamburger-lines">
-          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line1"></span>
-          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line2"></span>
-          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line3"></span>
-        </div>
-
+      <input className="navigation__checkbox" type="checkbox" name="" id="" />
+      <div className="navigation__hamburger-lines">
+        <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line1"></span>
+        <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line2"></span>
+        <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line3"></span>
+      </div>
 
       <div className="navigation__panel">
         <ul className="navigation__panel_menu">
