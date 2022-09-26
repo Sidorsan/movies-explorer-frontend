@@ -1,11 +1,11 @@
-.element {
+.moviesCardList {
   margin: 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.element__container {
+.moviesCardList__container {
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -17,3 +17,10 @@ width: 100%;
   border-top: 1px solid #424242;
 }
 
+@media screen and (min-width: 768px) {
+
+
+
+}
+
+@media screen and (min-width: 1280px) {}

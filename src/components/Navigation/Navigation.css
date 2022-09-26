@@ -1,9 +1,10 @@
 .navigation {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
   width: 100%;
-  margin-right: 14px;
+
+
 }
 
 .navigation__logo {
@@ -12,7 +13,7 @@
   height: 38px;
 }
 
-.checkbox {
+.navigation__checkbox {
   position: absolute;
   height: 20.5px;
   width: 22px;
@@ -21,11 +22,11 @@
   z-index: 3;
   opacity: 0;
   cursor: pointer;
+
 }
 
-.hamburger-lines {
+.navigation__hamburger-lines {
   height: 20.5px;
-  width: 22px;
   position: absolute;
   top: 27.5px;
   right: 23px;
@@ -35,59 +36,54 @@
   justify-content: space-between;
 }
 
-.line {
+.navigation__hamburger-lines_line {
   height: 2.5px;
   width: 22px;
   background: #FFFFFF;
 }
 
-.line1 {
+.navigation__hamburger-lines_line1 {
   transform-origin: 0% 0%;
   transition: transform 0.4s ease-in-out;
 }
 
-.line2 {
+.navigation__hamburger-lines_line2 {
   transition: transform 0.2s ease-in-out;
 }
 
-.line3 {
+.navigation__hamburger-lines_line3 {
   transform-origin: 0% 100%;
   transition: transform 0.4s ease-in-out;
 }
 
-.navigation input[type="checkbox"]:checked~.header__menuItems {
+.navigation input[type="checkbox"]:checked~.navigation__panel {
 
   transform: translateX(0);
 }
 
-.navigation input[type="checkbox"]:checked~.header__menuItems {
 
-  transform: translateX(0);
-}
 
-.navigation input[type="checkbox"]:checked~.hamburger-lines .line1 {
+.navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line1 {
   transform: rotate(45deg) translateX(2px);
 }
 
-.navigation input[type="checkbox"]:checked~.hamburger-lines .line2 {
+.navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line2 {
   transform: scaleY(0);
 }
 
-.navigation input[type="checkbox"]:checked~.hamburger-lines .line3 {
+.navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line3 {
   transform: rotate(-45deg) translateX(2px);
   ;
 }
 
 
-.header__menuItems {
+.navigation__panel {
   position: absolute;
-  padding: 0;
   width: 100%;
   height: 100%;
   transform: translateX(-150%);
   display: flex;
   flex-direction: column;
-  margin: 0;
   transition: transform 0.5s ease-in-out;
   text-align: center;
   align-self: flex-start;
@@ -96,14 +92,21 @@
   background-color: black;
   color: #FFFFFF;
   list-style: none;
+
 }
 
-.header__menuItems_links {
+.navigation__panel_menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation__panel_menu_links {
   height: 29px;
   margin-top: 24px;
 }
 
-.header__menuItems_link {
+.navigation__panel_menu_link {
   display: inline-block;
   text-decoration: none;
   font-weight: 500;
@@ -112,26 +115,27 @@
   color: #FFFFFF;
 }
 
-.header__menuItems_links:first-of-type {
+.navigation__panel_menu_links:first-of-type {
   margin-top: 144px;
 }
 
-.header__menuItems_links:hover {
-  opacity: 0.5;
+.navigation__panel_menu_link:hover {
+
   border-bottom: 2px solid#FFFFFF;
 }
 
-.header__menuItems-accaunt {
-  margin: 444px 0 48px;
+.navigation__panel_accaunt {
+  margin: auto 0 55px;
   display: flex;
   width: 100px;
   height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
-.header__menuItems_linkAccaunt {
+.navigation__panel_accaunt_link {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -140,11 +144,11 @@
   text-decoration: none;
 }
 
-.header__menuItems_linkAccaunt:hover {
+.navigation__panel_accaunt_link:hover {
   opacity: 0.5;
 }
 
-.accaunt__logo {
+.navigation__panel_accaunt_logo {
   width: 26px;
   height: 30px;
   background: #313131;
@@ -152,11 +156,90 @@
 }
 
 @media screen and (min-width: 768px) {
+  .navigation__logo {
+    margin-left: 30px;
+  }
 
+  .navigation__checkbox {
+    right: 38px;
+    width: 28px;
+    height: 23px;
+  }
+
+  .navigation__hamburger-lines {
+    top: 26px;
+    right: 38px;
+    height: 23px;
+
+  }
+
+  .navigation__hamburger-lines_line {
+    height: 3px;
+    width: 28px;
+
+  }
+
+  .navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line1 {
+    transform: rotate(45deg) translateX(1px);
+  }
+
+  .navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line2 {
+    transform: scaleY(0);
+  }
+
+  .navigation input[type="checkbox"]:checked~.navigation__hamburger-lines .navigation__hamburger-lines_line3 {
+    transform: rotate(-45deg) translateX(1px);
+    ;
+  }
 
 
 }
 
 @media screen and (min-width: 1280px) {
+  .navigation__logo {
+      margin-left: 70px;
+    }
+  .navigation__panel {
+    transform: translateX(0);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+  }
+
+  .navigation__panel_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 212px;
+    margin-left: 44px;
+  }
+
+  .navigation__panel_menu_links:first-of-type {
+    display: none;
+  }
+
+  .navigation__checkbox {
+    display: none;
+  }
+
+  .navigation__hamburger-lines {
+    display: none;
+  }
+.navigation__panel_accaunt{
+  margin:0 70px 0 0;
+}
+.navigation__panel_menu_links{
+margin: 0;
+height: 18px;
+}
+.navigation__panel_menu_link {
+  font-size: 13px;
+    line-height: 18px;
+}
+
 
 }

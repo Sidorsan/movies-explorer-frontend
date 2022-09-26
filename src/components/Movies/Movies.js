@@ -8,8 +8,11 @@ const Movies = ({ cards, isLoading, onCardclick, loggedIn }) => {
     <>
       <main>
         <div className="movies">
-          <SearchForm />
-          <FilterCheckbox />
+          <div className="movies__searchAndFilter">
+            <SearchForm />
+            <FilterCheckbox />
+          </div>
+
           <MoviesCardList
             cards={cards}
             isLoading={isLoading}

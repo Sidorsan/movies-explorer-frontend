@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
+import findInInput from "../../../images/findInInput.svg";
 import Form from "../../Form/Form";
 const Movies = () => {
   const [data, setData] = useState({

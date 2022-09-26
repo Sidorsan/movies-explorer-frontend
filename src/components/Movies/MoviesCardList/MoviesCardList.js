@@ -10,8 +10,8 @@ function MoviesCardList({
   loggedIn,
 }) {
   return (
-    <section className="element">
-      <ul className="element__container">
+    <section className="moviesCardList">
+      <ul className="moviesCardList__container">
         {/* поменять местами Preloader и cards.map */}
         {isLoading ? (
           cards.map((card) => (

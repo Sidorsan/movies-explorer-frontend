@@ -7,36 +7,44 @@ function Navigation(props) {
       <a href="/">
         <img src={logo} alt="Логотип" className="navigation__logo" />
       </a>
-      <input className="checkbox" type="checkbox" name="" id="" />
-      <div className="hamburger-lines">
-        <span className="line line1"></span>
-        <span className="line line2"></span>
-        <span className="line line3"></span>
-      </div>
 
-      <ul className="header__menuItems">
-        <li className="header__menuItems_links">
-          <a className="header__menuItems_link" href="/">
-            Главная
-          </a>
-        </li>
-        <li className="header__menuItems_links">
-          <a className="header__menuItems_link" href="/movies">
-            Фильмы
-          </a>
-        </li>
-        <li className="header__menuItems_links">
-          <a className="header__menuItems_link" href="/saved-movies">
-            Сохранённые фильмы
-          </a>
-        </li>
-        <div className="header__menuItems-accaunt">
-          <a className="header__menuItems_linkAccaunt" href="/profile">
+        <input className="navigation__checkbox" type="checkbox" name="" id="" />
+        <div className="navigation__hamburger-lines">
+          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line1"></span>
+          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line2"></span>
+          <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line3"></span>
+        </div>
+
+
+      <div className="navigation__panel">
+        <ul className="navigation__panel_menu">
+          <li className="navigation__panel_menu_links">
+            <a className="navigation__panel_menu_link" href="/">
+              Главная
+            </a>
+          </li>
+          <li className="navigation__panel_menu_links">
+            <a className="navigation__panel_menu_link" href="/movies">
+              Фильмы
+            </a>
+          </li>
+          <li className="navigation__panel_menu_links">
+            <a className="navigation__panel_menu_link" href="/saved-movies">
+              Сохранённые фильмы
+            </a>
+          </li>
+        </ul>
+        <div className="navigation__panel_accaunt">
+          <a className="navigation__panel_accaunt_link" href="/profile">
             Аккаунт
           </a>
-          <img src={accaunt} alt="Аккаунт" className="accaunt__logo" />
+          <img
+            src={accaunt}
+            alt="Аккаунт"
+            className="navigation__panel_accaunt_logo"
+          />
         </div>
-      </ul>
+      </div>
     </div>
   );
 }

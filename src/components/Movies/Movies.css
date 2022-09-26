@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #202020
 }
+
+
 
 .element__buttonAdd {
   margin: 70px 0 80px;
@@ -17,3 +20,19 @@
   line-height: 15px;
   color: #FFFFFF;
 }
+
+@media screen and (min-width: 768px) {
+  .movies__searchAndFilter {
+display: flex;
+
+    min-width: 708Px;
+    margin: 80px 30px 0;
+    background-color: #222222;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+  }
+
+
+}
+
+@media screen and (min-width: 1280px) {}
