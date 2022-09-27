@@ -1,5 +1,4 @@
 .moviesCardList {
-  margin: 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,19 +18,15 @@
 
 @media screen and (min-width: 768px) {
   .moviesCardList {
-    margin: 30px 0;
-    width: 100%;
+     width: 100%;
 
   }
-
-
   .moviesCardList__container {
     width: 93%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 339px);
-    row-gap: 36px;
-    column-gap: 30px;
-    padding-top: 80px
+    gap: 36px 30px;
+    padding: 80px 0 30px
   }
 }
 
@@ -39,8 +34,7 @@
   .moviesCardList__container {
     width: 90%;
     grid-template-columns: repeat(auto-fill, 270px);
-    row-gap: 32px;
-    column-gap: 20px;
+    gap: 32px 20px;
     padding-top: 70px
   }
 

@@ -51,7 +51,7 @@
   top: 32px;
   left: 19px;
   transition: opacity 0.3s;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 }
 
