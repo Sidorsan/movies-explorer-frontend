@@ -2,18 +2,19 @@
   margin: 80px 0 0;
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  /* width: 100%; */
   min-height: 527px;
 }
 
 .form_profile {
-  width: 100%;
+  max-width: 410px;
 }
 
 
 
-.form_searchForm{
-min-height: 72px;
+.form_searchForm {
+  min-height: 72px;
 }
 
 .form__section {
@@ -21,6 +22,7 @@ min-height: 72px;
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  width: 100%;
 }
 
 
@@ -54,17 +56,19 @@ min-height: 72px;
   font-size: 11px;
   line-height: 13px;
   align-self: center;
+  color: #FFFFFF;
 }
 
 .form__input {
-  width: 260px;
-  height: 27px;
+  /* width: 260px; */
+  width: 100%;
+  height: 26px;
   margin-top: 5px;
   padding: 0;
   border: none;
   border-bottom: 1px solid #424242;
   color: #FFFFFF;
-  background-color: black;
+  background-color: #202020;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -72,12 +76,17 @@ min-height: 72px;
 
 .form__input_profile {
   height: 30px;
-  width: 120px;
+  width: 80%;
   font-size: 11px;
   line-height: 13px;
-  text-align: right;
   margin: 0;
   margin-left: auto;
+
+}
+
+.form__input_profile::placeholder {
+  text-align: right;
+
 }
 
 .form__submitButton {
@@ -88,6 +97,10 @@ min-height: 72px;
   border-radius: 3px;
   border: none;
   padding: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF
 }
 
 .form__submitButton:hover {
@@ -96,17 +109,18 @@ min-height: 72px;
 }
 
 .form__submitButton_profile {
-  margin: 379px 0 0;
+  margin: 379px auto 0;
   color: #FFFFFF;
-  background-color: black;
+  background-color: #202020;
   border: none;
   cursor: pointer;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  width: auto;
-  height: auto;
+  width: min-content;
 }
+
+.form__submitButton_register {}
 
 
 .form__questionAboutRegistration {
@@ -128,6 +142,7 @@ min-height: 72px;
   line-height: 15px;
   color: #4285F4;
   text-decoration: none;
+  margin-left: 5px;
 }
 
 .form__link:hover {
@@ -136,9 +151,8 @@ min-height: 72px;
 
 
 .form__link_profile {
-  margin: 16px 0 0;
   color: #EE3465;
-  background-color: black;
+  background-color: #202020;
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -162,5 +176,69 @@ min-height: 72px;
 
 .form__input_errorState_profile {
   top: 35px;
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    min-height: 645px;
+  }
+
+  .form_profile {
+    margin-top: 96px;
+  }
+
+  .form__input_profile {
+    width: 80%;
+  }
+
+  .form__submitButton_profile {
+    margin-top: 210px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .form__questionAboutRegistration_profile {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 16px 0 269px;
+  }
+
+  .form__questionAboutRegistration {
+    margin: 16px 0 232px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .form {
+    width: 396px;
+    margin-top: 40px;
+  }
+
+  .form__submitButton {
+    width: 396px;
+    height: 45px;
+  }
+
+  .form__submitButton_register {
+    /* margin-top: 165px; */
+  }
+
+
+}
+
+@media screen and (min-width: 1280px) {
+  .form_profile {
+    margin-top: 123px;
+  }
+
+  .form__submitButton_profile {
+    margin-top: 220px;
+
+  }
+
+  .form__questionAboutRegistration_profile {
+    margin: 16px 0 70px;
+  }
+
 
 }

@@ -41,11 +41,14 @@ const Register = ({ onRegister }) => {
 
   return (
     <div className="register">
-      <a href="/">
-        <img src={logo} alt="Логотип" className="register__logo" />
-      </a>
+      <div className="register__header">
+        <a href="/">
+          <img src={logo} alt="Логотип" className="register__logo" />
+        </a>
 
-      <h2 className="register__title">Добро пожаловать!</h2>
+        <h2 className="register__title">Добро пожаловать!</h2>
+      </div>
+
       <Form
         name="register"
         buttonSubmitTitle="Зарегистрироваться"

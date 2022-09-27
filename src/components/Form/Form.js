@@ -11,7 +11,7 @@ function Form({
 }) {
   return (
     <form
-      className={`form form_${name}`}
+      className={`form form__${name}`}
       name={`form_${name}`}
       onSubmit={onSubmit}
     >

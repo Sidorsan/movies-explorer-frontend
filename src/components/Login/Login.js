@@ -33,15 +33,17 @@ const Login = ({ onLogin }) => {
   const onSubmit = (data) => {
     const { password, email } = data;
     onLogin({ email, password });
-
   };
 
   return (
     <div className="login">
-      <a href="/">
-        <img src={logo} alt="Логотип" className="login__logo" />
-      </a>
-      <h2 className="login__title">Рады видеть!</h2>
+      <div className="login__header">
+        <a href="/">
+          <img src={logo} alt="Логотип" className="login__logo" />
+        </a>
+        <h2 className="login__title">Рады видеть!</h2>
+      </div>
+
       <Form
         name="login"
         buttonSubmitTitle="Войти"
