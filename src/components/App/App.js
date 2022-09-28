@@ -17,7 +17,7 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import ImagePopup from "./ImagePopup";
-import RegistrationConfirmPopup from "../RegistrationConfirmPopup/RegistrationConfirmPopup";
+import PopapNotFound from "../PopapNotFound/PopapNotFound";
 import api from "../../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
@@ -34,9 +34,8 @@ function App() {
   // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   // const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isRegistrationConfirmPopupOpen, setRegistrationConfirmPopupOpen] =
-    useState(false);
-  const [dataRegistrationConfirmPopup, setRegistrationConfirmPopup] = useState({
+  const [isPopapNotFoundOpen, setPopapNotFoundOpen] = useState(false);
+  const [dataPopapNotFound, setPopapNotFound] = useState({
     title: "",
     subtitle: "",
     buttonTitle: "",
@@ -69,12 +68,12 @@ function App() {
   // }, [loggedIn]);
 
   const handleError = () => {
-    setRegistrationConfirmPopup({
+    setPopapNotFound({
       title: "404",
       subtitle: "Страница не найдена",
       buttonTitle: "Назад",
     });
-    setRegistrationConfirmPopupOpen(!isRegistrationConfirmPopupOpen);
+    setPopapNotFoundOpen(!isPopapNotFoundOpen);
   };
 
   // function handleCardDelete(id) {
@@ -129,7 +128,7 @@ function App() {
   // }
 
   function closeAllPopups() {
-    setRegistrationConfirmPopupOpen(false);
+    setPopapNotFoundOpen(false);
   }
 
   const handleLogin = ({ email, password }) => {
@@ -241,9 +240,9 @@ function App() {
         location.pathname !== "/profile" ? (
           <Footer />
         ) : null}
-        <RegistrationConfirmPopup
-          data={dataRegistrationConfirmPopup}
-          isOpen={isRegistrationConfirmPopupOpen}
+        <PopapNotFound
+          data={dataPopapNotFound}
+          isOpen={isPopapNotFoundOpen}
           onClose={closeAllPopups}
         />
       </>

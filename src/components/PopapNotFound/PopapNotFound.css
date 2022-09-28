@@ -15,7 +15,6 @@
   z-index: 2;
   transition: visibility 0.2s, opacity 0.5s linear;
   color: #FFFFFF;
-
 }
 
 .popup_opened {
@@ -23,11 +22,7 @@
   opacity: 1;
 }
 
-
-
-
 .popup__title {
-/* position: absolute; */
   margin: 329px 0 0;
   font-weight: 400;
   font-size: 80px;
@@ -84,6 +79,4 @@
       font-size: 140px;
       line-height: 169px;
     }
-
-
 }
