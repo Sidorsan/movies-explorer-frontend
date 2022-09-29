@@ -152,9 +152,11 @@ function App() {
     //   setIsloading(true);раскомментировать когда будет авторизация
 
     api
-      .getAllNeededData()
-      .then(([userData, cardData]) => {
-        setCurrentUser(userData);
+      // .getAllNeededData()раскомментировать когда будет авторизация
+      .getInitialMovies()
+      // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
+      .then((cardData) => {
+        // setCurrentUser(userData);раскомментировать когда будет авторизация
         setCards(cardData);
         // setIsloading(false); раскомментировать когда будет авторизация
         setIsloading(true);
