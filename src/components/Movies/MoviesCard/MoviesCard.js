@@ -21,16 +21,16 @@ function MoviesCard(props) {
     isSaved ? "moviesCard__Button_active" : " "
   } ${
     location.pathname === "/saved-movies" ? "moviesCard__Button_delite" : " "
-  }`;
+    }`;
   return (
     <li className="moviesCard">
       <img
-        src={props.card.image}
+        src={`https://api.nomoreparties.co${props.card.image.url}`}
         alt={props.card.description}
         className="moviesCard__image"
       />
       <div className="moviesCard__Content">
-        <h2 className="moviesCard__title">{props.card.description}</h2>
+        <h2 className="moviesCard__title">{props.card.nameRU}</h2>
         <button
           className={MoviesButtonClassName}
           onClick={handleCardButtonClick}

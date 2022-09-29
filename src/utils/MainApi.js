@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
   }
@@ -69,8 +69,7 @@ class Api {
   }
 }
 
-const api = new Api({
+const mainApi = new MainApi({
   baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
-
 });
-export default api;
+export default mainApi;

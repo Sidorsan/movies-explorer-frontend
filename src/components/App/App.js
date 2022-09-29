@@ -18,7 +18,8 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import ImagePopup from "./ImagePopup";
 import PopapNotFound from "../PopapNotFound/PopapNotFound";
-import api from "../../utils/Api";
+import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
 // import EditAvatarPopup from "./EditAvatarPopup";
@@ -77,7 +78,7 @@ function App() {
   };
 
   // function handleCardDelete(id) {
-  //   api
+  //   mainApi
   //     .deleteCard(id)
   //     .then(() => {
   //       setCards((cards) => cards.filter((c) => c._id !== id));
@@ -87,7 +88,7 @@ function App() {
 
   // function handleCardLike(card) {
   //   const isLiked = card.likes.some((i) => i === currentUser._id);
-  //   api
+  //   mainApi
   //     .changeLikeCardStatus(card._id, !isLiked)
   //     .then((newCard) => {
   //       setCards((newCards) =>
@@ -98,7 +99,7 @@ function App() {
   // }
 
   // function handleUpdateUser(userInfo) {
-  //   api
+  //   mainApi
   //     .setUserInfo(userInfo)
   //     .then((data) => {
   //       setCurrentUser(data);
@@ -108,7 +109,7 @@ function App() {
   // }
 
   // function handleUpdateAvatar(avatarInfo) {
-  //   api
+  //   mainApi
   //     .setAvatar(avatarInfo)
   //     .then((data) => {
   //       setCurrentUser(data);
@@ -118,7 +119,7 @@ function App() {
   // }
 
   // function handleAddPlaceSubmit(card) {
-  //   api
+  //   mainApi
   //     .postInitialCards(card)
   //     .then((newCard) => {
   //       setCards([newCard, ...cards]);
@@ -151,26 +152,22 @@ function App() {
     // if (loggedIn) {раскомментировать когда будет авторизация
     //   setIsloading(true);раскомментировать когда будет авторизация
 
-    api
-      // .getAllNeededData()раскомментировать когда будет авторизация
-      .getInitialMovies()
-      // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
-      .then((cardData) => {
-        // setCurrentUser(userData);раскомментировать когда будет авторизация
-        setCards(cardData);
-        // setIsloading(false); раскомментировать когда будет авторизация
-        setIsloading(true);
-      })
-      .catch(handleError);
+    // mainApi
+moviesApi
+  // .getAllNeededData()раскомментировать когда будет авторизация
+  .getInitialMovies()
+  // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
+  .then((cardData) => {
+    // setCurrentUser(userData);раскомментировать когда будет авторизация
+
+    setCards(cardData);
+    // setIsloading(false); раскомментировать когда будет авторизация
+    setIsloading(true);
+  })
+  .catch(handleError);
     // }
     // }, [loggedIn]);раскомментировать когда будет авторизация
   }, []);
-
-
-
-
-
-
 
   const handleRegister = ({ password, email, firstName }) => {
     auth
