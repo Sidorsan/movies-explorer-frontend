@@ -48,16 +48,16 @@ function App() {
 
   const history = useHistory();
 
-  const handleTokenCheck = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-    }
-  };
+  // const handleTokenCheck = () => {
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+  //   }
+  // };
 
-  useEffect(() => {
-    handleTokenCheck();
-  }, []);
+  // useEffect(() => {
+  //   handleTokenCheck();
+  // }, []);
 
   // useEffect(() => {
   //   if (loggedIn) {
