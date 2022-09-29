@@ -48,16 +48,16 @@ function App() {
 
   const history = useHistory();
 
-  const handleTokenCheck = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-    }
-  };
+  // const handleTokenCheck = () => {
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+  //   }
+  // };
 
-  useEffect(() => {
-    handleTokenCheck();
-  }, []);
+  // useEffect(() => {
+  //   handleTokenCheck();
+  // }, []);
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -152,9 +152,11 @@ function App() {
     //   setIsloading(true);раскомментировать когда будет авторизация
 
     api
-      .getAllNeededData()
-      .then(([userData, cardData]) => {
-        setCurrentUser(userData);
+      // .getAllNeededData()раскомментировать когда будет авторизация
+      .getInitialMovies()
+      // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
+      .then((cardData) => {
+        // setCurrentUser(userData);раскомментировать когда будет авторизация
         setCards(cardData);
         // setIsloading(false); раскомментировать когда будет авторизация
         setIsloading(true);
@@ -163,6 +165,12 @@ function App() {
     // }
     // }, [loggedIn]);раскомментировать когда будет авторизация
   }, []);
+
+
+
+
+
+
 
   const handleRegister = ({ password, email, firstName }) => {
     auth

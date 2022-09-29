@@ -22,6 +22,7 @@ class Api {
 
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}/movies`, {
+
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -70,5 +71,6 @@ class Api {
 
 const api = new Api({
   baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
+
 });
 export default api;
