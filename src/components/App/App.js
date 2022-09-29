@@ -45,7 +45,6 @@ function App() {
   const [cards, setCards] = useState();
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
   const history = useHistory();
 
   // const handleTokenCheck = () => {
@@ -97,35 +96,10 @@ function App() {
   //     .catch(handleError);
   // }
 
-  // function handleUpdateUser(userInfo) {
-  //   api
-  //     .setUserInfo(userInfo)
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
 
-  // function handleUpdateAvatar(avatarInfo) {
-  //   api
-  //     .setAvatar(avatarInfo)
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
 
-  // function handleAddPlaceSubmit(card) {
-  //   api
-  //     .postInitialCards(card)
-  //     .then((newCard) => {
-  //       setCards([newCard, ...cards]);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
+
+
 
   function closeAllPopups() {
     setPopapNotFoundOpen(false);
