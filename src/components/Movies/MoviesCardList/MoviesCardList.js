@@ -16,7 +16,7 @@ function MoviesCardList({
         {isLoading ? (
           cards.map((card) => (
             <MoviesCard
-              key={card._id}
+              key={card.id}
               card={card}
               // onCardClick={onCardClick}
               onCardClick={onCardClick}
