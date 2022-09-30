@@ -19,6 +19,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // import ImagePopup from "./ImagePopup";
 import PopapNotFound from "../PopapNotFound/PopapNotFound";
 import api from "../../utils/Api";
+import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 // import EditProfilePopup from "./EditProfilePopup";
 // import EditAvatarPopup from "./EditAvatarPopup";
@@ -125,7 +126,7 @@ function App() {
     // if (loggedIn) {раскомментировать когда будет авторизация
     //   setIsloading(true);раскомментировать когда будет авторизация
 
-    api
+    moviesApi
       // .getAllNeededData()раскомментировать когда будет авторизация
       .getInitialMovies()
       // .then(([userData, cardData]) => {раскомментировать когда будет авторизация

@@ -4,6 +4,8 @@ import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
 const Movies = ({ cards, isLoading, onCardclick, loggedIn }) => {
+
+
   return (
     <>
       <main>
