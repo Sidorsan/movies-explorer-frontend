@@ -12,24 +12,18 @@ function MoviesCardList({
   return (
     <section className="moviesCardList">
       <ul className="moviesCardList__container">
-        {/* поменять местами Preloader и cards.map */}
         {isLoading ? (
-          cards.map(
-            (card) => (
-              (
-                <MoviesCard
-                  key={card.id}
-                  card={card}
-                  // onCardClick={onCardClick}
-                  onCardClick={onCardClick}
-                  // onCardDelete={onCardDelete}
-                />
-              )
-
-            )
-          )
-        ) : (
           <Preloader />
+        ) : (
+          cards.map((card) => (
+            <MoviesCard
+              key={card.id}
+              card={card}
+              // onCardClick={onCardClick}
+              onCardClick={onCardClick}
+              // onCardDelete={onCardDelete}
+            />
+          ))
         )}
       </ul>
     </section>

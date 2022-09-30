@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+
   useLocation,
   withRouter,
   Route,
@@ -32,9 +33,6 @@ import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
 function App() {
   let location = useLocation();
-  // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  // const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isPopapNotFoundOpen, setPopapNotFoundOpen] = useState(false);
   const [dataPopapNotFound, setPopapNotFound] = useState({
     title: "",
@@ -43,28 +41,30 @@ function App() {
   });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState();
+  const [cards, setCards] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const history = useHistory();
 
-  // const handleTokenCheck = () => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-  //   }
-  // };
+  const handleTokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+history.push(location.pathname);
+    }
+  };
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   // useEffect(() => {
-  //   handleTokenCheck();
-  // }, []);
-
-  // useEffect(() => {
+  //   console.log("работаю");
   //   if (loggedIn) {
   //     history.push("/movies");
   //   } else {
-  //     history.push("/");
+  //     history.push("/signin");
   //   }
   // }, [loggedIn]);
 
@@ -140,34 +140,50 @@ function App() {
           return handleError;
         }
         if (data) {
+
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
           setLoggedIn(true);
+          history.push("/movies");
         }
       })
       .catch(handleError);
   };
 
   useEffect(() => {
-    // if (loggedIn) {раскомментировать когда будет авторизация
-    //   setIsloading(true);раскомментировать когда будет авторизация
+    if (loggedIn) {
+      setIsloading(true);
+      // mainApi
+      moviesApi
+        // .getAllNeededData()
+        .getInitialMovies()
+        // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
+        .then((cardData) => {
+          // setCurrentUser(userData);раскомментировать когда будет авторизация
 
-    // mainApi
-moviesApi
-  // .getAllNeededData()раскомментировать когда будет авторизация
-  .getInitialMovies()
-  // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
-  .then((cardData) => {
-    // setCurrentUser(userData);раскомментировать когда будет авторизация
+          setCards(cardData);
 
-    setCards(cardData);
-    // setIsloading(false); раскомментировать когда будет авторизация
-    setIsloading(true);
-  })
-  .catch(handleError);
-    // }
-    // }, [loggedIn]);раскомментировать когда будет авторизация
-  }, []);
+          setIsloading(false);
+        })
+        .catch(handleError);
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      setIsloading(true);
+      setIsloading(true);
+      mainApi
+        .getInitialUser()
+        .then((userData) => {
+          setCurrentUser(userData);
+          // setIsloading(false);
+        })
+        .catch(handleError);
+    }
+  }, [loggedIn]);
+
+  //
 
   const handleRegister = ({ password, email, firstName }) => {
     auth
@@ -201,42 +217,48 @@ moviesApi
           </Route>
 
           <Route path="/signup">
-            <Register onRegister={handleRegister} />
-          </Route>
-          {/* <Route path="/signin">
-            <Login onLogin={handleLogin} />
-          </Route> */}
-          <Route path="/signin">
-            {/* {loggedIn ? (
+            {loggedIn ? (
               <Redirect to="/movies" />
-            ) : ( */}
-            <Login onLogin={handleLogin} />
-            {/* )} */}
+            ) : (
+              <Register onRegister={handleRegister} />
+            )}
+          </Route>
+          <Route path="/signin">
+            {loggedIn ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )}
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
 
-          <Route path="/movies">
-            <Movies
-              cards={cards}
-              isLoading={isLoading}
-              onCardclick={""}
-              loggedIn={loggedIn}
-            />
-          </Route>
-
-          {/* <ProtectedRoute
+          <ProtectedRoute
             path="/movies"
             component={Movies}
             cards={cards}
             isLoading={isLoading}
             loggedIn={loggedIn}
-          /> */}
-
-          <Route path="/saved-movies">
+          />
+          {/* <Route path="/movies">
+            <Movies
+              cards={cards}
+              isLoading={isLoading}
+              onCardclick={""}
+              loggedIn={setLoggedIn}
+            />
+          </Route> */}
+          <ProtectedRoute
+            path="/saved-movies"
+            component={SavedMovies}
+            cards={cards}
+            isLoading={isLoading}
+            loggedIn={loggedIn}
+          />
+          {/* <Route path="/saved-movies">
             <SavedMovies cards={cards} isLoading={isLoading} onCardclick={""} />
-          </Route>
+          </Route> */}
         </Switch>
 
         {/* <Footer /> */}

@@ -11,7 +11,8 @@ class MainApi {
   }
 
   getInitialUser() {
-    return fetch(`https://${this._baseUrl}/users/me`, {
+    // return fetch(`https://${this._baseUrl}/users/me`, { расскоментировать когда через сайт запустишь
+    return fetch(`http://${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -70,6 +71,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
+  // baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
+  baseUrl: "localhost:3001",
 });
 export default mainApi;
