@@ -36,7 +36,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="login">
+    <section className="login">
       <div className="login__header">
         <a href="/">
           <img src={logo} alt="Логотип" className="login__logo" />
@@ -102,7 +102,7 @@ const Login = ({ onLogin }) => {
           )}
         </section>
       </Form>
-    </div>
+    </section>
   );
 };
 export default Login;

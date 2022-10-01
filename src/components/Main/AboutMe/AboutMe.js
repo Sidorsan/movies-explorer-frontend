@@ -4,7 +4,7 @@ const { gitHabLink } = require("../../Constant/Constant");
 
 function AboutMe(props) {
   return (
-    <div className="aboutMe" id="aboutMe">
+    <section className="aboutMe" id="aboutMe">
       <h2 className="aboutMe__title">Студент</h2>
       <div className="aboutMe__info">
         <img
@@ -29,7 +29,7 @@ function AboutMe(props) {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

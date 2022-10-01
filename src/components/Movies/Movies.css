@@ -30,7 +30,7 @@
   .movies__searchAndFilter {
     display: flex;
     width: 90%;
-    padding: 80px 30px 110px;
+    margin: 80px 30px 110px;
     background-color: #202020;
     box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
     border-radius: 9px;

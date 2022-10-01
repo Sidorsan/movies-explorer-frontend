@@ -1,18 +1,21 @@
 import React from "react";
 import Arrow from "../../../images/arrow.svg";
-const {staticWebSiteLink} = require("../../Constant/Constant");
-const {adaptiveWebSiteLink} = require("../../Constant/Constant");
-const {singlePageApplicationLink} = require("../../Constant/Constant");
-
+const { staticWebSiteLink } = require("../../Constant/Constant");
+const { adaptiveWebSiteLink } = require("../../Constant/Constant");
+const { singlePageApplicationLink } = require("../../Constant/Constant");
 
 function Portfolio(props) {
   return (
-    <div className="portfolio">
+    <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__link_blocks">
         <li className="portfolio__link_block">
-          <h3 className="portfolio__link_block_title"> Статичный сайт</h3>
-          <a href={staticWebSiteLink} className="portfolio__link">
+          <a
+            href={staticWebSiteLink}
+            target="_ blank"
+            className="portfolio__link"
+          >
+            <h3 className="portfolio__link_title"> Статичный сайт</h3>
             <img
               src={Arrow}
               alt="Стрелка"
@@ -21,8 +24,12 @@ function Portfolio(props) {
           </a>
         </li>
         <li className="portfolio__link_block">
-          <h3 className="portfolio__link_block_title"> Адаптивный сайт</h3>
-          <a href={adaptiveWebSiteLink} className="portfolio__link">
+          <a
+            href={adaptiveWebSiteLink}
+            target="_ blank"
+            className="portfolio__link"
+          >
+            <h3 className="portfolio__link_title"> Адаптивный сайт</h3>
             <img
               src={Arrow}
               alt="Стрелка"
@@ -31,10 +38,14 @@ function Portfolio(props) {
           </a>
         </li>
         <li className="portfolio__link_block">
-          <h3 className="portfolio__link_block_title">
-            Одностраничное приложение
-          </h3>
-          <a href={singlePageApplicationLink} className="portfolio__link">
+          <a
+            href={singlePageApplicationLink}
+            target="_ blank"
+            className="portfolio__link"
+          >
+            <h3 className="portfolio__link_title">
+              Одностраничное приложение
+            </h3>
             <img
               src={Arrow}
               alt="Стрелка"
@@ -43,7 +54,7 @@ function Portfolio(props) {
           </a>
         </li>
       </ul>
-    </div>
+    </section>
   );
 }
 

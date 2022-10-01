@@ -165,40 +165,41 @@ function App() {
         {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
           <Header />
         ) : null}
+        <main>
+          <Switch>
+            {/* <ProtectedRoute */}
 
-        <Switch>
-          {/* <ProtectedRoute */}
-          <Route exact path="/">
-            <Main />
-          </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
 
-          <Route path="/signup">
-            <Register onRegister={handleRegister} />
-          </Route>
-          {/* <Route path="/signin">
+            <Route path="/signup">
+              <Register onRegister={handleRegister} />
+            </Route>
+            {/* <Route path="/signin">
             <Login onLogin={handleLogin} />
           </Route> */}
-          <Route path="/signin">
-            {/* {loggedIn ? (
+            <Route path="/signin">
+              {/* {loggedIn ? (
               <Redirect to="/movies" />
             ) : ( */}
-            <Login onLogin={handleLogin} />
-            {/* )} */}
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
+              <Login onLogin={handleLogin} />
+              {/* )} */}
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
 
-          <Route path="/movies">
-            <Movies
-              cards={cards}
-              isLoading={isLoading}
-              onCardclick={""}
-              loggedIn={loggedIn}
-            />
-          </Route>
+            <Route path="/movies">
+              <Movies
+                cards={cards}
+                isLoading={isLoading}
+                onCardclick={""}
+                loggedIn={loggedIn}
+              />
+            </Route>
 
-          {/* <ProtectedRoute
+            {/* <ProtectedRoute
             path="/movies"
             component={Movies}
             cards={cards}
@@ -206,11 +207,15 @@ function App() {
             loggedIn={loggedIn}
           /> */}
 
-          <Route path="/saved-movies">
-            <SavedMovies cards={cards} isLoading={isLoading} onCardclick={""} />
-          </Route>
-        </Switch>
-
+            <Route path="/saved-movies">
+              <SavedMovies
+                cards={cards}
+                isLoading={isLoading}
+                onCardclick={""}
+              />
+            </Route>
+          </Switch>
+        </main>
         {/* <Footer /> */}
         {location.pathname !== "/signin" &&
         location.pathname !== "/signup" &&

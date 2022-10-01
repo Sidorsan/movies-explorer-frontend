@@ -10,7 +10,7 @@ function MoviesCardList({
   loggedIn,
 }) {
   return (
-    <section className="moviesCardList">
+    <div className="moviesCardList">
       <ul className="moviesCardList__container">
         {/* поменять местами Preloader и cards.map */}
         {isLoading ? (
@@ -27,7 +27,7 @@ function MoviesCardList({
           <Preloader />
         )}
       </ul>
-    </section>
+    </div>
   );
 }
 

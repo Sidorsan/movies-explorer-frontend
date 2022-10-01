@@ -8,8 +8,7 @@ const Movies = ({ cards, isLoading, onCardclick, loggedIn }) => {
 
   return (
     <>
-      <main>
-        <div className="movies">
+        <section className="movies">
           <div className="movies__searchAndFilter">
             <SearchForm />
             <FilterCheckbox />
@@ -22,8 +21,8 @@ const Movies = ({ cards, isLoading, onCardclick, loggedIn }) => {
             loggedIn={loggedIn}
           />
           <button className="movies__buttonAdd">Ещё</button>
-        </div>
-      </main>
+        </section>
+
     </>
   );
 };
