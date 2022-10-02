@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
 import findInInput from "../../../images/findInInput.svg";
 import Form from "../../Form/Form";
-const Movies = () => {
+const SearchForm = (props) => {
   const [data, setData] = useState({
     film: ""
   });
@@ -23,13 +23,14 @@ const Movies = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const { film } = data;
-    console.log(data);
-  };
+  // const onSubmit = (data) => {
+  //   const { film } = data;
+  //   console.log(data);
+  // };
+
   return (
     <div className="searchForm">
-      <form onSubmit={handleSubmit(onSubmit)} className="searchForm__form">
+      <form onSubmit={handleSubmit(props.onSubmit)} className="searchForm__form">
         <input
           className="searchForm__input"
           placeholder="Фильм"
@@ -58,4 +59,4 @@ const Movies = () => {
     </div>
   );
 };
-export default Movies;
+export default SearchForm;

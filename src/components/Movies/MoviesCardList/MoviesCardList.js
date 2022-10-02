@@ -8,11 +8,13 @@ function MoviesCardList({
   cards,
   isLoading,
   loggedIn,
+  onSubmit
 }) {
+
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
-        {isLoading ? (
+        {isLoading  ? (
           <Preloader />
         ) : (
           cards.map((card) => (

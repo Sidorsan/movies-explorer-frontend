@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1281px) {
   .moviesCardList__container {
     width: 90%;
     grid-template-columns: repeat(auto-fill, 270px);

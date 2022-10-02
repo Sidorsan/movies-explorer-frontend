@@ -21,6 +21,8 @@ import PopapNotFound from "../PopapNotFound/PopapNotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
+
 // import EditProfilePopup from "./EditProfilePopup";
 // import EditAvatarPopup from "./EditAvatarPopup";
 // import AddPlacePopup from "./AddPlacePopup";
@@ -44,13 +46,13 @@ function App() {
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
+
   const history = useHistory();
 
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      // auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch((data) => (data));
+      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
       history.push(location.pathname);
     }
   };
@@ -77,57 +79,6 @@ function App() {
     setPopapNotFoundOpen(!isPopapNotFoundOpen);
   };
 
-  // function handleCardDelete(id) {
-  //   mainApi
-  //     .deleteCard(id)
-  //     .then(() => {
-  //       setCards((cards) => cards.filter((c) => c._id !== id));
-  //     })
-  //     .catch(handleError);
-  // }
-
-  // function handleCardLike(card) {
-  //   const isLiked = card.likes.some((i) => i === currentUser._id);
-  //   mainApi
-  //     .changeLikeCardStatus(card._id, !isLiked)
-  //     .then((newCard) => {
-  //       setCards((newCards) =>
-  //         newCards.map((c) => (c._id === card._id ? newCard : c))
-  //       );
-  //     })
-  //     .catch(handleError);
-  // }
-
-  // function handleUpdateUser(userInfo) {
-  //   mainApi
-  //     .setUserInfo(userInfo)
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
-
-  // function handleUpdateAvatar(avatarInfo) {
-  //   mainApi
-  //     .setAvatar(avatarInfo)
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
-
-  // function handleAddPlaceSubmit(card) {
-  //   mainApi
-  //     .postInitialCards(card)
-  //     .then((newCard) => {
-  //       setCards([newCard, ...cards]);
-  //       closeAllPopups();
-  //     })
-  //     .catch(handleError);
-  // }
-
   function closeAllPopups() {
     setPopapNotFoundOpen(false);
   }
@@ -149,29 +100,46 @@ function App() {
       .catch(handleError);
   };
 
-  useEffect(() => {
-    if (loggedIn) {
-      setIsloading(true);
-      // mainApi
+
+  const onSubmitForm = () => {
+    setIsloading(true);
+    const allMovies = JSON.parse(localStorage.getItem("AllMovies"));
+    if (!allMovies) {
       moviesApi
-        // .getAllNeededData()
         .getInitialMovies()
-        // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
-        .then((cardData) => {
-          // setCurrentUser(userData);раскомментировать когда будет авторизация
-
-          setCards(cardData);
-
+        .then((moviesData) => {
+          localStorage.setItem("allMovies", JSON.stringify(moviesData));
+          setCards(moviesData);
           setIsloading(false);
         })
         .catch(handleError);
     }
-  }, [loggedIn]);
+  };
+
+
+
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     setIsloading(true);
+  //     // mainApi
+  //     moviesApi
+  //       // .getAllNeededData()
+  //       .getInitialMovies()
+  //       // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
+  //       .then((cardData) => {
+  //         // setCurrentUser(userData);раскомментировать когда будет авторизация
+
+  //         setCards(cardData);
+
+  //         setIsloading(false);
+  //       })
+  //       .catch(handleError);
+  //   }
+  // }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
-      setIsloading(true);
-      setIsloading(true);
+      // setIsloading(true);
       mainApi
         .getInitialUser()
         .then((userData) => {
@@ -239,6 +207,7 @@ function App() {
             cards={cards}
             isLoading={isLoading}
             loggedIn={loggedIn}
+            onSubmit={onSubmitForm}
           />
           {/* <Route path="/movies">
             <Movies
