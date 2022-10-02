@@ -1,18 +1,16 @@
 import React from "react";
 
-const FilterCheckbox = (onChange) => {
-  // console.log(onChange);
-  const handleCardClick = () => {
-    onChange(false);
+const FilterCheckbox = (Props) => {
+
+  const handleClick = () => {
+    Props.onChange(true);
   };
   return (
     <div className="filterCheckbox">
       <input
         className="filterCheckbox__checkbox"
         type="checkbox"
-        // checked={!checked}
-        onChange={handleCardClick}
-        // onClick={handleCardClick}
+        onChange={handleClick}
       ></input>
       <h2 className="filterCheckbox__title">Короткометражки</h2>
     </div>

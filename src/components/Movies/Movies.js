@@ -29,7 +29,7 @@ console.log(checked);
       <section className="movies">
         <div className="movies__searchAndFilter">
           <SearchForm onSubmit={onSubmit} />
-          <FilterCheckbox onChange={setChecked} />
+          <FilterCheckbox onChange={handleChange} />
         </div>
 
         <MoviesCardList
