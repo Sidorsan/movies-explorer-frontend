@@ -111,8 +111,12 @@
 
   .aboutProject__table_cell {
     margin: 0;
-    max-width: 319px;
+    /* max-width: 319px; */
   }
+    .aboutProject__table_cell:first-of-type {
+      margin-right: 30px;
+      /* max-width: 319px; */
+    }
 
   .aboutProject__subtitle {
     font-size: 20px;

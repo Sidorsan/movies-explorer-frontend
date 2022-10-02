@@ -38,7 +38,7 @@ const Profile = ({ onLogin }) => {
   };
   const currentUser = React.useContext(CurrentUserContext);
   return (
-    <div className="profile">
+    <section className="profile">
       <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
 
       <Form
@@ -106,7 +106,7 @@ const Profile = ({ onLogin }) => {
           )}
         </section>
       </Form>
-    </div>
+    </section>
   );
 };
 export default Profile;

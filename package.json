@@ -9,6 +9,7 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
     "react-router-dom": "^5.3.3",
@@ -20,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r ./build/* sidorsan@84.201.152.181:/home/sidorsan/mesto-frontend"
   },
   "eslintConfig": {
     "extends": [

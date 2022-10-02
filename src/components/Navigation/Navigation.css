@@ -1,10 +1,9 @@
 .navigation {
   display: flex;
   justify-content: space-between;
-
   width: 100%;
-
-
+  /* height: 100%; */
+  /* position: fixed; */
 }
 
 .navigation__logo {
@@ -14,7 +13,7 @@
 }
 
 .navigation__checkbox {
-  position: absolute;
+  position: fixed;
   height: 20.5px;
   width: 22px;
   top: 27.5px;
@@ -27,7 +26,7 @@
 
 .navigation__hamburger-lines {
   height: 20.5px;
-  position: absolute;
+  position: fixed;
   top: 27.5px;
   right: 23px;
   z-index: 2;
@@ -78,7 +77,8 @@
 
 
 .navigation__panel {
-  position: absolute;
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 100%;
   transform: translateX(-250%);

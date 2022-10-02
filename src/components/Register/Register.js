@@ -40,7 +40,7 @@ const Register = ({ onRegister }) => {
   };
 
   return (
-    <div className="register">
+    <section className="register">
       <div className="register__header">
         <a href="/">
           <img src={logo} alt="Логотип" className="register__logo" />
@@ -143,7 +143,7 @@ const Register = ({ onRegister }) => {
           </span>
         </section>
       </Form>
-    </div>
+    </section>
   );
 };
 

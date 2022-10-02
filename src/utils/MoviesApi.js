@@ -11,7 +11,6 @@ class MoviesApi {
   }
 
 
-
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}`, {
       method: "GET",

@@ -50,7 +50,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       // auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch((data) => console.log(data));
+      auth.checkToken(jwt).then(setLoggedIn(true)).catch((data) => (data));
       history.push(location.pathname);
     }
   };

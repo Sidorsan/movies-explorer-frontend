@@ -10,7 +10,7 @@ function MoviesCardList({
   loggedIn,
 }) {
   return (
-    <section className="moviesCardList">
+    <div className="moviesCardList">
       <ul className="moviesCardList__container">
         {isLoading ? (
           <Preloader />
@@ -26,7 +26,7 @@ function MoviesCardList({
           ))
         )}
       </ul>
-    </section>
+    </div>
   );
 }
 

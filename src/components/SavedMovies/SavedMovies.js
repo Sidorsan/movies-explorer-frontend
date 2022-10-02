@@ -6,8 +6,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 const SavedMovies = ({ cards, isLoading, onCardclick, loggedIn }) => {
   return (
     <>
-      <main>
-        <div className="savedMovies">
+        <section className="savedMovies">
           <div className="movies__searchAndFilter">
             <SearchForm />
             <FilterCheckbox />
@@ -18,8 +17,8 @@ const SavedMovies = ({ cards, isLoading, onCardclick, loggedIn }) => {
             onCardclick={onCardclick}
             loggedIn={loggedIn}
           />
-        </div>
-      </main>
+        </section>
+
     </>
   );
 };

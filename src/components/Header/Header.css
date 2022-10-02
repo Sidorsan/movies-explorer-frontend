@@ -13,15 +13,7 @@
   height: 38px;
 }
 
-.header__link_enter {
-  color: black;
-  margin-right: 14px;
-  width: 54px;
-  height: 26px;
-  background-color: rgba(61, 220, 132, 1);
-  border-radius: 3px;
-  border: none;
-}
+
 
 .header__link {
   padding: 0;
@@ -31,6 +23,16 @@
   font-weight: 500;
   font-size: 10px;
   line-height: 16px;
+}
+
+.header__link_enter {
+  color: #000000;
+  margin-right: 14px;
+  width: 54px;
+  height: 26px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  border: none;
 }
 
 .header__link:hover {
