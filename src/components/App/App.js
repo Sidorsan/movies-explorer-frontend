@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-
   useLocation,
   withRouter,
   Route,
@@ -50,8 +49,9 @@ function App() {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
-history.push(location.pathname);
+      // auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+      auth.checkToken(jwt).then(setLoggedIn(true)).catch((data) => console.log(data));
+      history.push(location.pathname);
     }
   };
 
@@ -140,7 +140,6 @@ history.push(location.pathname);
           return handleError;
         }
         if (data) {
-
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
           setLoggedIn(true);
