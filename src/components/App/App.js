@@ -16,19 +16,10 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-// import ImagePopup from "./ImagePopup";
 import PopapNotFound from "../PopapNotFound/PopapNotFound";
 import mainApi from "../../utils/MainApi";
-import moviesApi from "../../utils/MoviesApi";
+
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-
-
-// import EditProfilePopup from "./EditProfilePopup";
-// import EditAvatarPopup from "./EditAvatarPopup";
-// import AddPlacePopup from "./AddPlacePopup";
-
-// import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import * as auth from "../../utils/auth";
 import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
@@ -42,7 +33,7 @@ function App() {
   });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -101,20 +92,6 @@ function App() {
   };
 
 
-  const onSubmitForm = () => {
-    setIsloading(true);
-    const allMovies = JSON.parse(localStorage.getItem("AllMovies"));
-    if (!allMovies) {
-      moviesApi
-        .getInitialMovies()
-        .then((moviesData) => {
-          localStorage.setItem("allMovies", JSON.stringify(moviesData));
-          setCards(moviesData);
-          setIsloading(false);
-        })
-        .catch(handleError);
-    }
-  };
 
 
 
@@ -204,10 +181,13 @@ function App() {
           <ProtectedRoute
             path="/movies"
             component={Movies}
-            cards={cards}
+            movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
-            onSubmit={onSubmitForm}
+            setIsloading={setIsloading}
+            setMovies={setMovies}
+            handleError={handleError}
+            // onSubmit={onSubmitForm}
           />
           {/* <Route path="/movies">
             <Movies
@@ -220,7 +200,7 @@ function App() {
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
-            cards={cards}
+            movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
           />

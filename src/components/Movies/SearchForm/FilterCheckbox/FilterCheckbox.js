@@ -1,9 +1,9 @@
 import React from "react";
 
-const FilterCheckbox = (Props) => {
+const FilterCheckbox = ({onChange}) => {
 
   const handleClick = () => {
-    Props.onChange(true);
+   onChange(true);
   };
   return (
     <div className="filterCheckbox">

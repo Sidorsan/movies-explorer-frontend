@@ -4,26 +4,24 @@ import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList({
   onCardClick,
-  onCardDelete,
-  cards,
+  movies,
   isLoading,
   loggedIn,
-  onSubmit
+  onSubmit,
 }) {
-
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
-        {isLoading  ? (
+        {isLoading ? (
           <Preloader />
         ) : (
-          cards.map((card) => (
+          movies.map((movie) => (
             <MoviesCard
-              key={card.id}
-              card={card}
+              key={movie.id}
+              movie={movie}
               // onCardClick={onCardClick}
               onCardClick={onCardClick}
-              // onCardDelete={onCardDelete}
+
             />
           ))
         )}

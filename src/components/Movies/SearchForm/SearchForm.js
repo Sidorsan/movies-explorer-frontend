@@ -1,20 +1,24 @@
+
+//react-hook-form.com/advanced-usage
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
 import findInInput from "../../../images/findInInput.svg";
 import Form from "../../Form/Form";
+
 const SearchForm = (props) => {
   const [data, setData] = useState({
     film: ""
   });
-
+console.log(data);
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    setData(e.target.value);
+    // const { name, value } = e.target;
+    // setData({
+    //   ...data,
+    //   [name]: value,
+    // });
   };
 
   const {
@@ -36,7 +40,7 @@ const SearchForm = (props) => {
           placeholder="Фильм"
           id="film"
           name="film"
-          onChange={handleChange}
+          // onChange={handleChange}
           {...register("film", {
             required: true,
           })}
