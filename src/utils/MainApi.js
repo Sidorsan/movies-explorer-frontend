@@ -12,6 +12,7 @@ class MainApi {
 
   getInitialUser() {
     // return fetch(`https://${this._baseUrl}/users/me`, { расскоментировать когда через сайт запустишь
+    console.log(localStorage.getItem("jwt"));
     return fetch(`http://${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
