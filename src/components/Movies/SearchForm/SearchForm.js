@@ -5,12 +5,11 @@ import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
 import findInInput from "../../../images/findInInput.svg";
 import Form from "../../Form/Form";
-import { clear } from '@testing-library/user-event/dist/clear';
 
 const SearchForm = (props) => {
   const [film, setFilm] = React.useState("");
 
-  console.log(film);
+
   function handleChangeFilm(e) {
     setFilm(e.target.value);
   }
@@ -40,10 +39,10 @@ const SearchForm = (props) => {
   //  }
 
   const onSubmit = (e) => {
-       console.log(e);
-       reset()
-
+    props.onSubmit(e);
+    reset();
   };
+
   // const onSubmit = (data) => {
   //   const { film } = data;
   //   console.log(data);

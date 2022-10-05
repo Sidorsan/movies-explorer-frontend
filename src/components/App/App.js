@@ -118,7 +118,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       // setIsloading(true);
-      console.log(loggedIn);
+
       mainApi
         .getInitialUser()
         .then((userData) => {
@@ -130,7 +130,7 @@ function App() {
   }, [loggedIn]);
 
   //
-console.log(loggedIn);
+
   const handleRegister = ({ password, email, firstName }) => {
     auth
       .register({ password, email, firstName })

@@ -5,7 +5,6 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
-
 const Movies = ({
   movies,
   isLoading,
@@ -22,13 +21,15 @@ const Movies = ({
     setCheckedShotFilms(!checkedShotFilms);
   };
 
-  const filterMovies = () => {
-    return movies.filter((card) => {});
+  const filterBySimbols = (movie, search) => {
+    return movie.nameRU.toLowerCase().includes(search.toLowerCase());
   };
-  const onSubmitForm = (data) => {
-    // console.log(data);
+
+  const onSubmitForm = (search) => {
+    let allMovies = JSON.parse(localStorage.getItem("allMovies"));
+    console.log(allMovies);
     setIsloading(true);
-    const allMovies = JSON.parse(localStorage.getItem("AllMovies"));
+
     if (!allMovies) {
       moviesApi
         .getInitialMovies()
@@ -38,6 +39,14 @@ const Movies = ({
           setIsloading(false);
         })
         .catch(handleError);
+    }
+
+    if (checkedShotFilms) {
+      console.log(allMovies);
+      const filtered = allMovies.filter((movie) =>
+        filterBySimbols(movie, search.film)
+      );
+      console.log(filtered);
     }
   };
 
