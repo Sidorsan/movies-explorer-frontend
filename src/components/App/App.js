@@ -33,7 +33,7 @@ function App() {
   });
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -185,11 +185,11 @@ console.log(email, password);
           <ProtectedRoute
             path="/movies"
             component={Movies}
-            movies={movies}
+            // movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
             setIsloading={setIsloading}
-            setMovies={setMovies}
+            // setMovies={setMovies}
             handleError={handleError}
             // onSubmit={onSubmitForm}
           />
@@ -204,7 +204,7 @@ console.log(email, password);
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
-            movies={movies}
+            // movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
           />

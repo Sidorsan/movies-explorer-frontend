@@ -6,28 +6,61 @@ import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
 const Movies = ({
-  movies,
+  // movies,
   isLoading,
   onCardclick,
   loggedIn,
   setIsloading,
-  setMovies,
+  // setMovies,
   handleError,
   // onSubmit,
   onClick,
 }) => {
+  const [movies, setMovies] = useState([]);
   const [checkedShotFilms, setCheckedShotFilms] = React.useState(false);
+  const [loadMovies, setLoadMovies] = React.useState(
+    JSON.parse(localStorage.getItem("allMovies")) || []
+  );
+
+  const [isNotFound, setIsNotFound] = React.useState(false);
+
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
   };
 
   const filterBySimbols = (movie, search) => {
-    return movie.nameRU.toLowerCase().includes(search.toLowerCase());
+    return (
+      movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+      movie.nameEN.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
+  const moviesFiltered = (data, search) => {
+    const filteredMovies = data.filter((movie) =>
+      filterBySimbols(movie, search.film)
+    );
+    if (filteredMovies.length === 0) {
+      setIsNotFound(true);
+      return;
+    }
+    if (checkedShotFilms) {
+      const shotFilteredMovies = filteredMovies.filter(
+        (movie) => movie.duration <= 40
+      );
+      if (shotFilteredMovies.length === 0) {
+        setIsNotFound(true);
+        return;
+      }
+      setMovies(shotFilteredMovies);
+      setIsNotFound(false);
+      return;
+    }
+    setMovies(filteredMovies);
+    setIsNotFound(false);
   };
 
   const onSubmitForm = (search) => {
     let allMovies = JSON.parse(localStorage.getItem("allMovies"));
-    console.log(allMovies);
     setIsloading(true);
 
     if (!allMovies) {
@@ -35,19 +68,24 @@ const Movies = ({
         .getInitialMovies()
         .then((moviesData) => {
           localStorage.setItem("allMovies", JSON.stringify(moviesData));
-          setMovies(moviesData);
+          setLoadMovies(moviesData);
+          moviesFiltered(moviesData, search);
           setIsloading(false);
         })
         .catch(handleError);
+    } else {
+      moviesFiltered(loadMovies, search);
+      setIsloading(false);
     }
 
-    if (checkedShotFilms) {
-      console.log(allMovies);
-      const filtered = allMovies.filter((movie) =>
-        filterBySimbols(movie, search.film)
-      );
-      console.log(filtered);
-    }
+    // console.log(allMovies);
+
+    // const filtered =  allMovies.filter((movie) =>
+    //   filterBySimbols(movie, search.film)
+    // );
+    // setMovies(filtered);
+    // setIsloading(false);
+    // console.log(filtered);
   };
 
   return (
@@ -64,6 +102,7 @@ const Movies = ({
           onCardclick={onCardclick}
           loggedIn={loggedIn}
           onSubmit={onSubmitForm}
+          isNotFound={isNotFound}
         />
         <button className="movies__buttonAdd">Ещё</button>
       </section>

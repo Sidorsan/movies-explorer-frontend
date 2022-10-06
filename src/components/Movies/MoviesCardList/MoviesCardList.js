@@ -8,12 +8,15 @@ function MoviesCardList({
   isLoading,
   loggedIn,
   onSubmit,
+  isNotFound,
 }) {
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
         {isLoading ? (
           <Preloader />
+        ) : isNotFound ? (
+          <p className='notFoundTitle'>«Ничего не найдено»</p>
         ) : (
           movies.map((movie) => (
             <MoviesCard
@@ -21,7 +24,6 @@ function MoviesCardList({
               movie={movie}
               // onCardClick={onCardClick}
               onCardClick={onCardClick}
-
             />
           ))
         )}
