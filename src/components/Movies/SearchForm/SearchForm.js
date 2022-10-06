@@ -47,7 +47,7 @@ const SearchForm = (props) => {
   //   const { film } = data;
   //   console.log(data);
   // };
-
+const searchFromLocalStorage = localStorage.getItem("search");
   return (
     <div className="searchForm">
       <form onSubmit={handleSubmit(onSubmit)} className="searchForm__form">
@@ -60,6 +60,7 @@ const SearchForm = (props) => {
           {...register("film", {
             required: true,
           })}
+          defaultValue={searchFromLocalStorage || ""}
         />
         <span>
           {errors?.film?.type === "required" && (

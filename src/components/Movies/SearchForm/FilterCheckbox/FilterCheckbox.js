@@ -10,6 +10,7 @@ const FilterCheckbox = ({onChange}) => {
       <input
         className="filterCheckbox__checkbox"
         type="checkbox"
+        defaultChecked={localStorage.getItem("checkedShotFilms")}
         onChange={handleClick}
       ></input>
       <h2 className="filterCheckbox__title">Короткометражки</h2>

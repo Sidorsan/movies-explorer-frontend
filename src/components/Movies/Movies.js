@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import moviesApi from "../../utils/MoviesApi";
 import SearchForm from "../Movies/SearchForm/SearchForm";
@@ -16,8 +16,10 @@ const Movies = ({
   // onSubmit,
   onClick,
 }) => {
+  const [checkedShotFilms, setCheckedShotFilms] = React.useState(
+    localStorage.getItem("checkedShotFilms") || false
+  );
   const [movies, setMovies] = useState([]);
-  const [checkedShotFilms, setCheckedShotFilms] = React.useState(false);
   const [loadMovies, setLoadMovies] = React.useState(
     JSON.parse(localStorage.getItem("allMovies")) || []
   );
@@ -52,10 +54,20 @@ const Movies = ({
         return;
       }
       setMovies(shotFilteredMovies);
+      localStorage.setItem(
+        "shotFilteredMovies",
+        JSON.stringify(shotFilteredMovies)
+      );
+      localStorage.setItem("search", search.film);
+      localStorage.setItem("checkedShotFilms", checkedShotFilms);
+
       setIsNotFound(false);
       return;
     }
     setMovies(filteredMovies);
+    localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
+    localStorage.setItem("search", search.film);
+    localStorage.setItem("checkedShotFilms", checkedShotFilms);
     setIsNotFound(false);
   };
 
@@ -68,6 +80,7 @@ const Movies = ({
         .getInitialMovies()
         .then((moviesData) => {
           localStorage.setItem("allMovies", JSON.stringify(moviesData));
+
           setLoadMovies(moviesData);
           moviesFiltered(moviesData, search);
           setIsloading(false);
@@ -75,6 +88,7 @@ const Movies = ({
         .catch(handleError);
     } else {
       moviesFiltered(loadMovies, search);
+
       setIsloading(false);
     }
 
