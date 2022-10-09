@@ -5,12 +5,18 @@ const FilterCheckbox = ({onChange}) => {
   const handleClick = () => {
    onChange(true);
   };
+
+
+  let checked = localStorage.getItem("checkedShotFilms") === "true"
+    ? true
+    : false;
+
   return (
     <div className="filterCheckbox">
       <input
         className="filterCheckbox__checkbox"
         type="checkbox"
-        defaultChecked={localStorage.getItem("checkedShotFilms")}
+        defaultChecked={checked}
         onChange={handleClick}
       ></input>
       <h2 className="filterCheckbox__title">Короткометражки</h2>

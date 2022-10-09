@@ -9,14 +9,18 @@ function MoviesCardList({
   loggedIn,
   onSubmit,
   isNotFound,
+  // setIsLoading,
 }) {
+
+  // setIsLoading(false);
+
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
         {isLoading ? (
           <Preloader />
         ) : isNotFound ? (
-          <p className='notFoundTitle'>«Ничего не найдено»</p>
+          <p className="notFoundTitle">{isNotFound.title}</p>
         ) : (
           movies.map((movie) => (
             <MoviesCard

@@ -34,7 +34,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   // const [movies, setMovies] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
+
   const [loggedIn, setLoggedIn] = useState(false);
 
 
@@ -96,24 +96,7 @@ function App() {
 
 
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     setIsloading(true);
-  //     // mainApi
-  //     moviesApi
-  //       // .getAllNeededData()
-  //       .getInitialMovies()
-  //       // .then(([userData, cardData]) => {раскомментировать когда будет авторизация
-  //       .then((cardData) => {
-  //         // setCurrentUser(userData);раскомментировать когда будет авторизация
 
-  //         setCards(cardData);
-
-  //         setIsloading(false);
-  //       })
-  //       .catch(handleError);
-  //   }
-  // }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -186,34 +169,25 @@ console.log(email, password);
             path="/movies"
             component={Movies}
             // movies={movies}
-            isLoading={isLoading}
+            // isLoading={isLoading}
             loggedIn={loggedIn}
-            setIsloading={setIsloading}
-            // setMovies={setMovies}
+            // setIsloading={setIsloading}
+
             handleError={handleError}
-            // onSubmit={onSubmitForm}
+
           />
-          {/* <Route path="/movies">
-            <Movies
-              cards={cards}
-              isLoading={isLoading}
-              onCardclick={""}
-              loggedIn={setLoggedIn}
-            />
-          </Route> */}
+
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
-            // movies={movies}
-            isLoading={isLoading}
+
+            // isLoading={isLoading}
             loggedIn={loggedIn}
           />
-          {/* <Route path="/saved-movies">
-            <SavedMovies cards={cards} isLoading={isLoading} onCardclick={""} />
-          </Route> */}
+
         </Switch>
 
-        {/* <Footer /> */}
+
         {location.pathname !== "/signin" &&
         location.pathname !== "/signup" &&
         location.pathname !== "/profile" ? (

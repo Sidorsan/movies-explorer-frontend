@@ -60,7 +60,7 @@ const searchFromLocalStorage = localStorage.getItem("search");
           {...register("film", {
             required: true,
           })}
-          defaultValue={searchFromLocalStorage || ""}
+          // defaultValue={searchFromLocalStorage || ""}
         />
         <span>
           {errors?.film?.type === "required" && (
