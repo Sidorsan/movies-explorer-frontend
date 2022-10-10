@@ -23,18 +23,9 @@ const Movies = ({
   const [isNotFound, setIsNotFound] = React.useState({
     title: "",
   });
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [displayedMovies, setDisplayedMovies] = useState([]);
 
-  let resizeWindowWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("This will run after 1 second!");
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     let timeoutId = null;
@@ -47,6 +38,15 @@ const Movies = ({
   }, []);
 
   console.log(windowWidth);
+
+  // const displayedMovieschange = () => {
+  //   setDisplayedMovies(JSON.parse(
+  //     localStorage.getItem("filteredMovies")
+  //   ).slice(0, 3))
+  //   console.log(displayedMovies);
+  // }
+  // displayedMovieschange();
+
 
   useEffect(() => {
     if (localStorage.getItem("filteredMovies")) {

@@ -11,7 +11,6 @@ function MoviesCardList({
   isNotFound,
   // setIsLoading,
 }) {
-
   // setIsLoading(false);
 
   return (
@@ -26,7 +25,6 @@ function MoviesCardList({
             <MoviesCard
               key={movie.id}
               movie={movie}
-              // onCardClick={onCardClick}
               onCardClick={onCardClick}
             />
           ))
