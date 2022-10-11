@@ -24,8 +24,6 @@ const Movies = ({
     title: "",
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [displayedMovies, setDisplayedMovies] = useState([]);
-
 
   useEffect(() => {
     let timeoutId = null;
@@ -37,25 +35,31 @@ const Movies = ({
     return () => window.removeEventListener("resize", resizeListener);
   }, []);
 
-  console.log(windowWidth);
+  const displayedMoviesChange = () => {
+    if (windowWidth > 320) {
+      setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 5));
+    }
+    if (windowWidth > 767) {
+      setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 8));
+    }
+    if (windowWidth > 1279) {
+       setMovies(
+         JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12)
+       );
+    }
+  }
 
-  // const displayedMovieschange = () => {
-  //   setDisplayedMovies(JSON.parse(
-  //     localStorage.getItem("filteredMovies")
-  //   ).slice(0, 3))
-  //   console.log(displayedMovies);
-  // }
-  // displayedMovieschange();
 
 
   useEffect(() => {
     if (localStorage.getItem("filteredMovies")) {
       setIsLoading(true);
-      setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+      // setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12));
+      displayedMoviesChange();
       setIsLoading(false);
       setIsNotFound(false);
     }
-  }, []);
+  }, [windowWidth]);
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
