@@ -43,13 +43,13 @@ const Movies = ({
       setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 8));
     }
     if (windowWidth > 1279) {
-       setMovies(
-         JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12)
-       );
+      setMovies(
+        JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12)
+      );
     }
-  }
 
-
+    console.log(movies);
+  };
 
   useEffect(() => {
     if (localStorage.getItem("filteredMovies")) {
@@ -136,7 +136,25 @@ const Movies = ({
       setIsLoading(false);
     }
   };
+  const handleAddButton = () => {
+    const array = JSON.parse(localStorage.getItem("filteredMovies"));
+    console.log(array);
+    for (let index = 12; index < array.length; index ++) {
+      // const element = array[index];
+      setMovies(
+        JSON.parse(localStorage.getItem("filteredMovies")).slice(0, index)
+      );
+    }
 
+    // let index = 3;
+    // let x = 12;
+    // let z = x + index;
+
+    // setMovies(
+    //   JSON.parse(localStorage.getItem("filteredMovies")).slice(0, z)
+    // );
+    console.log(movies.length);
+  };
   return (
     <>
       <section className="movies">
@@ -154,7 +172,9 @@ const Movies = ({
           isNotFound={isNotFound}
           // setIsLoading={setIsLoading}
         />
-        <button className="movies__buttonAdd">Ещё</button>
+        <button className="movies__buttonAdd" onClick={handleAddButton}>
+          Ещё
+        </button>
       </section>
     </>
   );
