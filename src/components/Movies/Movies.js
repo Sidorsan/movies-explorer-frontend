@@ -26,9 +26,10 @@ const Movies = ({
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);
 
-  console.log(isButtonAddVisble);
-  console.log(JSON.parse(localStorage.getItem("filteredMovies")).length);
-  console.log(movies.length);
+  // console.log(isButtonAddVisble);
+  // console.log(JSON.parse(localStorage.getItem("filteredMovies")).length);
+  // console.log(movies.length);
+
   useEffect(() => {
     let timeoutId = null;
     const resizeListener = () => {
@@ -64,10 +65,12 @@ const Movies = ({
   }, [windowWidth]);
 
   useEffect(() => {
-    setIsButtonAddVisble(
-      JSON.parse(localStorage.getItem("filteredMovies")).length !==
-        movies.length
-    );
+    if (JSON.parse(localStorage.getItem("filteredMovies"))) {
+      setIsButtonAddVisble(
+        JSON.parse(localStorage.getItem("filteredMovies")).length !==
+          movies.length
+      );
+    }
   }, [movies]);
 
   const handleChange = () => {
@@ -90,7 +93,6 @@ const Movies = ({
       return;
     }
     if (checkedShotFilms) {
-      console.log(checkedShotFilms);
       const shotFilteredMovies = filteredMovies.filter(
         (movie) => movie.duration <= 40
       );
@@ -117,6 +119,7 @@ const Movies = ({
     localStorage.setItem("search", search.film);
     localStorage.setItem("checkedShotFilms", JSON.stringify(checkedShotFilms));
     setIsNotFound(false);
+    // displayedMoviesChange();
   };
   const handleError = () => {
     setIsNotFound({
@@ -174,11 +177,10 @@ const Movies = ({
         />
         <button
           className={`movies__buttonAdd ${
-            isButtonAddVisble ? "" : "movies__buttonAdd_visble"
+            isButtonAddVisble ? "" : "movies__buttonAdd_hidden"
           }`}
           onClick={handleAddButton}
         >
-          {/* <button className={`movies__buttonAdd `} onClick={handleAddButton}> */}
           Ещё
         </button>
       </section>

@@ -24,9 +24,16 @@
 
 .movies__buttonAdd:hover {
  opacity: 0.5;
+ }
+
+@media  all and (hover: none) {
+  .movies__buttonAdd:hover {
+    opacity: 1;
+  }
 }
 
-.movies__buttonAdd_visble {
+
+.movies__buttonAdd_hidden {
 visibility: hidden;
 }
 
