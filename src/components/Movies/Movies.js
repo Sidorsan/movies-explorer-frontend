@@ -24,7 +24,11 @@ const Movies = ({
     title: "",
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);
 
+  console.log(isButtonAddVisble);
+  console.log(JSON.parse(localStorage.getItem("filteredMovies")).length);
+  console.log(movies.length);
   useEffect(() => {
     let timeoutId = null;
     const resizeListener = () => {
@@ -47,8 +51,6 @@ const Movies = ({
         JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12)
       );
     }
-
-    console.log(movies);
   };
 
   useEffect(() => {
@@ -60,6 +62,13 @@ const Movies = ({
       setIsNotFound(false);
     }
   }, [windowWidth]);
+
+  useEffect(() => {
+    setIsButtonAddVisble(
+      JSON.parse(localStorage.getItem("filteredMovies")).length !==
+        movies.length
+    );
+  }, [movies]);
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
@@ -137,22 +146,13 @@ const Movies = ({
     }
   };
   const handleAddButton = () => {
-    const array = JSON.parse(localStorage.getItem("filteredMovies"));
-    console.log(array);
-    for (let index = 12; index < array.length; index ++) {
-      // const element = array[index];
-      setMovies(
-        JSON.parse(localStorage.getItem("filteredMovies")).slice(0, index)
-      );
-    }
+    setMovies(
+      JSON.parse(localStorage.getItem("filteredMovies")).slice(
+        0,
+        movies.length + 3
+      )
+    );
 
-    // let index = 3;
-    // let x = 12;
-    // let z = x + index;
-
-    // setMovies(
-    //   JSON.parse(localStorage.getItem("filteredMovies")).slice(0, z)
-    // );
     console.log(movies.length);
   };
   return (
@@ -172,7 +172,13 @@ const Movies = ({
           isNotFound={isNotFound}
           // setIsLoading={setIsLoading}
         />
-        <button className="movies__buttonAdd" onClick={handleAddButton}>
+        <button
+          className={`movies__buttonAdd ${
+            isButtonAddVisble ? "" : "movies__buttonAdd_visble"
+          }`}
+          onClick={handleAddButton}
+        >
+          {/* <button className={`movies__buttonAdd `} onClick={handleAddButton}> */}
           Ещё
         </button>
       </section>

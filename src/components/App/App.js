@@ -25,8 +25,8 @@ import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
 function App() {
   let location = useLocation();
-  const [isPopapNotFoundOpen, setPopapNotFoundOpen] = useState(false);
-  const [dataPopapNotFound, setPopapNotFound] = useState({
+  const [isPopapNotFoundOpen, setIsPopapNotFoundOpen] = useState(false);
+  const [dataPopapNotFound, setDataPopapNotFound] = useState({
     title: "",
     subtitle: "",
     buttonTitle: "",
@@ -62,16 +62,16 @@ function App() {
   // }, [loggedIn]);
 
   const handleError = () => {
-    setPopapNotFound({
+    setDataPopapNotFound({
       title: "404",
       subtitle: "Страница не найдена",
       buttonTitle: "Назад",
     });
-    setPopapNotFoundOpen(!isPopapNotFoundOpen);
+    setIsPopapNotFoundOpen(!isPopapNotFoundOpen);
   };
 
   function closeAllPopups() {
-    setPopapNotFoundOpen(false);
+    setIsPopapNotFoundOpen(false);
   }
 
   const handleLogin = ({ email, password }) => {

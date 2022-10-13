@@ -26,6 +26,11 @@
  opacity: 0.5;
 }
 
+.movies__buttonAdd_visble {
+visibility: hidden;
+}
+
+
 @media screen and (min-width: 768px) {
   .movies__searchAndFilter {
     display: flex;
