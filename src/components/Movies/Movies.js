@@ -41,24 +41,29 @@ const Movies = ({
   }, []);
 
   const displayedMoviesChange = () => {
-    if (windowWidth > 320) {
-      setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 5));
+    if (windowWidth > 319) {
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 5);
+      setMovies(arr);
+      localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
     if (windowWidth > 767) {
-      setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 8));
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 8);
+      setMovies(arr);
+      localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
     if (windowWidth > 1279) {
-      setMovies(
-        JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12)
-      );
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12);
+      setMovies(arr);
+      localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("filteredMovies")) {
+    if (localStorage.getItem("visibleMovies")) {
       setIsLoading(true);
-      // setMovies(JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12));
-      displayedMoviesChange();
+      setMovies(JSON.parse(localStorage.getItem("visibleMovies")));
+      // displayedMoviesChange();
+
       setIsLoading(false);
       setIsNotFound(false);
     }
@@ -100,11 +105,13 @@ const Movies = ({
         setIsNotFound({ title: "Ничего не найдено" });
         return;
       }
-      setMovies(shotFilteredMovies);
+      // setMovies(shotFilteredMovies);
       localStorage.setItem(
         "filteredMovies",
         JSON.stringify(shotFilteredMovies)
       );
+      displayedMoviesChange();
+
       localStorage.setItem("search", search.film);
       localStorage.setItem(
         "checkedShotFilms",
@@ -114,12 +121,12 @@ const Movies = ({
       setIsNotFound(false);
       return;
     }
-    setMovies(filteredMovies);
+    // setMovies(filteredMovies);
     localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
     localStorage.setItem("search", search.film);
     localStorage.setItem("checkedShotFilms", JSON.stringify(checkedShotFilms));
     setIsNotFound(false);
-    // displayedMoviesChange();
+    displayedMoviesChange();
   };
   const handleError = () => {
     setIsNotFound({
@@ -149,14 +156,21 @@ const Movies = ({
     }
   };
   const handleAddButton = () => {
-    setMovies(
-      JSON.parse(localStorage.getItem("filteredMovies")).slice(
+    if (windowWidth > 1279) {
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
         0,
         movies.length + 3
-      )
-    );
-
-    console.log(movies.length);
+      );
+      setMovies(arr);
+      localStorage.setItem("visibleMovies", JSON.stringify(arr));
+    } else {
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
+        0,
+        movies.length + 2
+      );
+      setMovies(arr);
+      localStorage.setItem("visibleMovies", JSON.stringify(arr));
+    }
   };
   return (
     <>
