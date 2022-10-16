@@ -24,7 +24,6 @@ class MainApi {
 
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}/movies`, {
-
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -38,7 +37,20 @@ class MainApi {
   }
 
   postInitialMovies(data) {
-    return fetch(`https://${this._baseUrl}/movies`, {
+    console.log(data.country);
+    console.log(data.director);
+    console.log(data.duration);
+    console.log(data.year);
+    console.log(data.description);
+    console.log(data.image.url);
+    console.log(data.trailerLink);
+    console.log(data.nameRU);
+    console.log(data.nameEN);
+    console.log(data.image.url);
+    console.log(data.id);
+
+    // return fetch(`https://${this._baseUrl}/movies`, {
+    return fetch(`http://${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -50,12 +62,12 @@ class MainApi {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: data.image,
+        image: `https://api.nomoreparties.co${data.image.url}`,
         trailerLink: data.trailerLink,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
-        thumbnail: data.thumbnail,
-        movieId: data.movieId,
+        thumbnail: `https://api.nomoreparties.co${data.image.url}`,
+        movieId: data.id,
       }),
     }).then((res) => this._checkJson(res));
   }

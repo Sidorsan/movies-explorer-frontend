@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import moviesApi from "../../utils/MoviesApi";
+import mainApi from "../../utils/MainApi";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
 const Movies = ({
-  onCardclick,
+  // onCardclick,
   loggedIn,
   // handleError,
   onClick,
@@ -172,6 +173,22 @@ const Movies = ({
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
   };
+
+  function handleCardSave(movie) {
+    console.log(movie);
+
+    // const isSaved = movie.likes.some((i) => i._id === currentUser._id);
+    mainApi
+      .postInitialMovies(movie)
+      // .then((newMovie) => {
+      //   setMovies((newMovie) =>
+      //     newMovie.map((c) => (c._id === card._id ? newCard : c))
+      //   );
+      // })
+      .catch(handleError);
+  }
+
+
   return (
     <>
       <section className="movies">
@@ -183,7 +200,7 @@ const Movies = ({
         <MoviesCardList
           movies={movies}
           isLoading={isLoading}
-          onCardclick={onCardclick}
+          onCardClick={handleCardSave}
           loggedIn={loggedIn}
           onSubmit={onSubmitForm}
           isNotFound={isNotFound}

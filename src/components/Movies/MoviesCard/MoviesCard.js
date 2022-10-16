@@ -6,7 +6,9 @@ import { useLocation } from "react-router-dom";
 function MoviesCard(props) {
   let location = useLocation();
   const handleCardButtonClick = () => {
+
     props.onCardClick(props.movie);
+
   };
 
   // const handleDeleteClick = () => {
