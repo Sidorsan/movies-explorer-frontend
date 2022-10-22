@@ -23,7 +23,8 @@ class MainApi {
   }
 
   getInitialMovies() {
-    return fetch(`https://${this._baseUrl}/movies`, {
+    // return fetch(`https://${this._baseUrl}/movies`, {
+    return fetch(`http://${this._baseUrl}/movies`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -37,17 +38,7 @@ class MainApi {
   }
 
   postInitialMovies(data) {
-    console.log(data.country);
-    console.log(data.director);
-    console.log(data.duration);
-    console.log(data.year);
-    console.log(data.description);
-    console.log(data.image.url);
-    console.log(data.trailerLink);
-    console.log(data.nameRU);
-    console.log(data.nameEN);
-    console.log(data.image.url);
-    console.log(data.id);
+
 
     // return fetch(`https://${this._baseUrl}/movies`, {
     return fetch(`http://${this._baseUrl}/movies`, {
