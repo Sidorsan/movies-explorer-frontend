@@ -8,7 +8,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Movies = ({
-  // onCardclick,
+  onCardClick,
   loggedIn,
   // handleError,
   onClick,
@@ -21,14 +21,14 @@ const Movies = ({
   const [loadMovies, setLoadMovies] = React.useState(
     JSON.parse(localStorage.getItem("allMovies")) || []
   );
-  const [savedMovies, setSavedMovies] = useState([]);
+
 
   const [isNotFound, setIsNotFound] = React.useState({
     title: "",
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);
-const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   useEffect(() => {
     let timeoutId = null;
@@ -173,24 +173,8 @@ const currentUser = React.useContext(CurrentUserContext);
     }
   };
 
-  function handleCardSave(movie) {
-    console.log(movie);
 
-    mainApi.getInitialMovies().then((newMovie) => { setSavedMovies(newMovie) }).then(console.log(savedMovies));
-    const isSave = savedMovies.some((i) => i.owner === currentUser.id);
-    console.log(isSave);
-    // const isSaved = movie.likes.some((i) => i._id === currentUser._id);
-    // mainApi
-    //   .postInitialMovies(movie)
-      // .then((newMovie) => {
-      //   setMovies((newMovie) =>
-      //     newMovie.map((c) => (c._id === card._id ? newCard : c))
-      //   );
-      // })
-      // .catch(handleError);
-  }
-
-
+console.log(movies);
   return (
     <>
       <section className="movies">
@@ -202,7 +186,7 @@ const currentUser = React.useContext(CurrentUserContext);
         <MoviesCardList
           movies={movies}
           isLoading={isLoading}
-          onCardClick={handleCardSave}
+          onCardClick={onCardClick}
           loggedIn={loggedIn}
           onSubmit={onSubmitForm}
           isNotFound={isNotFound}

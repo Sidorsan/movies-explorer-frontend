@@ -6,11 +6,9 @@ import { useLocation } from "react-router-dom";
 function MoviesCard(props) {
   let location = useLocation();
   const handleCardButtonClick = () => {
-
     props.onCardClick(props.movie);
-
   };
-
+console.log(props);
   // const handleDeleteClick = () => {
   //   props.onCardDelete(props.card._id);
   // };
@@ -24,10 +22,16 @@ function MoviesCard(props) {
   } ${
     location.pathname === "/saved-movies" ? "moviesCard__Button_delite" : " "
     }`;
+
   return (
     <li className="moviesCard">
       <img
-        src={`https://api.nomoreparties.co${props.movie.image.url}`}
+        // src={`https://api.nomoreparties.co${props.movie.image.url}`}
+        src={
+          props.movie.image.url
+            ? `https://api.nomoreparties.co${props.movie.image.url}`
+            : props.movie.image
+        }
         alt={props.movie.description}
         className="moviesCard__image"
       />

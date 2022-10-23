@@ -64,7 +64,8 @@ class MainApi {
   }
 
   deleteMovies(id) {
-    return fetch(`https://${this._baseUrl}/movies/${id}`, {
+    // return fetch(`https://${this._baseUrl}/movies/${id}`, {
+    return fetch(`http://${this._baseUrl}/movies/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,

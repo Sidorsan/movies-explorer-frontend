@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
-const SavedMovies = ({ movies, isLoading, onCardclick, loggedIn }) => {
 
+const SavedMovies = ({ isLoading, onCardClick, loggedIn }) => {
+  const [savedMovies, setSavedMovies] = useState(
+    JSON.parse(localStorage.getItem("savedMovies"))
+  );
+
+console.log(savedMovies);
   return (
     <>
       <section className="savedMovies">
@@ -13,9 +19,9 @@ const SavedMovies = ({ movies, isLoading, onCardclick, loggedIn }) => {
           <FilterCheckbox />
         </div>
         <MoviesCardList
-          movies={movies}
+          movies={savedMovies}
           isLoading={isLoading}
-          onCardclick={onCardclick}
+          onCardClick={onCardClick}
           loggedIn={loggedIn}
           // onSubmit={}
         />

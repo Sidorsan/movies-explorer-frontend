@@ -47,6 +47,7 @@ function App() {
       history.push(location.pathname);
     }
   };
+  const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
     handleTokenCheck();
@@ -130,6 +131,31 @@ console.log(email, password);
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
+  function handleCardClick(movie) {
+
+    console.log(movie);
+    if (movie.owner) {
+     return mainApi.deleteMovies(movie._id);
+    }
+
+ mainApi.postInitialMovies(movie);
+    mainApi
+      .getInitialMovies()
+      .then((newMovie) => {
+        setSavedMovies(newMovie);
+        localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
+      })
+      .then(console.log(savedMovies));
+
+    // const isSaved = movie.likes.some((i) => i._id === currentUser._id);
+
+    // .then((newMovie) => {
+    //   setMovies((newMovie) =>
+    //     newMovie.map((c) => (c._id === card._id ? newCard : c))
+    //   );
+    // })
+    // .catch(handleError);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -172,21 +198,18 @@ console.log(email, password);
             // isLoading={isLoading}
             loggedIn={loggedIn}
             // setIsloading={setIsloading}
-
+            onCardClick={handleCardClick}
             handleError={handleError}
-
           />
 
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
-
             // isLoading={isLoading}
+            onCardClick={handleCardClick}
             loggedIn={loggedIn}
           />
-
         </Switch>
-
 
         {location.pathname !== "/signin" &&
         location.pathname !== "/signup" &&
