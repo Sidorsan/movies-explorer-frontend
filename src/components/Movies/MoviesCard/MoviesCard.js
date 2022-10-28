@@ -8,14 +8,16 @@ function MoviesCard(props) {
   const handleCardButtonClick = () => {
     props.onCardClick(props.movie);
   };
-console.log(props);
+
   // const handleDeleteClick = () => {
   //   props.onCardDelete(props.card._id);
   // };
 
   const currentUser = React.useContext(CurrentUserContext);
   // const isOwn = props.card.owner === currentUser._id;
-  const isSaved = props.movie.owner === currentUser.id;
+  const isSaved = props.movie.owner === currentUser._id;
+
+
 
   const MoviesButtonClassName = `moviesCard__Button ${
     isSaved ? "moviesCard__Button_active" : " "

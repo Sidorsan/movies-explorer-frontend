@@ -38,8 +38,6 @@ class MainApi {
   }
 
   postInitialMovies(data) {
-
-
     // return fetch(`https://${this._baseUrl}/movies`, {
     return fetch(`http://${this._baseUrl}/movies`, {
       method: "POST",

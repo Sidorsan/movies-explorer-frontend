@@ -143,6 +143,7 @@ const Movies = ({
       moviesApi
         .getInitialMovies()
         .then((moviesData) => {
+          console.log(moviesData);
           localStorage.setItem("allMovies", JSON.stringify(moviesData));
 
           setLoadMovies(moviesData);
@@ -174,7 +175,7 @@ const Movies = ({
   };
 
 
-console.log(movies);
+
   return (
     <>
       <section className="movies">

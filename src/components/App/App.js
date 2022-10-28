@@ -37,7 +37,6 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-
   const history = useHistory();
 
   const handleTokenCheck = () => {
@@ -93,12 +92,6 @@ function App() {
       .catch(handleError);
   };
 
-
-
-
-
-
-
   useEffect(() => {
     if (loggedIn) {
       // setIsloading(true);
@@ -113,14 +106,12 @@ function App() {
     }
   }, [loggedIn]);
 
-  //
-
   const handleRegister = ({ password, email, firstName }) => {
     auth
       .register({ password, email, firstName })
       .then(() => {
-        handleLogin({email, password});
-console.log(email, password);
+        handleLogin({ email, password });
+        console.log(email, password);
         // history.push("/movies");
       })
       .catch(handleError);
@@ -131,30 +122,33 @@ console.log(email, password);
   //   localStorage.removeItem("jwt");
   //   localStorage.removeItem("userEmail");
   // };
+
   function handleCardClick(movie) {
+    // mainApi.postInitialMovies(movie);
 
-    console.log(movie);
-    if (movie.owner) {
-     return mainApi.deleteMovies(movie._id);
-    }
-
- mainApi.postInitialMovies(movie);
     mainApi
       .getInitialMovies()
-      .then((newMovie) => {
-        setSavedMovies(newMovie);
-        localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
+      .then((arr) => {
+        let hasId = arr.find((o) => o.movieId === movie.id || movie.movieId);
+        if (hasId) {
+          return mainApi.deleteMovies(hasId._id);
+        }
+        mainApi.postInitialMovies(movie);
       })
-      .then(console.log(savedMovies));
 
-    // const isSaved = movie.likes.some((i) => i._id === currentUser._id);
+      // if (movie.owner) {
+      //   return mainApi.deleteMovies(movie._id);
+      // }
+      //     mainApi
+      //   .postInitialMovies(movie)
+      //   .then((newCard) => {
+      // console.log(
+      //   savedMovies.map((c) => (c.movieId === movie.movieId ? movie : c))
+      // );
+      // })
+      // .then(console.log(savedMovies))
 
-    // .then((newMovie) => {
-    //   setMovies((newMovie) =>
-    //     newMovie.map((c) => (c._id === card._id ? newCard : c))
-    //   );
-    // })
-    // .catch(handleError);
+      .catch(handleError);
   }
 
   return (

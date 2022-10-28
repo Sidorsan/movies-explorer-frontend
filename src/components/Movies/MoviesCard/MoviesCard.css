@@ -44,6 +44,11 @@
   cursor: pointer;
 }
 
+
+.moviesCard__Button_active {
+  background-color: aquamarine;
+}
+
 .moviesCard__Button_delite {
   background: url(../../../images/buttonDelite.svg);
   background-repeat: no-repeat;
