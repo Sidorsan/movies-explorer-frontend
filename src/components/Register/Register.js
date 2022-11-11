@@ -1,24 +1,39 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useCallback } from "react";
 import logo from "../../images/logoDiploma.svg";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
+
 // const Register = ({ onRegister }) => {
 const Register = ({ onRegister }) => {
-  const [data, setData] = useState({
+  const [values, setValues] = React.useState({
     firstName: "",
     email: "",
     password: "",
   });
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+
+    // console.log(name);
+    // console.log(target.validationMessage);
+
   };
 
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   {
@@ -28,16 +43,25 @@ const Register = ({ onRegister }) => {
 
   // };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
 
-  const onSubmit = (data) => {
-    const { password, email, firstName } = data;
-    onRegister({ password, email, firstName });
+  // } = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    {
+      const { password, email, firstName } = values;
+      onRegister({ password, email, firstName });
+    }
   };
+
+  // const onSubmit = (data) => {
+  //   const { password, email, firstName } = data;
+  //   onRegister({ password, email, firstName });
+  // };
 
   return (
     <section className="register">
@@ -52,10 +76,12 @@ const Register = ({ onRegister }) => {
       <Form
         name="register"
         buttonSubmitTitle="Зарегистрироваться"
-        onSubmit={handleSubmit(onSubmit)}
+        // onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         questionAboutRegistration="Уже зарегистрированы?"
         link="signin"
         linkTitle="Войти"
+        isValid={isValid}
       >
         <section className="form__section">
           <label className="form__input_label">Имя</label>
@@ -66,28 +92,17 @@ const Register = ({ onRegister }) => {
             name="firstName"
             // value={data.firstName}
             onChange={handleChange}
-            {...register("firstName", {
-              required: true,
-              minLength: 2,
-              maxLength: 20,
-            })}
+            required
+            minLength="2"
+            maxLength="20"
+            pattern="^[a-zA-Zа-яА-ЯЁё -]+$"
           />
           <span>
-            {errors?.firstName?.type === "required" && (
-              <p className="form__input_errorState">
-                Это поле необходимо заполнить
-              </p>
-            )}
-            {errors?.firstName?.type === "maxLength" && (
-              <p className="form__input_errorState">
-                Имя не должно быть длиннее 20 символов
-              </p>
-            )}
-            {errors?.firstName?.type === "minLength" && (
-              <p className="form__input_errorState">
-                Имя не должно быть меньше 2 символов
-              </p>
-            )}
+            <p className="form__input_errorState">
+              {errors.firstName === "Введите данные в указанном формате."
+                ? "Поле должно содержать только латиницу, кириллицу, пробел или дефис"
+                : errors.firstName}
+            </p>
           </span>
         </section>
 
@@ -102,16 +117,11 @@ const Register = ({ onRegister }) => {
             type="email"
             // value={data.email}
             onChange={handleChange}
-            {...register("email", {
-              required: true,
-            })}
+            required
+            // pattern="^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i"
           />
           <span>
-            {errors?.email?.type === "required" && (
-              <p className="form__input_errorState">
-                Это поле необходимо заполнить
-              </p>
-            )}
+            <p className="form__input_errorState">{errors.email}</p>
           </span>
         </section>
         <section className="form__section">
@@ -124,22 +134,11 @@ const Register = ({ onRegister }) => {
             type="password"
             // value={data.password}
             onChange={handleChange}
-            {...register("password", {
-              required: true,
-              minLength: 8,
-            })}
+            required
+            minLength="8"
           />
           <span>
-            {errors?.password?.type === "required" && (
-              <p className="form__input_errorState">
-                Это поле необходимо заполнить
-              </p>
-            )}
-            {errors?.password?.type === "minLength" && (
-              <p className="form__input_errorState">
-                Пароль не может быть меньше 8 символов
-              </p>
-            )}
+            <p className="form__input_errorState">{errors.password}</p>
           </span>
         </section>
       </Form>

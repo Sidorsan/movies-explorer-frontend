@@ -1,24 +1,18 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 
 const Login = ({ onLogin }) => {
-  const [values, setValues] = useState({ email: "", password: "" });
-  const [errors, setErrors] = React.useState({});
-  const [isValid, setIsValid] = React.useState(false);
+  const [data, setData] = useState({ email: "", password: "" });
 
-  const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
-
-    // console.log(name);
-    // console.log(target.validationMessage);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
   };
 
   // const handleSubmit = (e) => {
@@ -30,26 +24,15 @@ const Login = ({ onLogin }) => {
   //   onLogin({ email, password });
   // };
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
-   const resetForm = useCallback(
-     (newValues = {}, newErrors = {}, newIsValid = false) => {
-       setValues(newValues);
-       setErrors(newErrors);
-       setIsValid(newIsValid);
-     },
-     [setValues, setErrors, setIsValid]
-   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    {
-      const { password, email } = values;
-      onLogin({ password, email });
-    }
+  const onSubmit = (data) => {
+    const { password, email } = data;
+    onLogin({ email, password });
   };
 
   return (
@@ -64,12 +47,10 @@ const Login = ({ onLogin }) => {
       <Form
         name="login"
         buttonSubmitTitle="Войти"
-        // onSubmit={handleSubmit(onSubmit)}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         questionAboutRegistration="Ещё не зарегистрированы?"
         link="signup"
         linkTitle="Регистрация"
-        isValid={isValid}
       >
         <section className="form__section">
           {" "}
@@ -82,10 +63,16 @@ const Login = ({ onLogin }) => {
             type="email"
             // value={data.email}
             onChange={handleChange}
-            required
+            {...register("email", {
+              required: true,
+            })}
           />
           <span>
-            <p className="form__input_errorState">{errors.email}</p>
+            {errors?.email?.type === "required" && (
+              <p className="form__input_errorState">
+                Это поле необходимо заполнить
+              </p>
+            )}
           </span>
         </section>
         <section className="form__section">
@@ -98,12 +85,21 @@ const Login = ({ onLogin }) => {
             type="password"
             // value={data.password}
             onChange={handleChange}
-            required
-            minLength="8"
+            {...register("password", {
+              required: true,
+              minLength: 8,
+            })}
           />
-          <span>
-            <p className="form__input_errorState">{errors.password}</p>
-          </span>
+          {errors?.password?.type === "required" && (
+            <p className="form__input_errorState">
+              Это поле необходимо заполнить
+            </p>
+          )}
+          {errors?.password?.type === "minLength" && (
+            <p className="form__input_errorState">
+              Пароль не может быть меньше 8 символов
+            </p>
+          )}
         </section>
       </Form>
     </section>

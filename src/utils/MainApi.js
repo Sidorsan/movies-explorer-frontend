@@ -71,8 +71,21 @@ class MainApi {
       },
     }).then((res) => this._checkJson(res));
   }
-}
 
+  patchUser({ firstName, email }) {
+    return fetch(`http://${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        name: firstName,
+      }),
+    }).then((res) => this._checkJson(res));
+  }
+}
 const mainApi = new MainApi({
   // baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
   baseUrl: "localhost:3001",

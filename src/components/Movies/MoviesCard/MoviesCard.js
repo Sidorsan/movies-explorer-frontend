@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import pikcher from "../../../images/Pikcher.png";
 import { useLocation } from "react-router-dom";
-
+import mainApi from "../../../utils/MainApi";
 function MoviesCard(props) {
   let location = useLocation();
   const handleCardButtonClick = () => {
@@ -12,18 +12,36 @@ function MoviesCard(props) {
   // const handleDeleteClick = () => {
   //   props.onCardDelete(props.card._id);
   // };
-
+  // const [saveMovies, setSaveMovies] = useState(false);
   const currentUser = React.useContext(CurrentUserContext);
-  // const isOwn = props.card.owner === currentUser._id;
-  const isSaved = props.movie.owner === currentUser._id;
+  // const isSaved =  mainApi.getInitialMovies().then((arr) => {
+  //   arr.find((o) => o.movieId === props.movie.id)
+  //     ? setSaveMovies(true)
+  //     : setSaveMovies(false);
+  // });
 
-
+  // useEffect(() => {
+// console.log(props.savedMovies);
+//     props.savedMovies.find(
+//       (o) => o.movieId === props.movie.id && o.owner === currentUser._id
+//     )
+//     // mainApi.getInitialMovies().then((arr) => {
+//     //   arr.find((o) => o.movieId === props.movie.id
+//     //     && o.owner === currentUser._id
+//     //   )
+//         ? setSaveMovies(true)
+//         : setSaveMovies(false);
+//     // // });
+//   }, [handleCardButtonClick]);
+const isSaved = props.savedMovies.find(
+  (o) => o.movieId === props.movie.id && o.owner === currentUser._id
+);
 
   const MoviesButtonClassName = `moviesCard__Button ${
     isSaved ? "moviesCard__Button_active" : " "
   } ${
     location.pathname === "/saved-movies" ? "moviesCard__Button_delite" : " "
-    }`;
+  }`;
 
   return (
     <li className="moviesCard">

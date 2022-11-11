@@ -1,12 +1,13 @@
 //react-hook-form.com/advanced-usage
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
 import findInInput from "../../../images/findInInput.svg";
 import Form from "../../Form/Form";
 
 const SearchForm = (props) => {
+  let location = useLocation();
   const [film, setFilm] = React.useState("");
 
 
@@ -47,7 +48,8 @@ const SearchForm = (props) => {
   //   const { film } = data;
   //   console.log(data);
   // };
-const searchFromLocalStorage = localStorage.getItem("search");
+  const searchFromLocalStorage = location.pathname === "/movies" ?
+    localStorage.getItem("search") : ''
   return (
     <div className="searchForm">
       <form onSubmit={handleSubmit(onSubmit)} className="searchForm__form">
@@ -64,7 +66,9 @@ const searchFromLocalStorage = localStorage.getItem("search");
         />
         <span>
           {errors?.film?.type === "required" && (
-            <p className="searchForm__errorState">Введите название фильма</p>
+            <p className="searchForm__errorState">
+              Нужно ввести ключевое слово
+            </p>
           )}
         </span>
 

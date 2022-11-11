@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 function Form({
   name,
   onSubmit,
@@ -8,7 +9,13 @@ function Form({
   questionAboutRegistration,
   link,
   linkTitle,
-}) {
+  isValid,
+  logOut
+})
+
+{
+  let location = useLocation();
+
   return (
     <form
       className={`form form__${name}`}
@@ -19,18 +26,32 @@ function Form({
       <button
         type="submit"
         // onSubmit={handleSubmit}
-        className={`form__submitButton form__submitButton_${name}`}
+        className={`form__submitButton form__submitButton_${name} ${
+          !isValid ? "form__submitButton_notActive" : ""
+        }`}
         value={buttonSubmitTitle}
+        disabled={!isValid ? true : false}
       >
         {buttonSubmitTitle}
       </button>
 
-      <p className={`form__questionAboutRegistration form__questionAboutRegistration_${name}`}>
+      <p
+        className={`form__questionAboutRegistration form__questionAboutRegistration_${name}`}
+      >
         {questionAboutRegistration}{" "}
         <span>
-          <Link to={link} className={`form__link form__link_${name}`}>
-            {linkTitle}
-          </Link>
+          {location.pathname === "/profile" ? (
+            <button
+              onClick={logOut}
+              className={`form__link form__link_${name}`}
+            >
+              {linkTitle}
+            </button>
+          ) : (
+            <Link to={link} className={`form__link form__link_${name}`}>
+              {linkTitle}
+            </Link>
+          )}
         </span>
       </p>
     </form>

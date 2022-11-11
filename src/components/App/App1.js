@@ -23,7 +23,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
 import union_confirm from "../../images/union_confirm.svg";
 import union_fail from "../../images/union_fail.svg";
-import { locales } from "validator/lib/isIBAN";
 function App() {
   let location = useLocation();
   const [isPopapNotFoundOpen, setIsPopapNotFoundOpen] = useState(false);
@@ -48,7 +47,7 @@ function App() {
     }
   };
   const [saveMovies, setSaveMovies] = useState([]);
-  // const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = useState([]);
@@ -67,6 +66,17 @@ function App() {
     handleTokenCheck();
     // checkId();
   }, []);
+
+  useEffect(() => {
+    // if (loggedIn) {
+    // setIsloading(true);
+    mainApi.getInitialMovies().then((movies) => {
+      setSavedMovies(movies);
+      // setIsloading(false);
+    });
+    // .catch(handleError);
+    // }
+  }, [saveMovies]);
 
   // useEffect(() => {
   //   console.log("работаю");
@@ -108,24 +118,6 @@ function App() {
       .catch(handleError);
   };
 
-  const handleLoginUpdate = ({ firstName, email }) => {
-    mainApi
-      .patchUser({ firstName, email })
-      .then((data) => {
-        if (!data) {
-          return handleError;
-        }
-        if (data) {
-          // localStorage.setItem("jwt", data.token);
-          localStorage.setItem("userEmail", email);
-          alert("Данные успешно изменены");
-          // history.push("/movies");
-        }
-      })
-      .then(() => console.log(currentUser))
-      .catch(handleError);
-  };
-
   useEffect(() => {
     if (loggedIn) {
       // setIsloading(true);
@@ -139,17 +131,6 @@ function App() {
         .catch(handleError);
     }
   }, [loggedIn]);
-
-  useEffect(() => {
-    if (loggedIn) {
-      // setIsloading(true);
-      mainApi.getInitialMovies().then((movies) => {
-        setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
-      });
-
-      // .catch(handleError);
-    }
-  }, [currentUser]);
 
   useEffect(() => {
     if (localStorage.getItem("visibleMovies")) {
@@ -177,6 +158,8 @@ function App() {
       .register({ password, email, firstName })
       .then(() => {
         handleLogin({ email, password });
+        console.log(email, password);
+        // history.push("/movies");
       })
       .catch(handleError);
   };
@@ -191,25 +174,14 @@ function App() {
     mainApi
       .getInitialMovies()
       .then((arr) => {
-        let hasIdAndOwner = arr.find(
-          (o) =>
-            o.movieId === (movie.id || movie.movieId) &&
-            o.owner === currentUser._id
-        );
+        let hasId = arr.find((o) => o.movieId === (movie.id || movie.movieId));
 
-        if (hasIdAndOwner) {
-          mainApi.deleteMovies(hasIdAndOwner._id).then((newMovie) => {
-            // setMovies((newMovies) =>
-            //   newMovies.map((c) => (c._id === hasIdAndOwner._id ? newMovie : c))
-            // );
-            console.log(movies);
-            setSaveMovies((movies) =>
-              movies.filter((c) => c._id !== hasIdAndOwner._id)
-            );
-          });
+        if (hasId) {
+          mainApi.deleteMovies(hasId._id);
           return checkId();
         }
         mainApi.postInitialMovies(movie);
+
         checkId();
       })
 
@@ -219,11 +191,12 @@ function App() {
   function checkId() {
     mainApi
       .getInitialMovies()
-      .then((movies) => {
-        setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
+      .then((arr) => {
+        setSaveMovies(arr);
       })
       .catch(handleError);
   }
+  console.log(saveMovies);
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
@@ -255,13 +228,16 @@ function App() {
       } else {
         moviesFiltered(loadMovies, search);
         setIsLoading(false);
+
       }
+
       return;
-    } else {
-      moviesFiltered(saveMovies, search);
-      console.log(search);
-    }
-  };
+    } else { mainApi.getInitialMovies().then((movies) => {
+
+      console.log(movies);
+    });} }
+
+
 
   const displayedMoviesChange = () => {
     if (windowWidth > 319) {
@@ -321,47 +297,30 @@ function App() {
         setIsNotFound({ title: "Ничего не найдено" });
         return;
       }
-      if (location.pathname === "/movies") {
-        localStorage.setItem(
-          "filteredMovies",
-          JSON.stringify(shotFilteredMovies)
-        );
-        displayedMoviesChange();
 
-        localStorage.setItem("search", search.film);
-        localStorage.setItem(
-          "checkedShotFilms",
-          JSON.stringify(checkedShotFilms)
-        );
+      localStorage.setItem(
+        "filteredMovies",
+        JSON.stringify(shotFilteredMovies)
+      );
+      displayedMoviesChange();
 
-        setIsNotFound(false);
-        return;
-      } else {
-        setSaveMovies(shotFilteredMovies);
-        setIsNotFound(false);
-        return;
-      }
-    }
-    if (location.pathname === "/movies") {
-      localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
       localStorage.setItem("search", search.film);
       localStorage.setItem(
         "checkedShotFilms",
         JSON.stringify(checkedShotFilms)
       );
+
       setIsNotFound(false);
-      displayedMoviesChange();
-    } else {
-      setSaveMovies(filteredMovies);
-      setIsNotFound(false);
+      return;
     }
+
+    localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
+    localStorage.setItem("search", search.film);
+    localStorage.setItem("checkedShotFilms", JSON.stringify(checkedShotFilms));
+    setIsNotFound(false);
+    displayedMoviesChange();
   };
-  const handleLogOut = () => {
-    history.push("/");
-     localStorage.removeItem("jwt");
-    localStorage.removeItem("userEmail");
-    setLoggedIn(false)
-}
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
@@ -393,12 +352,13 @@ function App() {
             )}
           </Route>
           <Route path="/profile">
-            <Profile onLogin={handleLoginUpdate} logOut={handleLogOut} />
+            <Profile />
           </Route>
 
           <ProtectedRoute
             path="/movies"
             component={Movies}
+            // movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
             movies={movies}
@@ -408,18 +368,16 @@ function App() {
             onSubmitForm={onSubmitForm}
             handleAddButton={handleAddButton}
             handleChange={handleChange}
-            savedMovies={saveMovies}
           />
 
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
-            savedMovies={saveMovies}
+            // isLoading={isLoading}
+            savedMovies={savedMovies}
             onCardClick={handleCardClick}
             loggedIn={loggedIn}
             onSubmitForm={onSubmitForm}
-            isNotFound={isNotFound}
-            handleChange={handleChange}
           />
         </Switch>
 

@@ -1,42 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+
 import Form from "../Form/Form";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-const Profile = ({ onLogin }) => {
-  //  const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = data;
-  //   if (!email || !password) {
-  //     return;
-  //   }
-  //   onLogin({ email, password });
-  // };
 
-  const [data, setData] = useState({
-    email: "",
-    firstName: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const { firstName, email } = data;
-    console.log(data);
-  };
+const Profile = ({ onLogin, logOut}) => {
   const currentUser = React.useContext(CurrentUserContext);
+
+  const [values, setValues] = useState({ email: "", firstName: "" });
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
+
+   useEffect(() => {
+     if (currentUser) {
+       setValues({ email: currentUser.email, firstName: currentUser.name });
+     }
+   }, [currentUser]);
+
+  const checkFirstDataAndValid =
+    isValid &&
+    (((values.firstName === currentUser.name) || (values.firstName === "")) ? false : true) ||
+    (((values.email === currentUser.email) || (values.email === "") ) ? false : true);
+
+
+   const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    {
+      const { firstName, email } = values;
+      onLogin({ firstName, email });
+    }
+  };
+
   return (
     <section className="profile">
       <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
@@ -44,10 +47,12 @@ const Profile = ({ onLogin }) => {
       <Form
         name="profile"
         buttonSubmitTitle="Редактировать"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         questionAboutRegistration=""
-        link="#"
+        // link="#"
+        logOut={logOut}
         linkTitle="Выйти из аккаунта"
+        isValid={checkFirstDataAndValid}
       >
         <section className="form__section form__section_profile">
           {" "}
@@ -56,31 +61,26 @@ const Profile = ({ onLogin }) => {
           </label>
           <input
             placeholder="Введите имя"
+            defaultValue={currentUser.name}
             className="form__input form__input_profile"
             id="firstName"
             name="firstName"
             type="firstName"
             onChange={handleChange}
-            {...register("firstName", {
-              required: true,
-            })}
+            // {...register("firstName", {
+            required
+            minLength="2"
+            maxLength="20"
+            pattern="^[a-zA-Zа-яА-ЯЁё -]+$"
+
+            // })}
           />
           <span>
-            {errors?.firstName?.type === "required" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Это поле необходимо заполнить
-              </p>
-            )}
-            {errors?.firstName?.type === "maxLength" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Имя не должно быть длиннее 20 символов
-              </p>
-            )}
-            {errors?.firstName?.type === "minLength" && (
-              <p className="form__input_errorState form__input_errorState_profile">
-                Имя не должно быть меньше 2 символов
-              </p>
-            )}
+            <p className="form__input_errorState form__input_errorState_profile ">
+              {errors.firstName === "Введите данные в указанном формате."
+                ? "Поле должно содержать только латиницу, кириллицу, пробел или дефис"
+                : errors.firstName}
+            </p>
           </span>
         </section>
         <section className="form__section form__section_profile">
@@ -88,22 +88,20 @@ const Profile = ({ onLogin }) => {
             E-mail
           </label>
           <input
+            defaultValue={currentUser.email}
             className="form__input form__input_profile"
             placeholder="Введите E-mail"
             id="email"
             name="email"
             type="email"
             onChange={handleChange}
-            {...register("email", {
-              required: true,
-              minLength: 8,
-            })}
+            required
           />
-          {errors?.email?.type === "required" && (
+          <span>
             <p className="form__input_errorState form__input_errorState_profile">
-              Это поле необходимо заполнить
+              {errors.email}
             </p>
-          )}
+          </span>
         </section>
       </Form>
     </section>

@@ -9,6 +9,7 @@ function MoviesCardList({
   loggedIn,
   onSubmit,
   isNotFound,
+  savedMovies,
   // setIsLoading,
 }) {
   // setIsLoading(false);
@@ -26,6 +27,7 @@ function MoviesCardList({
               key={movie.id ? movie.id : movie._id}
               movie={movie}
               onCardClick={onCardClick}
+              savedMovies={savedMovies}
             />
           ))
         )}

@@ -32,6 +32,16 @@ export const authorize = ({ email, password }) => {
   }).then(checkResponse);
 };
 
+// export const patchUser = ({ firstName, email }) => {
+//   return fetch(`${BASE_URL}/users/me`, {
+//     method: "PATCH",
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+//     },
+//     body: JSON.stringify({ email: email, name: firstName }),
+//   }).then(checkResponse);
+// };
+
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",

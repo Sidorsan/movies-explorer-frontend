@@ -5,39 +5,42 @@ import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import mainApi from "../../utils/MainApi";
 
-const SavedMovies = ({ isLoading, onCardClick, loggedIn }) => {
-  const [savedMovies, setSavedMovies] = useState([]
-    // JSON.parse(localStorage.getItem("savedMovies"))
-  );
-  // useEffect(() => {
-  //   JSON.parse(localStorage.getItem("savedMovies"));
-  // }, [savedMovies]);
+const SavedMovies = ({
+  isLoading,
+  onCardClick,
+  loggedIn,
+  savedMovies,
+  onSubmitForm,
+  isNotFound,
+  handleChange,
+}) => {
+  // const [movies, setMovies] = useState(savedMovies);
+
   useEffect(() => {
     // if (loggedIn) {
     // setIsloading(true);
-    mainApi
-      .getInitialMovies()
-      .then((movies) => {
-        setSavedMovies(movies);
-        // setIsloading(false);
-      })
-      // .catch(handleError);
+    // mainApi.getInitialMovies().then((movies) => {
+    // setMovies(savedMovies);
+    // setIsloading(false);
+    // });
+    // .catch(handleError);
     // }
-  }, []);
+  }, [savedMovies]);
 
-  console.log(savedMovies);
   return (
     <>
       <section className="savedMovies">
         <div className="movies__searchAndFilter">
-          <SearchForm />
-          <FilterCheckbox />
+          <SearchForm onSubmit={onSubmitForm} />
+          <FilterCheckbox onChange={handleChange} />
         </div>
         <MoviesCardList
           movies={savedMovies}
           isLoading={isLoading}
           onCardClick={onCardClick}
           loggedIn={loggedIn}
+          isNotFound={isNotFound}
+          savedMovies={savedMovies}
           // onSubmit={}
         />
       </section>
