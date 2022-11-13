@@ -1,5 +1,4 @@
 import React from "react";
-
 function PopapNotFound({ data, isOpen, onClose }) {
   return (
     <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
@@ -12,5 +11,4 @@ function PopapNotFound({ data, isOpen, onClose }) {
     </div>
   );
 }
-
 export default PopapNotFound;

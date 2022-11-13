@@ -10,19 +10,20 @@ function MoviesCardList({
   onSubmit,
   isNotFound,
   savedMovies,
-  // setIsLoading,
-}) {
-  // setIsLoading(false);
 
+}) {
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
-        {isLoading ? (
+        {
+          isLoading ? (
           <Preloader />
         ) : isNotFound ? (
           <p className="notFoundTitle">{isNotFound.title}</p>
-        ) : (
-          movies.map((movie) => (
+            ) :
+              (
+              movies.map((movie) => (
+
             <MoviesCard
               key={movie.id ? movie.id : movie._id}
               movie={movie}
@@ -30,10 +31,10 @@ function MoviesCardList({
               savedMovies={savedMovies}
             />
           ))
-        )}
+          )
+        }
       </ul>
     </div>
   );
 }
-
 export default MoviesCardList;

@@ -1,9 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import logo from "../../images/logoDiploma.svg";
-import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 
-// const Register = ({ onRegister }) => {
 const Register = ({ onRegister }) => {
   const [values, setValues] = React.useState({
     firstName: "",
@@ -20,10 +18,6 @@ const Register = ({ onRegister }) => {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
-
-    // console.log(name);
-    // console.log(target.validationMessage);
-
   };
 
   const resetForm = useCallback(
@@ -34,22 +28,6 @@ const Register = ({ onRegister }) => {
     },
     [setValues, setErrors, setIsValid]
   );
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   {
-  //     const { password, email, firstName } = data;
-  //     // onRegister({ password, email, firstName });
-  //   }
-
-  // };
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-
-  // } = useForm();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     {
@@ -57,11 +35,6 @@ const Register = ({ onRegister }) => {
       onRegister({ password, email, firstName });
     }
   };
-
-  // const onSubmit = (data) => {
-  //   const { password, email, firstName } = data;
-  //   onRegister({ password, email, firstName });
-  // };
 
   return (
     <section className="register">
@@ -76,7 +49,6 @@ const Register = ({ onRegister }) => {
       <Form
         name="register"
         buttonSubmitTitle="Зарегистрироваться"
-        // onSubmit={handleSubmit(onSubmit)}
         onSubmit={handleSubmit}
         questionAboutRegistration="Уже зарегистрированы?"
         link="signin"
@@ -90,7 +62,6 @@ const Register = ({ onRegister }) => {
             placeholder="Введите имя"
             id="firstName"
             name="firstName"
-            // value={data.firstName}
             onChange={handleChange}
             required
             minLength="2"
@@ -115,7 +86,6 @@ const Register = ({ onRegister }) => {
             id="email"
             name="email"
             type="email"
-            // value={data.email}
             onChange={handleChange}
             required
             // pattern="^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i"
@@ -132,7 +102,6 @@ const Register = ({ onRegister }) => {
             id="password"
             name="password"
             type="password"
-            // value={data.password}
             onChange={handleChange}
             required
             minLength="8"

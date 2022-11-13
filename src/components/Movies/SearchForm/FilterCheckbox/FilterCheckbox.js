@@ -1,16 +1,11 @@
 import React from "react";
-
 const FilterCheckbox = ({onChange}) => {
-
   const handleClick = () => {
    onChange(true);
   };
-
-
   let checked = localStorage.getItem("checkedShotFilms") === "true"
     ? true
     : false;
-
   return (
     <div className="filterCheckbox">
       <input

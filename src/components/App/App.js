@@ -21,9 +21,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
-import union_confirm from "../../images/union_confirm.svg";
-import union_fail from "../../images/union_fail.svg";
-import { locales } from "validator/lib/isIBAN";
+
 function App() {
   let location = useLocation();
   const [isPopapNotFoundOpen, setIsPopapNotFoundOpen] = useState(false);
@@ -34,7 +32,6 @@ function App() {
   });
 
   const [currentUser, setCurrentUser] = useState({});
-  // const [movies, setMovies] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -48,13 +45,10 @@ function App() {
     }
   };
   const [saveMovies, setSaveMovies] = useState([]);
-  // const [savedMovies, setSavedMovies] = useState([]);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = useState([]);
-  const [isNotFound, setIsNotFound] = React.useState({
-    title: "",
-  });
+  const [isNotFound, setIsNotFound] = React.useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [loadMovies, setLoadMovies] = React.useState(
     JSON.parse(localStorage.getItem("allMovies")) || []
@@ -65,17 +59,18 @@ function App() {
 
   useEffect(() => {
     handleTokenCheck();
-    // checkId();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("работаю");
-  //   if (loggedIn) {
-  //     history.push("/movies");
-  //   } else {
-  //     history.push("/signin");
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    location.pathname === "/" ||
+    location.pathname === "/movies" ||
+    location.pathname === "/saved-movies" ||
+    location.pathname === "/signin" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/profile"
+      ? console.log()
+      : handleError()
+  }, [location]);
 
   const handleError = () => {
     setDataPopapNotFound({
@@ -100,7 +95,6 @@ function App() {
         if (data) {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
-
           history.push("/movies");
         }
       })
@@ -116,25 +110,19 @@ function App() {
           return handleError;
         }
         if (data) {
-          // localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
           alert("Данные успешно изменены");
-          // history.push("/movies");
         }
       })
-      .then(() => console.log(currentUser))
       .catch(handleError);
   };
 
   useEffect(() => {
     if (loggedIn) {
-      // setIsloading(true);
-
       mainApi
         .getInitialUser()
         .then((userData) => {
           setCurrentUser(userData);
-          // setIsloading(false);
         })
         .catch(handleError);
     }
@@ -142,12 +130,12 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      // setIsloading(true);
-      mainApi.getInitialMovies().then((movies) => {
-        setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
-      });
-
-      // .catch(handleError);
+      mainApi
+        .getInitialMovies()
+        .then((movies) => {
+          setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
+        })
+        .catch(handleError);
     }
   }, [currentUser]);
 
@@ -155,8 +143,7 @@ function App() {
     if (localStorage.getItem("visibleMovies")) {
       setIsLoading(true);
       setMovies(JSON.parse(localStorage.getItem("visibleMovies")));
-      // displayedMoviesChange();
-
+      displayedMoviesChange();
       setIsLoading(false);
       setIsNotFound(false);
     }
@@ -181,12 +168,6 @@ function App() {
       .catch(handleError);
   };
 
-  // const handleLogaout = () => {
-  //   setLoggedIn(false);
-  //   localStorage.removeItem("jwt");
-  //   localStorage.removeItem("userEmail");
-  // };
-
   function handleCardClick(movie) {
     mainApi
       .getInitialMovies()
@@ -198,11 +179,7 @@ function App() {
         );
 
         if (hasIdAndOwner) {
-          mainApi.deleteMovies(hasIdAndOwner._id).then((newMovie) => {
-            // setMovies((newMovies) =>
-            //   newMovies.map((c) => (c._id === hasIdAndOwner._id ? newMovie : c))
-            // );
-            console.log(movies);
+          mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
             setSaveMovies((movies) =>
               movies.filter((c) => c._id !== hasIdAndOwner._id)
             );
@@ -212,7 +189,6 @@ function App() {
         mainApi.postInitialMovies(movie);
         checkId();
       })
-
       .catch(handleError);
   }
 
@@ -259,7 +235,6 @@ function App() {
       return;
     } else {
       moviesFiltered(saveMovies, search);
-      console.log(search);
     }
   };
 
@@ -327,18 +302,20 @@ function App() {
           JSON.stringify(shotFilteredMovies)
         );
         displayedMoviesChange();
-
         localStorage.setItem("search", search.film);
         localStorage.setItem(
           "checkedShotFilms",
           JSON.stringify(checkedShotFilms)
         );
-
         setIsNotFound(false);
         return;
       } else {
         setSaveMovies(shotFilteredMovies);
         setIsNotFound(false);
+        localStorage.setItem(
+          "checkedShotFilms",
+          JSON.stringify(checkedShotFilms)
+        );
         return;
       }
     }
@@ -354,30 +331,36 @@ function App() {
     } else {
       setSaveMovies(filteredMovies);
       setIsNotFound(false);
+      localStorage.setItem(
+        "checkedShotFilms",
+        JSON.stringify(checkedShotFilms)
+      );
     }
   };
   const handleLogOut = () => {
     history.push("/");
-     localStorage.removeItem("jwt");
+    localStorage.removeItem("jwt");
     localStorage.removeItem("userEmail");
-    setLoggedIn(false)
-}
+    localStorage.removeItem("visibleMovies");
+    localStorage.removeItem("search");
+    localStorage.removeItem("checkedShotFilms");
+    localStorage.removeItem("filteredMovies");
+    localStorage.removeItem("allMovies");
+    setMovies([]);
+    setLoggedIn(false);
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
-        {/* <Header loggedIn={loggedIn} onLogout={handleLogaout} /> */}
-
-        {/* <Header /> */}
         {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
+
           <Header />
         ) : null}
-
         <Switch>
-          {/* <ProtectedRoute */}
           <Route exact path="/">
             <Main />
           </Route>
-
           <Route path="/signup">
             {loggedIn ? (
               <Redirect to="/movies" />
@@ -392,10 +375,13 @@ function App() {
               <Login onLogin={handleLogin} />
             )}
           </Route>
-          <Route path="/profile">
-            <Profile onLogin={handleLoginUpdate} logOut={handleLogOut} />
-          </Route>
-
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            loggedIn={loggedIn}
+            onLogin={handleLoginUpdate}
+            logOut={handleLogOut}
+          />
           <ProtectedRoute
             path="/movies"
             component={Movies}
@@ -410,7 +396,6 @@ function App() {
             handleChange={handleChange}
             savedMovies={saveMovies}
           />
-
           <ProtectedRoute
             path="/saved-movies"
             component={SavedMovies}
@@ -420,9 +405,9 @@ function App() {
             onSubmitForm={onSubmitForm}
             isNotFound={isNotFound}
             handleChange={handleChange}
+            isLoading={isLoading}
           />
         </Switch>
-
         {location.pathname !== "/signin" &&
         location.pathname !== "/signup" &&
         location.pathname !== "/profile" ? (
@@ -437,6 +422,4 @@ function App() {
     </CurrentUserContext.Provider>
   );
 }
-
-// export default App;
 export default withRouter(App);

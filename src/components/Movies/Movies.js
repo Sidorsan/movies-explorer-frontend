@@ -3,8 +3,6 @@ import mainApi from "../../utils/MainApi";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-
-
 const Movies = ({
   onCardClick,
   loggedIn,
@@ -16,7 +14,6 @@ const Movies = ({
   handleChange,
   savedMovies,
 }) => {
-
   const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);
 
   useEffect(() => {
@@ -27,7 +24,6 @@ const Movies = ({
       );
     }
   }, [movies]);
-
   return (
     <>
       <section className="movies">
@@ -41,9 +37,7 @@ const Movies = ({
           isLoading={isLoading}
           onCardClick={onCardClick}
           loggedIn={loggedIn}
-          // onSubmit={onSubmitForm}
           isNotFound={isNotFound}
-          // setIsLoading={setIsLoading}
           savedMovies={savedMovies}
         />
         <button

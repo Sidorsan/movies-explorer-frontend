@@ -10,14 +10,9 @@ class MoviesApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}`, {
       method: "GET",
-      // headers: {
-      //   authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      //   "Content-Type": "application/json",
-      // },
     }).then((res) => this._checkJson(res));
   }
 }

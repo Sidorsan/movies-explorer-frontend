@@ -10,10 +10,8 @@ function Form({
   link,
   linkTitle,
   isValid,
-  logOut
-})
-
-{
+  logOut,
+}) {
   let location = useLocation();
 
   return (
@@ -25,7 +23,6 @@ function Form({
       {children}
       <button
         type="submit"
-        // onSubmit={handleSubmit}
         className={`form__submitButton form__submitButton_${name} ${
           !isValid ? "form__submitButton_notActive" : ""
         }`}

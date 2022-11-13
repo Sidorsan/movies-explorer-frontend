@@ -1,5 +1,5 @@
-// export const BASE_URL = "https://api.sidorsan.diploma.nomoredomains.sbs";
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "https://api.sidorsan.diploma.nomoredomains.sbs";
+// export const BASE_URL = "http://localhost:3001";
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
@@ -31,16 +31,6 @@ export const authorize = ({ email, password }) => {
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 };
-
-// export const patchUser = ({ firstName, email }) => {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: "PATCH",
-//     headers: {
-//       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-//     },
-//     body: JSON.stringify({ email: email, name: firstName }),
-//   }).then(checkResponse);
-// };
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {

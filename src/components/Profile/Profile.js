@@ -4,26 +4,27 @@ import { Link } from "react-router-dom";
 import Form from "../Form/Form";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Profile = ({ onLogin, logOut}) => {
+const Profile = ({ onLogin, logOut }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   const [values, setValues] = useState({ email: "", firstName: "" });
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
-   useEffect(() => {
-     if (currentUser) {
-       setValues({ email: currentUser.email, firstName: currentUser.name });
-     }
-   }, [currentUser]);
+  useEffect(() => {
+    if (currentUser) {
+      setValues({ email: currentUser.email, firstName: currentUser.name });
+    }
+  }, [currentUser]);
 
   const checkFirstDataAndValid =
-    isValid &&
-    (((values.firstName === currentUser.name) || (values.firstName === "")) ? false : true) ||
-    (((values.email === currentUser.email) || (values.email === "") ) ? false : true);
+    (isValid &&
+      (values.firstName === currentUser.name || values.firstName === ""
+        ? false
+        : true)) ||
+    (values.email === currentUser.email || values.email === "" ? false : true);
 
-
-   const handleChange = (event) => {
+  const handleChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
@@ -31,7 +32,6 @@ const Profile = ({ onLogin, logOut}) => {
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     {
@@ -39,17 +39,14 @@ const Profile = ({ onLogin, logOut}) => {
       onLogin({ firstName, email });
     }
   };
-
   return (
     <section className="profile">
       <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
-
       <Form
         name="profile"
         buttonSubmitTitle="Редактировать"
         onSubmit={handleSubmit}
         questionAboutRegistration=""
-        // link="#"
         logOut={logOut}
         linkTitle="Выйти из аккаунта"
         isValid={checkFirstDataAndValid}
@@ -67,13 +64,10 @@ const Profile = ({ onLogin, logOut}) => {
             name="firstName"
             type="firstName"
             onChange={handleChange}
-            // {...register("firstName", {
             required
             minLength="2"
             maxLength="20"
             pattern="^[a-zA-Zа-яА-ЯЁё -]+$"
-
-            // })}
           />
           <span>
             <p className="form__input_errorState form__input_errorState_profile ">

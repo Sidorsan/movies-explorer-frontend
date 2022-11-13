@@ -1,53 +1,24 @@
-//react-hook-form.com/advanced-usage
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import find from "../../../images/find.svg";
-import findInInput from "../../../images/findInInput.svg";
-import Form from "../../Form/Form";
-
 const SearchForm = (props) => {
   let location = useLocation();
   const [film, setFilm] = React.useState("");
 
-
   function handleChangeFilm(e) {
     setFilm(e.target.value);
   }
-  // const [data, setData] = useState({
-  //   film: ""
-  // });
-
-  // const handleChange = (e) => {
-  //   setData(e.target.value);
-  //   // const { name, value } = e.target;
-  //   // setData({
-  //   //   ...data,
-  //   //   [name]: value,
-  //   // });
-  // };
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
-  //  function handleSubmit(e) {
-  //    e.preventDefault();
-  //    console.log("ecac");
-  //  }
-
   const onSubmit = (e) => {
     props.onSubmit(e);
     reset();
   };
-
-  // const onSubmit = (data) => {
-  //   const { film } = data;
-  //   console.log(data);
-  // };
   const searchFromLocalStorage = location.pathname === "/movies" ?
     localStorage.getItem("search") : ''
   return (

@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
 import logo from "../../images/logoDiploma.svg";
-import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 
 const Login = ({ onLogin }) => {
@@ -16,33 +14,7 @@ const Login = ({ onLogin }) => {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
-
-    // console.log(name);
-    // console.log(target.validationMessage);
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = data;
-  //   if (!email || !password) {
-  //     return;
-  //   }
-  //   onLogin({ email, password });
-  // };
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
-   const resetForm = useCallback(
-     (newValues = {}, newErrors = {}, newIsValid = false) => {
-       setValues(newValues);
-       setErrors(newErrors);
-       setIsValid(newIsValid);
-     },
-     [setValues, setErrors, setIsValid]
-   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +36,6 @@ const Login = ({ onLogin }) => {
       <Form
         name="login"
         buttonSubmitTitle="Войти"
-        // onSubmit={handleSubmit(onSubmit)}
         onSubmit={handleSubmit}
         questionAboutRegistration="Ещё не зарегистрированы?"
         link="signup"
@@ -80,7 +51,6 @@ const Login = ({ onLogin }) => {
             id="email"
             name="email"
             type="email"
-            // value={data.email}
             onChange={handleChange}
             required
           />
@@ -96,7 +66,6 @@ const Login = ({ onLogin }) => {
             id="password"
             name="password"
             type="password"
-            // value={data.password}
             onChange={handleChange}
             required
             minLength="8"
