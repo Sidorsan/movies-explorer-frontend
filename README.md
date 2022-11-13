@@ -1,2 +1,2 @@
 # movies-explorer-frontend
-# Ссылка на макет https://disk.yandex.ru/d/6PwJU_pIH-WPRA
+# Ссылка на пул реквест https://github.com/Sidorsan/movies-explorer-frontend/pull/2
