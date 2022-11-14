@@ -137,7 +137,7 @@ function App() {
         })
         .catch(handleError);
     }
-  }, [currentUser]);
+  }, [handleCardClick]);
 
   useEffect(() => {
     if (localStorage.getItem("visibleMovies")) {
@@ -184,22 +184,15 @@ function App() {
               movies.filter((c) => c._id !== hasIdAndOwner._id)
             );
           });
-          return checkId();
+
+          return
         }
         mainApi.postInitialMovies(movie);
-        checkId();
+
       })
       .catch(handleError);
   }
 
-  function checkId() {
-    mainApi
-      .getInitialMovies()
-      .then((movies) => {
-        setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
-      })
-      .catch(handleError);
-  }
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
