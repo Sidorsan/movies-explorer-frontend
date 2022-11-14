@@ -81,8 +81,6 @@ function App() {
     setIsPopapNotFoundOpen(!isPopapNotFoundOpen);
   };
 
-
-
   function closeAllPopups() {
     setIsPopapNotFoundOpen(false);
   }
@@ -139,7 +137,9 @@ function App() {
         })
         .catch(handleError);
     }
-  }, [handleCardClick]);
+  }, [currentUser]);
+
+
 
   useEffect(() => {
     if (localStorage.getItem("visibleMovies")) {
@@ -171,27 +171,64 @@ function App() {
   };
 
   function handleCardClick(movie) {
-    mainApi
-      .getInitialMovies()
-      .then((arr) => {
-        let hasIdAndOwner = arr.find(
-          (o) =>
-            o.movieId === (movie.id || movie.movieId) &&
-            o.owner === currentUser._id
+    let hasIdAndOwner = saveMovies.find(
+      (o) =>
+        o.movieId === (movie.id || movie.movieId) && o.owner === currentUser._id
+    );
+    if (hasIdAndOwner) {
+      mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
+        setSaveMovies((movies) =>
+          movies.filter((c) => c._id !== hasIdAndOwner._id)
         );
+      });
+      // return;
+    } else {
+      mainApi
+        .postInitialMovies(movie)
+        .then(
+          mainApi.getInitialMovies().then((movies) => {
+            setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
+          })
+        )
+        .catch(handleError);
+      // setSaveMovies(saveMovies.map((c) => (c.movieId === movie.id ? movie :c)) )
+      // .then(
+      //   mainApi.getInitialMovies().then((mov) => {
+      //     console.log(mov);
+      //     setSaveMovies(
+      //       mov.filter((o) => o.owner === currentUser._id)
+      //     );
+      //   })
+      // )
+      // .then(console.log(saveMovies))
 
-        if (hasIdAndOwner) {
-          mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
-            setSaveMovies((movies) =>
-              movies.filter((c) => c._id !== hasIdAndOwner._id)
-            );
-          });
+      // console.log(movie);
+      // const saveMovie1 = []
+      // const arr = () => {saveMovies.map((c) => (c.movieId === movie.id ? console.log(movie) :console.log(c))) };
+      // arr()
+    }
 
-          return;
-        }
-        mainApi.postInitialMovies(movie);
-      })
-      .catch(handleError);
+    // mainApi
+    //   .getInitialMovies()
+    //   .then((arr) => {
+    //     let hasIdAndOwner = arr.find(
+    //       (o) =>
+    //         o.movieId === (movie.id || movie.movieId) &&
+    //         o.owner === currentUser._id
+    //     );
+
+    //     if (hasIdAndOwner) {
+    //       mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
+    //         setSaveMovies((movies) =>
+    //           movies.filter((c) => c._id !== hasIdAndOwner._id)
+    //         );
+    //       });
+
+    //       return;
+    //     }
+    //     mainApi.postInitialMovies(movie);
+    //   })
+    //   .catch(handleError);
   }
 
   const handleChange = () => {

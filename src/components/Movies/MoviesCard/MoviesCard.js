@@ -7,6 +7,7 @@ function MoviesCard(props) {
     props.onCardClick(props.movie);
   };
   const currentUser = React.useContext(CurrentUserContext);
+
   const isSaved = props.savedMovies.find(
     (o) => o.movieId === props.movie.id && o.owner === currentUser._id
   );
