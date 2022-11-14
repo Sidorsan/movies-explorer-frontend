@@ -61,16 +61,16 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  useEffect(() => {
-    location.pathname === "/" ||
-    location.pathname === "/movies" ||
-    location.pathname === "/saved-movies" ||
-    location.pathname === "/signin" ||
-    location.pathname === "/signup" ||
-    location.pathname === "/profile"
-      ? console.log()
-      : handleError()
-  }, [location]);
+  // useEffect(() => {
+  //   location.pathname === "/" ||
+  //   location.pathname === "/movies" ||
+  //   location.pathname === "/saved-movies" ||
+  //   location.pathname === "/signin" ||
+  //   location.pathname === "/signup" ||
+  //   location.pathname === "/profile"
+  //     ? console.log("yes")
+  //     : handleError()
+  // }, [location]);
 
   const handleError = () => {
     setDataPopapNotFound({
@@ -80,6 +80,8 @@ function App() {
     });
     setIsPopapNotFoundOpen(!isPopapNotFoundOpen);
   };
+
+
 
   function closeAllPopups() {
     setIsPopapNotFoundOpen(false);
@@ -185,14 +187,12 @@ function App() {
             );
           });
 
-          return
+          return;
         }
         mainApi.postInitialMovies(movie);
-
       })
       .catch(handleError);
   }
-
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
@@ -347,7 +347,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <>
         {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
-
           <Header />
         ) : null}
         <Switch>
@@ -382,7 +381,7 @@ function App() {
             loggedIn={loggedIn}
             movies={movies}
             onCardClick={handleCardClick}
-            handleError={handleError}
+            // handleError={handleError}
             isNotFound={isNotFound}
             onSubmitForm={onSubmitForm}
             handleAddButton={handleAddButton}
