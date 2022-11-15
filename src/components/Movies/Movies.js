@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import mainApi from "../../utils/MainApi";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import FilterCheckbox from "../Movies/SearchForm/FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";

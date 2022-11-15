@@ -69,16 +69,16 @@ function App() {
     location.pathname === "/signup" ||
     location.pathname === "/profile"
       ? console.log()
-      : handleError()
+      : handleError();
   }, [location]);
-console.log(isPopapNotFoundOpen);
+
   const handleError = () => {
     setDataPopapNotFound({
       title: "404",
       subtitle: "Страница не найдена",
       buttonTitle: "Назад",
     });
-    setIsPopapNotFoundOpen(!isPopapNotFoundOpen);
+    setIsPopapNotFoundOpen(true);
   };
 
   function closeAllPopups() {
@@ -174,11 +174,14 @@ console.log(isPopapNotFoundOpen);
         o.movieId === (movie.id || movie.movieId) && o.owner === currentUser._id
     );
     if (hasIdAndOwner) {
-      mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
-        setSaveMovies((newMovies) =>
-          newMovies.filter((c) => c._id !== hasIdAndOwner._id)
-        );
-      });
+      mainApi
+        .deleteMovies(hasIdAndOwner._id)
+        .then(() => {
+          setSaveMovies((newMovies) =>
+            newMovies.filter((c) => c._id !== hasIdAndOwner._id)
+          );
+        })
+        .catch(handleError);
       return;
     } else {
       mainApi
