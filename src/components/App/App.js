@@ -61,17 +61,17 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  // useEffect(() => {
-  //   location.pathname === "/" ||
-  //   location.pathname === "/movies" ||
-  //   location.pathname === "/saved-movies" ||
-  //   location.pathname === "/signin" ||
-  //   location.pathname === "/signup" ||
-  //   location.pathname === "/profile"
-  //     ? console.log("yes")
-  //     : handleError()
-  // }, [location]);
-
+  useEffect(() => {
+    location.pathname === "/" ||
+    location.pathname === "/movies" ||
+    location.pathname === "/saved-movies" ||
+    location.pathname === "/signin" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/profile"
+      ? console.log()
+      : handleError()
+  }, [location]);
+console.log(isPopapNotFoundOpen);
   const handleError = () => {
     setDataPopapNotFound({
       title: "404",
@@ -139,8 +139,6 @@ function App() {
     }
   }, [currentUser]);
 
-
-
   useEffect(() => {
     if (localStorage.getItem("visibleMovies")) {
       setIsLoading(true);
@@ -177,58 +175,22 @@ function App() {
     );
     if (hasIdAndOwner) {
       mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
-        setSaveMovies((movies) =>
-          movies.filter((c) => c._id !== hasIdAndOwner._id)
+        setSaveMovies((newMovies) =>
+          newMovies.filter((c) => c._id !== hasIdAndOwner._id)
         );
       });
-      // return;
+      return;
     } else {
       mainApi
         .postInitialMovies(movie)
-        .then(
-          mainApi.getInitialMovies().then((movies) => {
-            setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
-          })
-        )
+        .then((newMovie) => {
+          setMovies((newCards) =>
+            newCards.map((c) => (c === newMovie.movieId ? newMovie.movieId : c))
+          );
+          setSaveMovies([...saveMovies, newMovie]);
+        })
         .catch(handleError);
-      // setSaveMovies(saveMovies.map((c) => (c.movieId === movie.id ? movie :c)) )
-      // .then(
-      //   mainApi.getInitialMovies().then((mov) => {
-      //     console.log(mov);
-      //     setSaveMovies(
-      //       mov.filter((o) => o.owner === currentUser._id)
-      //     );
-      //   })
-      // )
-      // .then(console.log(saveMovies))
-
-      // console.log(movie);
-      // const saveMovie1 = []
-      // const arr = () => {saveMovies.map((c) => (c.movieId === movie.id ? console.log(movie) :console.log(c))) };
-      // arr()
     }
-
-    // mainApi
-    //   .getInitialMovies()
-    //   .then((arr) => {
-    //     let hasIdAndOwner = arr.find(
-    //       (o) =>
-    //         o.movieId === (movie.id || movie.movieId) &&
-    //         o.owner === currentUser._id
-    //     );
-
-    //     if (hasIdAndOwner) {
-    //       mainApi.deleteMovies(hasIdAndOwner._id).then(() => {
-    //         setSaveMovies((movies) =>
-    //           movies.filter((c) => c._id !== hasIdAndOwner._id)
-    //         );
-    //       });
-
-    //       return;
-    //     }
-    //     mainApi.postInitialMovies(movie);
-    //   })
-    //   .catch(handleError);
   }
 
   const handleChange = () => {
