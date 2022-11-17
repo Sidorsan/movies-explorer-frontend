@@ -1,7 +1,8 @@
 import logo from "../../images/logoDiploma.svg";
 import accaunt from "../../images/accaunt.svg";
-
+import { useLocation } from "react-router-dom";
 function Navigation(props) {
+  let location = useLocation();
   return (
     <div className="navigation">
       <a href="/">
@@ -13,7 +14,7 @@ function Navigation(props) {
         <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line2"></span>
         <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line3"></span>
       </div>
-      <div className="navigation__panel">
+      <div className="navigation__panel" >
         <ul className="navigation__panel_menu">
           <li className="navigation__panel_menu_links">
             <a className="navigation__panel_menu_link" href="/">

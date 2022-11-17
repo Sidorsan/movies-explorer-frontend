@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import logo from "../../images/logoDiploma.svg";
 import Form from "../Form/Form";
 
+
 const Register = ({ onRegister }) => {
   const [values, setValues] = React.useState({
     firstName: "",
@@ -16,7 +17,14 @@ const Register = ({ onRegister }) => {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
+    setErrors({
+      ...errors,
+      [name]:
+        target.validationMessage === "Введите данные в указанном формате."
+          ? "Введеные символы не соответствуют Email"
+          : target.validationMessage,
+    });
+
     setIsValid(target.closest("form").checkValidity());
   };
 
@@ -87,8 +95,8 @@ const Register = ({ onRegister }) => {
             name="email"
             type="email"
             onChange={handleChange}
+            pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
             required
-            // pattern="^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i"
           />
           <span>
             <p className="form__input_errorState">{errors.email}</p>

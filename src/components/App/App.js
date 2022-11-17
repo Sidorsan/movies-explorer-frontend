@@ -45,6 +45,7 @@ function App() {
     }
   };
   const [saveMovies, setSaveMovies] = useState([]);
+  const [saveMoviesVisible, setSaveMoviesVisible] = useState([]);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = useState([]);
@@ -89,9 +90,9 @@ function App() {
     auth
       .authorize({ email, password })
       .then((data) => {
-        if (!data) {
-          return handleError;
-        }
+        // if (!data) {
+        //   return handleError;
+        // }
         if (data) {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
@@ -99,7 +100,11 @@ function App() {
         }
       })
       .then(handleTokenCheck)
-      .catch(handleError);
+      .catch((error) =>
+        error === "Ошибка: 401"
+          ? alert("Не верно введен адрес или пароль")
+          : handleError()
+      );
   };
 
   const handleLoginUpdate = ({ firstName, email }) => {
@@ -130,11 +135,14 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
+      setIsLoading(true);
       mainApi
         .getInitialMovies()
         .then((movies) => {
           setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
+          setIsLoading(false);
         })
+
         .catch(handleError);
     }
   }, [currentUser]);
@@ -162,10 +170,17 @@ function App() {
   const handleRegister = ({ password, email, firstName }) => {
     auth
       .register({ password, email, firstName })
-      .then(() => {
-        handleLogin({ email, password });
+      .then((data) => {
+        if (data) {
+          handleLogin({ email, password });
+        }
       })
-      .catch(handleError);
+
+      .catch((error) =>
+        error === "Ошибка: 409"
+          ? alert("Пользователь с таким Email уже зарегистрирован")
+          : handleError()
+      );
   };
 
   function handleCardClick(movie) {
@@ -195,10 +210,20 @@ function App() {
         .catch(handleError);
     }
   }
+  console.log(saveMovies);
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
   };
+
+  useEffect(() => {
+    if (localStorage.search) {
+      moviesFiltered(
+        location.pathname === "/movies" ? loadMovies : saveMovies,
+        JSON.parse(localStorage.search)
+      );
+    }
+  }, [checkedShotFilms]);
 
   const handleErrorNotFound = () => {
     setIsNotFound({
@@ -211,7 +236,6 @@ function App() {
   const onSubmitForm = (search) => {
     if (location.pathname === "/movies") {
       let allMovies = JSON.parse(localStorage.getItem("allMovies"));
-      setIsLoading(true);
 
       if (!allMovies) {
         moviesApi
@@ -250,6 +274,7 @@ function App() {
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
   };
+
   const handleAddButton = () => {
     if (windowWidth > 1279) {
       let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
@@ -297,7 +322,8 @@ function App() {
           JSON.stringify(shotFilteredMovies)
         );
         displayedMoviesChange();
-        localStorage.setItem("search", search.film);
+        // localStorage.setItem("search", search.film);
+        localStorage.search = JSON.stringify({ film: search.film });
         localStorage.setItem(
           "checkedShotFilms",
           JSON.stringify(checkedShotFilms)
@@ -306,6 +332,7 @@ function App() {
         return;
       } else {
         setSaveMovies(shotFilteredMovies);
+        // setMovies(shotFilteredMovies);
         setIsNotFound(false);
         localStorage.setItem(
           "checkedShotFilms",
@@ -316,15 +343,19 @@ function App() {
     }
     if (location.pathname === "/movies") {
       localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
-      localStorage.setItem("search", search.film);
+      // localStorage.setItem("search", search.film);
+      localStorage.search = JSON.stringify({ film: search.film });
       localStorage.setItem(
         "checkedShotFilms",
         JSON.stringify(checkedShotFilms)
       );
       setIsNotFound(false);
       displayedMoviesChange();
+      return;
     } else {
+      console.log(filteredMovies);
       setSaveMovies(filteredMovies);
+      // setMovies(filteredMovies);
       setIsNotFound(false);
       localStorage.setItem(
         "checkedShotFilms",
@@ -332,6 +363,8 @@ function App() {
       );
     }
   };
+
+
   const handleLogOut = () => {
     history.push("/");
     localStorage.removeItem("jwt");
@@ -349,7 +382,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <>
         {location.pathname !== "/signin" && location.pathname !== "/signup" ? (
-          <Header />
+          <Header loggedIn={loggedIn} />
         ) : null}
         <Switch>
           <Route exact path="/">

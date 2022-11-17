@@ -6,11 +6,8 @@ function MoviesCardList({
   onCardClick,
   movies,
   isLoading,
-  loggedIn,
-  onSubmit,
   isNotFound,
   savedMovies,
-
 }) {
   return (
     <div className="moviesCardList">

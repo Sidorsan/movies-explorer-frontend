@@ -12,7 +12,13 @@ const Login = ({ onLogin }) => {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
+    setErrors({
+      ...errors,
+      [name]:
+        target.validationMessage === "Введите данные в указанном формате."
+          ? "Введеные символы не соответствуют Email"
+          : target.validationMessage,
+    });
     setIsValid(target.closest("form").checkValidity());
   };
 
@@ -52,6 +58,7 @@ const Login = ({ onLogin }) => {
             name="email"
             type="email"
             onChange={handleChange}
+            pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
             required
           />
           <span>

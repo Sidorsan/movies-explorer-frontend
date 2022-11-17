@@ -12,7 +12,6 @@ const Movies = ({
   handleAddButton,
   handleChange,
   savedMovies,
-
 }) => {
 
   const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);

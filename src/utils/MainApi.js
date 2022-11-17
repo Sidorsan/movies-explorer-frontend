@@ -12,7 +12,6 @@ class MainApi {
 
   getInitialUser() {
     return fetch(`https://${this._baseUrl}/users/me`, {
-
     // return fetch(`http://${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
@@ -74,6 +73,7 @@ class MainApi {
 
   patchUser({ firstName, email }) {
     return fetch(`https://${this._baseUrl}/users/me`, {
+    // return fetch(`http://${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
