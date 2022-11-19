@@ -331,7 +331,6 @@ function App() {
   };
 
   const moviesFiltered = (data, search) => {
-    console.log(search);
     const filteredMovies = data.filter((movie) =>
       filterBySimbols(movie, search.film)
     );
