@@ -190,7 +190,7 @@ function App() {
 
       .catch((error) =>
         error.status === 409
-          ? alert("Пользователь с таким Email уже зарегистрирован")
+          ? alert("Пользователь уже зарегистрирован")
           : handleError(error)
       );
   };
