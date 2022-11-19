@@ -17,19 +17,20 @@ function MoviesCard(props) {
   } ${
     location.pathname === "/saved-movies" ? "moviesCard__Button_delite" : " "
   }`;
-
   return (
     <li className="moviesCard">
-      <img
+      <a href={props.movie.trailerLink} target="_ blank">
+        <img
+          src={
+            props.movie.image.url
+              ? `https://api.nomoreparties.co${props.movie.image.url}`
+              : props.movie.image
+          }
+          alt={props.movie.description}
+          className="moviesCard__image"
+        />
+      </a>
 
-        src={
-          props.movie.image.url
-            ? `https://api.nomoreparties.co${props.movie.image.url}`
-            : props.movie.image
-        }
-        alt={props.movie.description}
-        className="moviesCard__image"
-      />
       <div className="moviesCard__Content">
         <h2 className="moviesCard__title">{props.movie.nameRU}</h2>
         <button

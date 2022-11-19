@@ -12,6 +12,7 @@ const SavedMovies = ({
   onSubmitForm,
   isNotFound,
   handleChange,
+  savedMoviesVisible
 }) => {
   return (
     <>
@@ -21,7 +22,7 @@ const SavedMovies = ({
           <FilterCheckbox onChange={handleChange} />
         </div>
         <MoviesCardList
-          movies={savedMovies}
+          movies={savedMoviesVisible}
           isLoading={isLoading}
           onCardClick={onCardClick}
           loggedIn={loggedIn}

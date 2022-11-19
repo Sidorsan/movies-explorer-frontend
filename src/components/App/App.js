@@ -21,14 +21,20 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
+import { MovieDurationShotFilm } from "../Constant/Constant";
+import { QuantityMoviesAddButtonScreenResolutionMore1279 } from "../Constant/Constant";
+import { QuantityMoviesAddButtonScreenResolutionLess1279 } from "../Constant/Constant";
+import { QuantityVisibleMoviesScreenResolutionMore319 } from "../Constant/Constant";
+import { QuantityVisibleMoviesScreenResolutionMore767 } from "../Constant/Constant";
+import { QuantityVisibleMoviesScreenResolutionMore1279 } from "../Constant/Constant";
 
 function App() {
   let location = useLocation();
   const [isPopapNotFoundOpen, setIsPopapNotFoundOpen] = useState(false);
   const [dataPopapNotFound, setDataPopapNotFound] = useState({
-    title: "",
-    subtitle: "",
-    buttonTitle: "",
+    title: "404",
+    subtitle: "Страница не найдена",
+    buttonTitle: "Назад",
   });
 
   const [currentUser, setCurrentUser] = useState({});
@@ -40,9 +46,17 @@ function App() {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth.checkToken(jwt).then(setLoggedIn(true)).catch(handleError);
+      auth
+        .checkToken(jwt)
+        .then(setLoggedIn(true))
+        .catch((error) => {
+          handleError(error);
+          handleLogOut();
+        });
       history.push(location.pathname);
+      return;
     }
+    handleLogOut();
   };
   const [saveMovies, setSaveMovies] = useState([]);
   const [saveMoviesVisible, setSaveMoviesVisible] = useState([]);
@@ -70,13 +84,19 @@ function App() {
     location.pathname === "/signup" ||
     location.pathname === "/profile"
       ? console.log()
-      : handleError();
+      : handleError({
+          title: "404",
+          subtitle: "Страница не существует",
+          buttonTitle: "Назад",
+        });
   }, [location]);
 
-  const handleError = () => {
+  const handleError = (props) => {
     setDataPopapNotFound({
-      title: "404",
-      subtitle: "Страница не найдена",
+      title: `${props.status ? props.status : "404"}`,
+      subtitle: `${
+        props.statusText ? props.statusText : "Страница не найдена"
+      }`,
       buttonTitle: "Назад",
     });
     setIsPopapNotFoundOpen(true);
@@ -90,9 +110,6 @@ function App() {
     auth
       .authorize({ email, password })
       .then((data) => {
-        // if (!data) {
-        //   return handleError;
-        // }
         if (data) {
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("userEmail", email);
@@ -101,9 +118,9 @@ function App() {
       })
       .then(handleTokenCheck)
       .catch((error) =>
-        error === "Ошибка: 401"
-          ? alert("Не верно введен адрес или пароль")
-          : handleError()
+        error.status === 401
+          ? alert("Пользователь не найден или не зарегистрирован")
+          : handleError(error)
       );
   };
 
@@ -111,15 +128,12 @@ function App() {
     mainApi
       .patchUser({ firstName, email })
       .then((data) => {
-        if (!data) {
-          return handleError;
-        }
         if (data) {
           localStorage.setItem("userEmail", email);
           alert("Данные успешно изменены");
         }
       })
-      .catch(handleError);
+      .catch((error) => handleError(error));
   };
 
   useEffect(() => {
@@ -129,7 +143,7 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
         })
-        .catch(handleError);
+        .catch((error) => handleError(error));
     }
   }, [loggedIn]);
 
@@ -139,11 +153,13 @@ function App() {
       mainApi
         .getInitialMovies()
         .then((movies) => {
-          setSaveMovies(movies.filter((o) => o.owner === currentUser._id));
+          const arr = movies.filter((o) => o.owner === currentUser._id);
+          setSaveMovies(arr);
+          setSaveMoviesVisible(arr);
           setIsLoading(false);
         })
 
-        .catch(handleError);
+        .catch((error) => handleError(error));
     }
   }, [currentUser]);
 
@@ -177,9 +193,9 @@ function App() {
       })
 
       .catch((error) =>
-        error === "Ошибка: 409"
+        error.status === 409
           ? alert("Пользователь с таким Email уже зарегистрирован")
-          : handleError()
+          : handleError(error)
       );
   };
 
@@ -192,11 +208,11 @@ function App() {
       mainApi
         .deleteMovies(hasIdAndOwner._id)
         .then(() => {
-          setSaveMovies((newMovies) =>
-            newMovies.filter((c) => c._id !== hasIdAndOwner._id)
-          );
+          let arr = saveMovies.filter((c) => c._id !== hasIdAndOwner._id);
+          setSaveMovies(arr);
+          setSaveMoviesVisible(arr);
         })
-        .catch(handleError);
+        .catch((error) => handleError(error));
       return;
     } else {
       mainApi
@@ -205,24 +221,23 @@ function App() {
           setMovies((newCards) =>
             newCards.map((c) => (c === newMovie.movieId ? newMovie.movieId : c))
           );
-          setSaveMovies([...saveMovies, newMovie]);
+          let arr = [...saveMovies, newMovie];
+          setSaveMovies(arr);
+          setSaveMoviesVisible(arr);
         })
-        .catch(handleError);
+        .catch((error) => handleError(error));
     }
   }
-  console.log(saveMovies);
 
   const handleChange = () => {
     setCheckedShotFilms(!checkedShotFilms);
   };
 
   useEffect(() => {
-    if (localStorage.search) {
-      moviesFiltered(
-        location.pathname === "/movies" ? loadMovies : saveMovies,
-        JSON.parse(localStorage.search)
-      );
-    }
+    if (localStorage.search)
+      if (location.pathname === "/movies") {
+        moviesFiltered(loadMovies, JSON.parse(localStorage.search));
+      }
   }, [checkedShotFilms]);
 
   const handleErrorNotFound = () => {
@@ -234,8 +249,9 @@ function App() {
   };
 
   const onSubmitForm = (search) => {
+    setIsLoading(true);
     if (location.pathname === "/movies") {
-      let allMovies = JSON.parse(localStorage.getItem("allMovies"));
+      const allMovies = JSON.parse(localStorage.getItem("allMovies"));
 
       if (!allMovies) {
         moviesApi
@@ -254,22 +270,32 @@ function App() {
       return;
     } else {
       moviesFiltered(saveMovies, search);
+      setIsLoading(false);
     }
   };
 
   const displayedMoviesChange = () => {
     if (windowWidth > 319) {
-      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 5);
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
+        0,
+        QuantityVisibleMoviesScreenResolutionMore319
+      );
       setMovies(arr);
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
     if (windowWidth > 767) {
-      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 8);
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
+        0,
+        QuantityVisibleMoviesScreenResolutionMore767
+      );
       setMovies(arr);
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
     if (windowWidth > 1279) {
-      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(0, 12);
+      let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
+        0,
+        QuantityVisibleMoviesScreenResolutionMore1279
+      );
       setMovies(arr);
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     }
@@ -279,14 +305,14 @@ function App() {
     if (windowWidth > 1279) {
       let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
         0,
-        movies.length + 3
+        movies.length + QuantityMoviesAddButtonScreenResolutionMore1279
       );
       setMovies(arr);
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
     } else {
       let arr = JSON.parse(localStorage.getItem("filteredMovies")).slice(
         0,
-        movies.length + 2
+        movies.length + QuantityMoviesAddButtonScreenResolutionLess1279
       );
       setMovies(arr);
       localStorage.setItem("visibleMovies", JSON.stringify(arr));
@@ -306,14 +332,25 @@ function App() {
     );
     if (filteredMovies.length === 0) {
       setIsNotFound({ title: "Ничего не найдено" });
+      if (location.pathname === "/movies") {
+        localStorage.removeItem("search");
+        localStorage.removeItem("filteredMovies");
+        localStorage.removeItem("visibleMovies");
+      }
+
       return;
     }
     if (checkedShotFilms) {
       const shotFilteredMovies = filteredMovies.filter(
-        (movie) => movie.duration <= 40
+        (movie) => movie.duration <= MovieDurationShotFilm
       );
       if (shotFilteredMovies.length === 0) {
         setIsNotFound({ title: "Ничего не найдено" });
+        if (location.pathname === "/movies") {
+          localStorage.removeItem("search");
+          localStorage.removeItem("filteredMovies");
+          localStorage.removeItem("visibleMovies");
+        }
         return;
       }
       if (location.pathname === "/movies") {
@@ -322,7 +359,6 @@ function App() {
           JSON.stringify(shotFilteredMovies)
         );
         displayedMoviesChange();
-        // localStorage.setItem("search", search.film);
         localStorage.search = JSON.stringify({ film: search.film });
         localStorage.setItem(
           "checkedShotFilms",
@@ -331,8 +367,7 @@ function App() {
         setIsNotFound(false);
         return;
       } else {
-        setSaveMovies(shotFilteredMovies);
-        // setMovies(shotFilteredMovies);
+        setSaveMoviesVisible(shotFilteredMovies);
         setIsNotFound(false);
         localStorage.setItem(
           "checkedShotFilms",
@@ -343,7 +378,6 @@ function App() {
     }
     if (location.pathname === "/movies") {
       localStorage.setItem("filteredMovies", JSON.stringify(filteredMovies));
-      // localStorage.setItem("search", search.film);
       localStorage.search = JSON.stringify({ film: search.film });
       localStorage.setItem(
         "checkedShotFilms",
@@ -353,9 +387,7 @@ function App() {
       displayedMoviesChange();
       return;
     } else {
-      console.log(filteredMovies);
-      setSaveMovies(filteredMovies);
-      // setMovies(filteredMovies);
+      setSaveMoviesVisible(filteredMovies);
       setIsNotFound(false);
       localStorage.setItem(
         "checkedShotFilms",
@@ -363,8 +395,6 @@ function App() {
       );
     }
   };
-
-
   const handleLogOut = () => {
     history.push("/");
     localStorage.removeItem("jwt");
@@ -402,6 +432,7 @@ function App() {
               <Login onLogin={handleLogin} />
             )}
           </Route>
+
           <ProtectedRoute
             path="/profile"
             component={Profile}
@@ -416,7 +447,6 @@ function App() {
             loggedIn={loggedIn}
             movies={movies}
             onCardClick={handleCardClick}
-            // handleError={handleError}
             isNotFound={isNotFound}
             onSubmitForm={onSubmitForm}
             handleAddButton={handleAddButton}
@@ -427,6 +457,7 @@ function App() {
             path="/saved-movies"
             component={SavedMovies}
             savedMovies={saveMovies}
+            savedMoviesVisible={saveMoviesVisible}
             onCardClick={handleCardClick}
             loggedIn={loggedIn}
             onSubmitForm={onSubmitForm}

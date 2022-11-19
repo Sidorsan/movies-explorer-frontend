@@ -19,10 +19,7 @@ const Register = ({ onRegister }) => {
     setValues({ ...values, [name]: value });
     setErrors({
       ...errors,
-      [name]:
-        target.validationMessage === "Введите данные в указанном формате."
-          ? "Введеные символы не соответствуют Email"
-          : target.validationMessage,
+      [name]: target.validationMessage,
     });
 
     setIsValid(target.closest("form").checkValidity());
@@ -99,7 +96,12 @@ const Register = ({ onRegister }) => {
             required
           />
           <span>
-            <p className="form__input_errorState">{errors.email}</p>
+            <p className="form__input_errorState">
+              {errors.email === "Введите данные в указанном формате."
+                ? "Введеные символы не соответствуют Email"
+                : errors.email}
+            </p>
+
           </span>
         </section>
         <section className="form__section">

@@ -31,10 +31,7 @@ const Profile = ({ onLogin, logOut }) => {
     setValues({ ...values, [name]: value });
     setErrors({
       ...errors,
-      [name]:
-        target.validationMessage === "Введите данные в указанном формате."
-          ? "Введеные символы не соответствуют Email"
-          : target.validationMessage,
+      [name]: target.validationMessage,
     });
     setIsValid(target.closest("form").checkValidity());
   };
@@ -68,7 +65,7 @@ const Profile = ({ onLogin, logOut }) => {
             className="form__input form__input_profile"
             id="firstName"
             name="firstName"
-            type="firstName"
+            // type="firstName"
             onChange={handleChange}
             required
             minLength="2"
@@ -99,8 +96,10 @@ const Profile = ({ onLogin, logOut }) => {
             required
           />
           <span>
-            <p className="form__input_errorState form__input_errorState_profile">
-              {errors.email}
+            <p className="form__input_errorState">
+              {errors.email === "Введите данные в указанном формате."
+                ? "Введеные символы не соответствуют Email"
+                : errors.email}
             </p>
           </span>
         </section>
