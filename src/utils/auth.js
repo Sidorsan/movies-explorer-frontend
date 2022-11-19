@@ -1,8 +1,12 @@
 export const BASE_URL = "https://api.sidorsan.diploma.nomoredomains.sbs";
+// export const BASE_URL = "http://localhost:3001";
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
-    : Promise.reject(console.log(`Ошибка: ${response.status}`));
+   : Promise.reject(response);
+      // : Promise.reject((`Ошибка: ${response.status}`));
+      // Promise.reject(console.log(`${response.statusText}`));
+
 };
 
 export const register = ({ password, email, firstName }) => {

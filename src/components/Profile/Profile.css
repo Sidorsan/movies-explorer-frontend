@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   color: #FFFFFF;
-  margin: 70px 30px 0;
+  padding: 70px 30px 0;
+  background: #202020;
 
 }
 
@@ -16,12 +17,12 @@
 
 @media screen and (min-width: 768px) {
   .profile {
-    margin: 236px 179px 0;
+    padding: 236px 179px 0;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .profile {
-    margin: 74px 235px 0;
+    padding: 74px 235px 0;
   }
 }

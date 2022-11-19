@@ -16,7 +16,11 @@
   align-items: center;
   position: relative;
   width: 100%;
-  }
+}
+
+.searchForm__submitButton_notActiv {
+  opacity: 0.5;
+}
 
 .searchForm__input {
   font-weight: 400;
@@ -77,9 +81,11 @@
   .searchForm__submitButton {
     margin: 0 19px 0 0;
   }
-.searchForm__submitButton:hover {
-  opacity: 0.5;
-}
+
+  .searchForm__submitButton:hover {
+    opacity: 0.5;
+  }
+
   .searchForm__form {
     border-right: 1px solid#505050;
   }

@@ -1,38 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useCallback } from "react";
 import logo from "../../images/logoDiploma.svg";
-import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 
 const Login = ({ onLogin }) => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [values, setValues] = useState({ email: "", password: "" });
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({
+      ...errors,
+      [name]: target.validationMessage,
     });
+    setIsValid(target.closest("form").checkValidity());
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = data;
-  //   if (!email || !password) {
-  //     return;
-  //   }
-  //   onLogin({ email, password });
-  // };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const { password, email } = data;
-    onLogin({ email, password });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    {
+      const { password, email } = values;
+      onLogin({ password, email });
+    }
   };
 
   return (
@@ -47,10 +39,11 @@ const Login = ({ onLogin }) => {
       <Form
         name="login"
         buttonSubmitTitle="Войти"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         questionAboutRegistration="Ещё не зарегистрированы?"
         link="signup"
         linkTitle="Регистрация"
+        isValid={isValid}
       >
         <section className="form__section">
           {" "}
@@ -61,18 +54,16 @@ const Login = ({ onLogin }) => {
             id="email"
             name="email"
             type="email"
-            // value={data.email}
             onChange={handleChange}
-            {...register("email", {
-              required: true,
-            })}
+            pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+            required
           />
           <span>
-            {errors?.email?.type === "required" && (
-              <p className="form__input_errorState">
-                Это поле необходимо заполнить
-              </p>
-            )}
+            <p className="form__input_errorState">
+              {errors.email === "Введите данные в указанном формате."
+                ? "Введеные символы не соответствуют Email"
+                : errors.email}
+            </p>
           </span>
         </section>
         <section className="form__section">
@@ -83,23 +74,13 @@ const Login = ({ onLogin }) => {
             id="password"
             name="password"
             type="password"
-            // value={data.password}
             onChange={handleChange}
-            {...register("password", {
-              required: true,
-              minLength: 8,
-            })}
+            required
+            minLength="8"
           />
-          {errors?.password?.type === "required" && (
-            <p className="form__input_errorState">
-              Это поле необходимо заполнить
-            </p>
-          )}
-          {errors?.password?.type === "minLength" && (
-            <p className="form__input_errorState">
-              Пароль не может быть меньше 8 символов
-            </p>
-          )}
+          <span>
+            <p className="form__input_errorState">{errors.password}</p>
+          </span>
         </section>
       </Form>
     </section>

@@ -105,10 +105,14 @@
   cursor: pointer;
 }
 
+.form__submitButton_notActive {
+  opacity: 0.5;
+}
+
 .form__submitButton_profile {
   margin: 379px auto 0;
   color: #FFFFFF;
-  background-color: #202020;
+  background: none;
   border: none;
   cursor: pointer;
   font-weight: 400;
@@ -146,7 +150,7 @@
 
 .form__link_profile {
   color: #EE3465;
-  background-color: #202020;
+  background:none;
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -185,10 +189,16 @@
     width: 80%;
   }
 
+  .form__submitButton {
+    width: 396px;
+    height: 45px;
+  }
+
   .form__submitButton_profile {
     margin-top: 210px;
     font-size: 13px;
     line-height: 16px;
+    width: min-content;
   }
 
   .form__questionAboutRegistration_profile {
@@ -208,10 +218,7 @@
     margin-top: 40px;
   }
 
-  .form__submitButton {
-    width: 396px;
-    height: 45px;
-  }
+
 
 }
 

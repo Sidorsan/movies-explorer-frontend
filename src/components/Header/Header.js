@@ -4,7 +4,7 @@ import logo from "../../images/logoDiploma.svg";
 import Navigation from "../Navigation/Navigation";
 import { Link, useLocation } from "react-router-dom";
 
-function Header(props) {
+function Header({ loggedIn }) {
   let location = useLocation();
 
   return (
@@ -14,23 +14,28 @@ function Header(props) {
       }`}
     >
       <Switch>
-        <Route exact path={["/profile", "/movies", "/saved-movies"]}>
-          <Navigation />
-        </Route>
-
-        <Route path="/">
-          <a href="/">
-            <img src={logo} alt="Логотип" className="header__logo" />
-          </a>
-          <Link
-            className="header__link header__link_registration "
-            to={"/signup"}
-          >
-            Регистрация
-          </Link>
-          <Link to={"/signin"}>
-            <button className="header__link header__link_enter">Войти</button>
-          </Link>
+        {/* <Route exact path={["/profile", "/movies", "/saved-movies"]}> */}
+        <Route>
+          {loggedIn ? (
+            <Navigation />
+          ) : (
+            <Route path="/">
+              <a href="/">
+                <img src={logo} alt="Логотип" className="header__logo" />
+              </a>
+              <Link
+                className="header__link header__link_registration "
+                to={"/signup"}
+              >
+                Регистрация
+              </Link>
+              <Link to={"/signin"}>
+                <button className="header__link header__link_enter">
+                  Войти
+                </button>
+              </Link>
+            </Route>
+          )}
         </Route>
       </Switch>
     </header>

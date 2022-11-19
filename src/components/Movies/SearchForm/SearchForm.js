@@ -1,61 +1,73 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import find from "../../../images/find.svg";
-import findInInput from "../../../images/findInInput.svg";
-import Form from "../../Form/Form";
-const Movies = () => {
-  const [data, setData] = useState({
-    film: ""
-  });
+const SearchForm = ({ onSubmit }) => {
+  let location = useLocation();
+  const [values, setValues] = React.useState(localStorage.search
+    ? JSON.parse(localStorage.search)
+    : "");
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(
+    localStorage.getItem("search") ? true : false
+  );
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({
+      ...errors,
+      [name]: target.validationMessage,
     });
+       setIsValid(target.closest(".searchForm__form").checkValidity());
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    const { film } = data;
-    console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    {
+      const { film } = values;
+      onSubmit({ film });
+    }
   };
+
+
+
+  const searchFromLocalStorage = localStorage.search
+    ? JSON.parse(localStorage.search).film
+    : "";
+
   return (
     <div className="searchForm">
-      <form onSubmit={handleSubmit(onSubmit)} className="searchForm__form">
+      <form
+        onSubmit={handleSubmit}
+        className="searchForm__form"
+        name="searchForm__form"
+      >
         <input
           className="searchForm__input"
           placeholder="Фильм"
           id="film"
           name="film"
           onChange={handleChange}
-          {...register("film", {
-            required: true,
-          })}
+          defaultValue={searchFromLocalStorage}
+          required
         />
         <span>
-          {errors?.film?.type === "required" && (
-            <p className="searchForm__errorState">Введите название фильма</p>
-          )}
+          <p className="searchForm__errorState">{errors.film}</p>
         </span>
 
         <button
           type="submit"
-          // onSubmit={handleSubmit}
-          className="searchForm__submitButton"
+          className={`searchForm__submitButton ${
+            !isValid ? "searchForm__submitButton_notActiv" : ""
+          }`}
+          disabled={!isValid ? true : false}
         >
           <img src={find} alt="Лупа" />
         </button>
       </form>
-
     </div>
   );
 };
-export default Movies;
+export default SearchForm;
