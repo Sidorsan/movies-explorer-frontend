@@ -3,7 +3,9 @@ import { useLocation } from "react-router-dom";
 import find from "../../../images/find.svg";
 const SearchForm = ({ onSubmit }) => {
   let location = useLocation();
-  const [values, setValues] = React.useState({ film: "" });
+  const [values, setValues] = React.useState(localStorage.search
+    ? JSON.parse(localStorage.search)
+    : "");
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(
     localStorage.getItem("search") ? true : false
@@ -18,9 +20,7 @@ const SearchForm = ({ onSubmit }) => {
       ...errors,
       [name]: target.validationMessage,
     });
-    // console.log(target.closest(".searchForm__form"));
-
-    setIsValid(target.closest(".searchForm__form").checkValidity());
+       setIsValid(target.closest(".searchForm__form").checkValidity());
   };
 
   const handleSubmit = (e) => {
@@ -32,9 +32,11 @@ const SearchForm = ({ onSubmit }) => {
   };
 
 
+
   const searchFromLocalStorage = localStorage.search
     ? JSON.parse(localStorage.search).film
     : "";
+
   return (
     <div className="searchForm">
       <form
@@ -48,7 +50,7 @@ const SearchForm = ({ onSubmit }) => {
           id="film"
           name="film"
           onChange={handleChange}
-          defaultValue={searchFromLocalStorage || ""}
+          defaultValue={searchFromLocalStorage}
           required
         />
         <span>

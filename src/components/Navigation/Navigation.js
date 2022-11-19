@@ -1,6 +1,6 @@
 import logo from "../../images/logoDiploma.svg";
 import accaunt from "../../images/accaunt.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 function Navigation(props) {
   let location = useLocation();
   return (
@@ -14,7 +14,7 @@ function Navigation(props) {
         <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line2"></span>
         <span className="navigation__hamburger-lines_line navigation__hamburger-lines_line3"></span>
       </div>
-      <div className="navigation__panel" >
+      <div className="navigation__panel">
         <ul className="navigation__panel_menu">
           <li className="navigation__panel_menu_links">
             <a className="navigation__panel_menu_link" href="/">
@@ -22,20 +22,20 @@ function Navigation(props) {
             </a>
           </li>
           <li className="navigation__panel_menu_links">
-            <a className="navigation__panel_menu_link" href="/movies">
+            <Link className="navigation__panel_menu_link" to="/movies">
               Фильмы
-            </a>
+            </Link>
           </li>
           <li className="navigation__panel_menu_links">
-            <a className="navigation__panel_menu_link" href="/saved-movies">
+            <Link className="navigation__panel_menu_link" to="/saved-movies">
               Сохранённые фильмы
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="navigation__panel_accaunt">
-          <a className="navigation__panel_accaunt_link" href="/profile">
+          <Link className="navigation__panel_accaunt_link" to="/profile">
             Аккаунт
-          </a>
+          </Link>
           <img
             src={accaunt}
             alt="Аккаунт"

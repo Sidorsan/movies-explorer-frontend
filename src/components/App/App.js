@@ -38,11 +38,8 @@ function App() {
   });
 
   const [currentUser, setCurrentUser] = useState({});
-
   const [loggedIn, setLoggedIn] = useState(false);
-
   const history = useHistory();
-
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -60,7 +57,6 @@ function App() {
   };
   const [saveMovies, setSaveMovies] = useState([]);
   const [saveMoviesVisible, setSaveMoviesVisible] = useState([]);
-
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = useState([]);
   const [isNotFound, setIsNotFound] = React.useState(false);
@@ -83,7 +79,7 @@ function App() {
     location.pathname === "/signin" ||
     location.pathname === "/signup" ||
     location.pathname === "/profile"
-      ? console.log()
+      ? setIsNotFound(false)
       : handleError({
           title: "404",
           subtitle: "Страница не существует",
@@ -210,6 +206,13 @@ function App() {
         .then(() => {
           let arr = saveMovies.filter((c) => c._id !== hasIdAndOwner._id);
           setSaveMovies(arr);
+          if (checkedShotFilms) {
+            const newArr = arr.filter(
+              (m) => m.duration <= MovieDurationShotFilm
+            );
+            setSaveMoviesVisible(newArr);
+            return;
+          }
           setSaveMoviesVisible(arr);
         })
         .catch((error) => handleError(error));
@@ -239,6 +242,7 @@ function App() {
         moviesFiltered(loadMovies, JSON.parse(localStorage.search));
       }
   }, [checkedShotFilms]);
+  // console.log(JSON.parse(localStorage.search));
 
   const handleErrorNotFound = () => {
     setIsNotFound({
@@ -327,6 +331,7 @@ function App() {
   };
 
   const moviesFiltered = (data, search) => {
+    console.log(search);
     const filteredMovies = data.filter((movie) =>
       filterBySimbols(movie, search.film)
     );
@@ -359,6 +364,7 @@ function App() {
           JSON.stringify(shotFilteredMovies)
         );
         displayedMoviesChange();
+
         localStorage.search = JSON.stringify({ film: search.film });
         localStorage.setItem(
           "checkedShotFilms",
@@ -383,8 +389,9 @@ function App() {
         "checkedShotFilms",
         JSON.stringify(checkedShotFilms)
       );
-      setIsNotFound(false);
+
       displayedMoviesChange();
+      setIsNotFound(false);
       return;
     } else {
       setSaveMoviesVisible(filteredMovies);

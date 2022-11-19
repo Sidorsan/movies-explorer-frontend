@@ -14,7 +14,7 @@ const Movies = ({
   savedMovies,
 }) => {
 
-  const [isButtonAddVisble, setIsButtonAddVisble] = useState(true);
+  const [isButtonAddVisble, setIsButtonAddVisble] = useState(false);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("filteredMovies"))) {

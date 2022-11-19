@@ -47,6 +47,7 @@ const Profile = ({ onLogin, logOut }) => {
       <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
       <Form
         name="profile"
+        id="profile"
         buttonSubmitTitle="Редактировать"
         onSubmit={handleSubmit}
         questionAboutRegistration=""
