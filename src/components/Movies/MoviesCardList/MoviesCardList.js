@@ -4,31 +4,34 @@ import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList({
   onCardClick,
-  onCardDelete,
-  cards,
+  movies,
   isLoading,
-  loggedIn,
+  isNotFound,
+  savedMovies,
 }) {
   return (
     <div className="moviesCardList">
       <ul className="moviesCardList__container">
-        {/* поменять местами Preloader и cards.map */}
-        {isLoading ? (
-          cards.map((card) => (
+        {
+          isLoading ? (
+          <Preloader />
+        ) : isNotFound ? (
+          <p className="notFoundTitle">{isNotFound.title}</p>
+            ) :
+              (
+              movies.map((movie) => (
+
             <MoviesCard
-              key={card.id}
-              card={card}
-              // onCardClick={onCardClick}
+              key={movie.id ? movie.id : movie._id}
+              movie={movie}
               onCardClick={onCardClick}
-              // onCardDelete={onCardDelete}
+              savedMovies={savedMovies}
             />
           ))
-        ) : (
-          <Preloader />
-        )}
+          )
+        }
       </ul>
     </div>
   );
 }
-
 export default MoviesCardList;

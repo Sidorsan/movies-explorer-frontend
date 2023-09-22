@@ -14,7 +14,6 @@
     "react-hook-form": "^7.35.0",
     "react-router-dom": "^5.3.3",
     "react-scripts": "5.0.1",
-    "validator": "^13.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -22,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* sidorsan@84.201.152.181:/home/sidorsan/mesto-frontend"
+    "deploy": "npm run build && scp -r ./build/* sidorsan@51.250.20.26:~/frontend"
   },
   "eslintConfig": {
     "extends": [

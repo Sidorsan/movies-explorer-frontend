@@ -42,6 +42,13 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
+  border-radius: 10px;
+
+}
+
+
+.moviesCard__Button_active {
+  background-color: #2BE080
 }
 
 .moviesCard__Button_delite {

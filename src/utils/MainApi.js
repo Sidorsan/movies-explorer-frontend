@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
   }
@@ -7,11 +7,13 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(res);
+    // return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getInitialUser() {
     return fetch(`https://${this._baseUrl}/users/me`, {
+    // return fetch(`http://${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -22,6 +24,7 @@ class Api {
 
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}/movies`, {
+    // return fetch(`http://${this._baseUrl}/movies`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -36,6 +39,7 @@ class Api {
 
   postInitialMovies(data) {
     return fetch(`https://${this._baseUrl}/movies`, {
+    // return fetch(`http://${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -47,18 +51,19 @@ class Api {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: data.image,
+        image: `https://api.nomoreparties.co${data.image.url}`,
         trailerLink: data.trailerLink,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
-        thumbnail: data.thumbnail,
-        movieId: data.movieId,
+        thumbnail: `https://api.nomoreparties.co${data.image.url}`,
+        movieId: data.id,
       }),
     }).then((res) => this._checkJson(res));
   }
 
   deleteMovies(id) {
     return fetch(`https://${this._baseUrl}/movies/${id}`, {
+    // return fetch(`http://${this._baseUrl}/movies/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -66,9 +71,25 @@ class Api {
       },
     }).then((res) => this._checkJson(res));
   }
-}
 
-const api = new Api({
-  baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
+  patchUser({ firstName, email }) {
+    return fetch(`https://${this._baseUrl}/users/me`, {
+    // return fetch(`http://${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        name: firstName,
+      }),
+    }).then((res) => this._checkJson(res));
+  }
+}
+const mainApi = new MainApi({
+  baseUrl: "api.sidorsan.nomoredomains.sbs",
+  // baseUrl: "localhost:3001",
+
 });
-export default api;
+export default mainApi;

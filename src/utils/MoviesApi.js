@@ -13,10 +13,6 @@ class MoviesApi {
   getInitialMovies() {
     return fetch(`https://${this._baseUrl}`, {
       method: "GET",
-      // headers: {
-      //   authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      //   "Content-Type": "application/json",
-      // },
     }).then((res) => this._checkJson(res));
   }
 }
