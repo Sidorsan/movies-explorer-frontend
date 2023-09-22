@@ -88,7 +88,8 @@ class MainApi {
   }
 }
 const mainApi = new MainApi({
-  baseUrl: "api.sidorsan.diploma.nomoredomains.sbs",
+  baseUrl: "api.sidorsan.nomoredomains.sbs",
   // baseUrl: "localhost:3001",
+
 });
 export default mainApi;
